@@ -35,18 +35,18 @@ class TestUser:
 
     def get_token(self):
         url = self.base_url + "/oxauth/restv1/token"
-
         payload = 'grant_type=client_credentials'
         headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
         }
         authentication = requests.auth.HTTPBasicAuth(self.api_client_id,self.api_client_secret)
-
+        
         response = requests.request("POST", url, auth=authentication, headers=headers, data = payload, verify=False).json()
         return response['access_token']
 
     def getUsers(self,token):
-        url = "https://chris.gluutwo.org/identity/restv1/api/v1/users"
+        url = self.base_url + "/identity/restv1/api/v1/users"
+
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer %s' % token
@@ -79,13 +79,16 @@ class TestUser:
         response = requests.request("POST", url, headers=headers, data=json_data, verify=False)
 
 
-        if response.status_code == 200:
+        if response.status_code == 201:
             print("User created with success via API...")
+            print(response.content)
             json_resp = response.json()
             temp_db = helper.insert(json_resp)
             time.sleep(1)
         else:
             print("Error creating user, please check.")
+            print('response status: %s' % response.status_code)
+            print('reponse: %s' % response.content)
 
         # temp_db = helper.insert(json_resp)
         time.sleep(1)

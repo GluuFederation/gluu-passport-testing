@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
+##############################################################################
+##                                                                          ##
+##     ALL TESTS ARE MADE REACHING A PRESELECTED PROVIDER                   ##
+##     USERS ARE CREATED ON PROVIDER VIA API                                ##
+##                                                                          ##
+##############################################################################
 echo "PLEASE DO NOT INTERRUPT"
 
-
+## Settings down here
 setup_test_env() {
-    export PASSPORT_HOST=t1.techno24x7.org
-    export PROVIDER_HOST=t3.techno24x7.org
+    export PASSPORT_HOST=t1.techno24x7.com
+    export PROVIDER_HOST=t3.techno24x7.com
     export CLIENT_HOST=chris.testingenv.org
     export API_CLIENT_ID=5aba39e9-c8fe-47de-a231-1b57efb347ab
     export API_CLIENT_SECRET=FSjEHsqDPs5vVzdlF390D4EqeYd5noZqKymLjH1W
@@ -53,6 +59,7 @@ export PROVIDER_TYPE=IDP
 function setup_test_client() {
     # setup custom provider on test client
     echo "Setting up test client with pre-selected provider $PROVIDER_ID..."
+    echo "https://$CLIENT_HOST/configuration"
     curl -k -H "Content-Type: application/json" \
     --request POST \
     --data '{"provider_id":"'$PROVIDER_ID'"}' \
@@ -69,8 +76,7 @@ export FLOW=default
 
 # PROVIDER_ID: setup manually - api not working
 # TODO: check if api works
-export PROVIDER_ID=saml-only-1
-
+export PROVIDER_ID=saml-default
 setup_test_client
 
 # function run_blackbox_test
@@ -185,7 +191,7 @@ export FLOW="default emaillink"
 
 # PROVIDER_ID: setup manually - api not working
 # TODO: check if api works
-export PROVIDER_ID=saml-emaillink
+export PROVIDER_ID=saml-email-link
 
 # same e-mail from user josephdoe
 export USER_NAME="josephdoe2"

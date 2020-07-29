@@ -4,3 +4,5 @@ venv
 *.xml
 *.db
 *.json
+*.log
+*.pyc

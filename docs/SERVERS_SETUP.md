@@ -31,10 +31,28 @@
 - saml-default ·─ · urn:test:default
 - saml-emaillink - urn:test:link - act email linking
 - saml-emailreq - urn:test:mailreq - activate e-mail req 
-- saml-idpinit - chris.testingenv.org (has to contain host from url that host will be redirected)
+- saml-idpinit - chris.testingenv.org (has to contain host from url that host will be redirected) - validateInResponseTo: False
 
 ### [t3] Create IDP TR
 
 - saml-default
 - saml-emaillink - activate e-mail linking
 - saml-emailreq - Don't release e-mail
+- saml-idpinit
+
+### Configure IDP Initiated Flow
+
+- Add
+- Select provider: saml-idpinit
+
+### [t3] Enable API
+- Follow documentation https://gluu.org/docs/gluu-server/4.1/api-guide/oxtrust-api (test mode)
+
+### Setup /env.sh
+
+### [t1] Enable pre-selected provider
+
+### [t3] Activate basic script for authentication method
+- Custom Scripts -> Basic -> All ACRS -> Enabled
+
+### [t1] Create test users [AUTOMATED]

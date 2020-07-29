@@ -36,30 +36,26 @@ def user_exists(context):
 def user_authenticates(context):
     context.web.get(context.base_url+"/login")
     time.sleep(3)
-    # print()
-    # print(context.web.current_url)
-    # print()
-
+  
     try:
         if context.acr == "passport-saml":
-            # print("CONTEXT IS PASSPORT-SAML")
+            
             time.sleep(1)
-            # 4 | click | css=.row img |  |
             context.web.save_screenshot("1_before_selecting_provider.png")
 
-            if context.flow == "default":
-                # selects first provider
-                context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(2) > div > img").click()
+            # if context.flow == "default":
+            #     # selects first provider
+            #     context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(2) > div > img").click()
 
-                # 5 | type | id=loginForm:username | johndoe |
+            #     # 5 | type | id=loginForm:username | johndoe |
 
-            elif context.flow == "default emailreq":
-                # select second provider
+            # elif context.flow == "default emailreq":
+            #     # select second provider
 
-                context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(4) img").click()
+            #     context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(4) img").click()
 
-            elif context.flow == "default emaillink":
-                context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(3) img").click()
+            # elif context.flow == "default emaillink":
+            #     context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(3) img").click()
 
 
             time.sleep(2)
@@ -67,12 +63,17 @@ def user_authenticates(context):
 
             time.sleep(2)
             context.web.save_screenshot("3_before_username_typing.png")
-            context.web.find_element(By.ID, "loginForm:username").send_keys(context.user_name)
-            # 6 | type | id=loginForm:password | test123 |
-            context.web.find_element(By.ID, "loginForm:password").send_keys(context.user_password)
-            # 7 | click | id=loginForm:loginButton |  |
+            context.web.find_element(By.ID, "username").click()
+            context.web.find_element(By.ID, "username").send_keys(context.user_name)
+            context.web.find_element(By.ID, "password").send_keys(context.user_password)
             context.web.save_screenshot("4_before_login_button.png")
-            context.web.find_element(By.ID, "loginForm:loginButton").click()
+            context.web.find_element(By.ID, "loginButton").click()
+            # context.web.find_element(By.ID, "loginForm:username").send_keys(context.user_name)
+            # # 6 | type | id=loginForm:password | test123 |
+            # context.web.find_element(By.ID, "username").click()
+            # context.web.find_element(By.ID, "username").click()
+            # # 7 | click | id=loginForm:loginButton |  |
+    
             context.web.save_screenshot("5_after_login_button.png")
             time.sleep(3)
 
@@ -129,6 +130,7 @@ def user_authenticates(context):
 
     except Exception as e:
         print("Error ocurred on %s" % context.web.current_url)
+        print(e)
         filename = str(datetime.now())+"_error.png"
         context.web.save_screenshot(filename)
         print("Error print screen saved as %s" % filename)
@@ -151,12 +153,12 @@ def user_redirected_to_external_login_page(context):
     external_login_page = None
     if context.acr == 'passport-saml':
 
-        if context.flow != 'preselected provider':
-            external_login_page = "https://%s/oxauth/authorize.htm" % context.passport_host
-        else:
-            external_login_page = "https://%s/oxauth/login" % context.provider_host
-            time.sleep(2)
-            #import ipdb; ipdb.set_trace()
+        # if context.flow != 'preselected provider':
+        #     external_login_page = "https://%s/oxauth/authorize.htm" % context.passport_host
+        # else:
+        external_login_page = "https://%s/oxauth/login" % context.provider_host
+        time.sleep(2)
+        #import ipdb; ipdb.set_trace()
     else:
         external_login_page = "https://%s/oxauth/login" % context.passport_host
     time.sleep(4)
