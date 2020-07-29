@@ -1,0 +1,414 @@
+Setting up environment...
+Creating test user on chris.gluutwo.org...
+TEST
+...............................................
+ACCESS TOKEN IS c2b9a6c3-6920-44b6-b446-d55e2b7cdd1b
+
+...............................................
+USER CREATION FOR: {"userName": "johndoe22", "password": "test123", "surName": "doe", "givenName": "john", "email": "johndoe22@test.ocom", "status": "ACTIVE", "displayName": "johndoe22"}
+...............................................
+
+response = : <Response [200]>
+b'{"inum":"3025561b-96b6-4e2a-a164-5e0acd170863","surName":"doe","givenName":"john","email":"johndoe22@test.ocom","password":null,"userName":"johndoe22","displayName":"johndoe22","creationDate":1593182329844,"status":"ACTIVE"}'
+
+json_resp = {'inum': '3025561b-96b6-4e2a-a164-5e0acd170863', 'surName': 'doe', 'givenName': 'john', 'email': 'johndoe22@test.ocom', 'password': None, 'userName': 'johndoe22', 'displayName': 'johndoe22', 'creationDate': 1593182329844, 'status': 'ACTIVE'}
+CREATED USER
+{'inum': '3025561b-96b6-4e2a-a164-5e0acd170863', 'surName': 'doe', 'givenName': 'john', 'email': 'johndoe22@test.ocom', 'password': None, 'userName': 'johndoe22', 'displayName': 'johndoe22', 'creationDate': 1593182329844, 'status': 'ACTIVE'}
+Starting case 1: PASSPORT-SAML-DEFAULT
+............................................
+Setting env for PASSPORT-SAML-DEFAULT...
+Provider type: IDP
+Type: passport-saml
+Flow: default
+Passport Provider ID: saml-only-1
+TO DO: Creating Trust Relation on chris.gluutwo.org
+Creating
+............................................
+
+
+RUNNING BLACKBOX TESTS:
+Feature: accessing protected content # tests/behaver/features/inbound-saml.feature:1
+
+  Scenario: Not authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:3
+    Given that user exists in provider                       # tests/behaver/features/steps/protected-content.py:29
+
+    When user tries to access protected content page         # tests/behaver/features/steps/protected-content.py:124
+
+      Traceback (most recent call last):
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "tests/behaver/features/steps/protected-content.py", line 126, in user_clicks_protected_content_link
+          context.web.get(context.base_url)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+          self.execute(Command.GET, {'url': url})
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+          self.error_handler.check_response(response)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+          raise exception_class(message, screen, stacktrace)
+      selenium.common.exceptions.WebDriverException: Message: Reached error page: about:neterror?e=connectionFailure&u=https%3A//chris.testingenv.org/&c=UTF-8&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20chris.testingenv.org.
+
+    Then user should be redirected to login page             # None
+
+  Scenario: Authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:9
+    Given that user exists in provider                   # tests/behaver/features/steps/protected-content.py:29
+
+    And user is authenticated                            # tests/behaver/features/steps/protected-content.py:34
+
+      Traceback (most recent call last):
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "tests/behaver/features/steps/protected-content.py", line 36, in user_authenticates
+          context.web.get(context.base_url+"/login")
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+          self.execute(Command.GET, {'url': url})
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+          self.error_handler.check_response(response)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+          raise exception_class(message, screen, stacktrace)
+      selenium.common.exceptions.WebDriverException: Message: Reached error page: about:neterror?e=connectionFailure&u=https%3A//chris.testingenv.org/login&c=UTF-8&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20chris.testingenv.org.
+
+    When user tries to access protected content page     # None
+    Then user should access protected content            # None
+
+
+Failing scenarios:
+  tests/behaver/features/inbound-saml.feature:3  Not authenticated user access protected content
+  tests/behaver/features/inbound-saml.feature:9  Authenticated user access protected content
+
+0 features passed, 1 failed, 0 skipped
+0 scenarios passed, 2 failed, 0 skipped
+2 steps passed, 2 failed, 3 skipped, 0 undefined
+Took 0m0.329s
+TEST
+TEARDOWN: USER DELETED FROM IDP/OIDC PROVIDER
+TEST
+...............................................
+ACCESS TOKEN IS 4b0d668b-13b5-490f-b9d6-addcfbf2d3a6
+
+...............................................
+USER CREATION FOR: {"userName": "josephdoe", "password": "test123", "surName": "doe", "givenName": "john", "email": "jo-sef@test.com", "status": "ACTIVE", "displayName": "josephdoe"}
+...............................................
+
+response = : <Response [200]>
+b'{"inum":"88bd0aec-c843-4933-8312-ce9900bd7162","surName":"doe","givenName":"john","email":"jo-sef@test.com","password":null,"userName":"josephdoe","displayName":"josephdoe","creationDate":1593182344777,"status":"ACTIVE"}'
+
+json_resp = {'inum': '88bd0aec-c843-4933-8312-ce9900bd7162', 'surName': 'doe', 'givenName': 'john', 'email': 'jo-sef@test.com', 'password': None, 'userName': 'josephdoe', 'displayName': 'josephdoe', 'creationDate': 1593182344777, 'status': 'ACTIVE'}
+CREATED USER
+{'inum': '88bd0aec-c843-4933-8312-ce9900bd7162', 'surName': 'doe', 'givenName': 'john', 'email': 'jo-sef@test.com', 'password': None, 'userName': 'josephdoe', 'displayName': 'josephdoe', 'creationDate': 1593182344777, 'status': 'ACTIVE'}
+Starting case 1: PASSPORT-SAML-DEFAULT-EMAILREQ
+............................................
+Setting env for PASSPORT-SAML-DEFAULT-EMAILREQ...
+Provider type: IDP
+Type: passport-saml
+Flow: default emailreq
+Passport Provider ID: saml-emailreq
+TO DO: Creating Trust Relation on chris.gluutwo.org
+Creating
+............................................
+
+
+RUNNING BLACKBOX TESTS:
+Feature: accessing protected content # tests/behaver/features/inbound-saml.feature:1
+
+  Scenario: Not authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:3
+    Given that user exists in provider                       # tests/behaver/features/steps/protected-content.py:29
+
+    When user tries to access protected content page         # tests/behaver/features/steps/protected-content.py:124
+
+      Traceback (most recent call last):
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "tests/behaver/features/steps/protected-content.py", line 126, in user_clicks_protected_content_link
+          context.web.get(context.base_url)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+          self.execute(Command.GET, {'url': url})
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+          self.error_handler.check_response(response)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+          raise exception_class(message, screen, stacktrace)
+      selenium.common.exceptions.WebDriverException: Message: Reached error page: about:neterror?e=connectionFailure&u=https%3A//chris.testingenv.org/&c=UTF-8&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20chris.testingenv.org.
+
+    Then user should be redirected to login page             # None
+
+  Scenario: Authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:9
+    Given that user exists in provider                   # tests/behaver/features/steps/protected-content.py:29
+
+    And user is authenticated                            # tests/behaver/features/steps/protected-content.py:34
+
+      Traceback (most recent call last):
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "tests/behaver/features/steps/protected-content.py", line 36, in user_authenticates
+          context.web.get(context.base_url+"/login")
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+          self.execute(Command.GET, {'url': url})
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+          self.error_handler.check_response(response)
+        File "/root/dev/gluu-inbound-testing/venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+          raise exception_class(message, screen, stacktrace)
+      selenium.common.exceptions.WebDriverException: Message: Reached error page: about:neterror?e=connectionFailure&u=https%3A//chris.testingenv.org/login&c=UTF-8&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20chris.testingenv.org.
+
+    When user tries to access protected content page     # None
+    Then user should access protected content            # None
+
+
+Failing scenarios:
+  tests/behaver/features/inbound-saml.feature:3  Not authenticated user access protected content
+  tests/behaver/features/inbound-saml.feature:9  Authenticated user access protected content
+
+0 features passed, 1 failed, 0 skipped
+0 scenarios passed, 2 failed, 0 skipped
+2 steps passed, 2 failed, 3 skipped, 0 undefined
+Took 0m0.341s
+USER_INUM: 
+........................................................
+TEARDOWN:
+
+Deleting user  from IDP/OIDC Provider...
+TEST
+TEARDOWN: USER DELETED FROM IDP/OIDC PROVIDER
+Job finished.
+=====================================================================
+Setting up environment...
+Creating test user on chris.gluutwo.org...
+TEST
+...............................................
+ACCESS TOKEN IS 17ad91b1-a0d5-43a4-8966-c808b41de261
+
+...............................................
+USER CREATION FOR: {"userName": "johndoe22", "password": "test123", "surName": "doe", "givenName": "john", "email": "johndoe22@test.ocom", "status": "ACTIVE", "displayName": "johndoe22"}
+...............................................
+
+response = : <Response [200]>
+b'{"inum":"56ed12c3-2958-42eb-a575-e7d35a58b0ac","surName":"doe","givenName":"john","email":"johndoe22@test.ocom","password":null,"userName":"johndoe22","displayName":"johndoe22","creationDate":1593182986837,"status":"ACTIVE"}'
+
+json_resp = {'inum': '56ed12c3-2958-42eb-a575-e7d35a58b0ac', 'surName': 'doe', 'givenName': 'john', 'email': 'johndoe22@test.ocom', 'password': None, 'userName': 'johndoe22', 'displayName': 'johndoe22', 'creationDate': 1593182986837, 'status': 'ACTIVE'}
+CREATED USER
+{'inum': '56ed12c3-2958-42eb-a575-e7d35a58b0ac', 'surName': 'doe', 'givenName': 'john', 'email': 'johndoe22@test.ocom', 'password': None, 'userName': 'johndoe22', 'displayName': 'johndoe22', 'creationDate': 1593182986837, 'status': 'ACTIVE'}
+Starting case 1: PASSPORT-SAML-DEFAULT
+............................................
+Setting env for PASSPORT-SAML-DEFAULT...
+Provider type: IDP
+Type: passport-saml
+Flow: default
+Passport Provider ID: saml-only-1
+TO DO: Creating Trust Relation on chris.gluutwo.org
+Creating
+............................................
+
+
+RUNNING BLACKBOX TESTS:
+Feature: accessing protected content # tests/behaver/features/inbound-saml.feature:1
+
+  Scenario: Not authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:3
+    Given that user exists in provider                       # tests/behaver/features/steps/protected-content.py:29
+
+    When user tries to access protected content page         # tests/behaver/features/steps/protected-content.py:124
+
+    Then user should be redirected to login page             # tests/behaver/features/steps/protected-content.py:133
+
+
+  Scenario: Authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:9
+    Given that user exists in provider                   # tests/behaver/features/steps/protected-content.py:29
+
+    And user is authenticated                            # tests/behaver/features/steps/protected-content.py:34
+
+https://chris.gluuthree.org/oxauth/authorize.htm?scope=openid+profile+email&response_type=code&redirect_uri=https%3A%2F%2Fchris.testingenv.org%2Foidc_callback&state=ap3AQGVTVrFPBSrYDLPWo1gffXmIKb&nonce=0bXyWwrcbL4KktuOAlBE&client_id=f533946c-3e1c-4e9e-90db-c662e89a7ad3
+
+CONTEXT IS PASSPORT-SAML
+Couldn't find consent form, presuming user already consented...
+https://chris.testingenv.org/
+
+    When user tries to access protected content page     # tests/behaver/features/steps/protected-content.py:124
+
+    Then user should access protected content            # tests/behaver/features/steps/protected-content.py:148
+
+
+1 feature passed, 0 failed, 0 skipped
+2 scenarios passed, 0 failed, 0 skipped
+7 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m32.995s
+TEST
+TEARDOWN: USER DELETED FROM IDP/OIDC PROVIDER
+TEST
+...............................................
+ACCESS TOKEN IS e81e843b-2681-4a0f-be78-236963b17e73
+
+...............................................
+USER CREATION FOR: {"userName": "josephdoe", "password": "test123", "surName": "doe", "givenName": "john", "email": "jo-sef@test.com", "status": "ACTIVE", "displayName": "josephdoe"}
+...............................................
+
+response = : <Response [200]>
+b'{"inum":"9a8e1f0b-2de5-4b4c-bec2-05b9cbed4de7","surName":"doe","givenName":"john","email":"jo-sef@test.com","password":null,"userName":"josephdoe","displayName":"josephdoe","creationDate":1593183035205,"status":"ACTIVE"}'
+
+json_resp = {'inum': '9a8e1f0b-2de5-4b4c-bec2-05b9cbed4de7', 'surName': 'doe', 'givenName': 'john', 'email': 'jo-sef@test.com', 'password': None, 'userName': 'josephdoe', 'displayName': 'josephdoe', 'creationDate': 1593183035205, 'status': 'ACTIVE'}
+CREATED USER
+{'inum': '9a8e1f0b-2de5-4b4c-bec2-05b9cbed4de7', 'surName': 'doe', 'givenName': 'john', 'email': 'jo-sef@test.com', 'password': None, 'userName': 'josephdoe', 'displayName': 'josephdoe', 'creationDate': 1593183035205, 'status': 'ACTIVE'}
+Starting case 1: PASSPORT-SAML-DEFAULT-EMAILREQ
+............................................
+Setting env for PASSPORT-SAML-DEFAULT-EMAILREQ...
+Provider type: IDP
+Type: passport-saml
+Flow: default emailreq
+Passport Provider ID: saml-emailreq
+TO DO: Creating Trust Relation on chris.gluutwo.org
+Creating
+............................................
+
+
+RUNNING BLACKBOX TESTS:
+Feature: accessing protected content # tests/behaver/features/inbound-saml.feature:1
+
+  Scenario: Not authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:3
+    Given that user exists in provider                       # tests/behaver/features/steps/protected-content.py:29
+
+    When user tries to access protected content page         # tests/behaver/features/steps/protected-content.py:124
+
+    Then user should be redirected to login page             # tests/behaver/features/steps/protected-content.py:133
+
+
+  Scenario: Authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:9
+    Given that user exists in provider                   # tests/behaver/features/steps/protected-content.py:29
+
+    And user is authenticated                            # tests/behaver/features/steps/protected-content.py:34
+
+https://chris.gluuthree.org/oxauth/authorize.htm?scope=openid+profile+email&response_type=code&redirect_uri=https%3A%2F%2Fchris.testingenv.org%2Foidc_callback&state=iFlCyxMqsmzFzm6ipKzCtafBteD2C3&nonce=9SCeMPle6Yf7T2FRAnyA&client_id=f533946c-3e1c-4e9e-90db-c662e89a7ad3
+
+CONTEXT IS PASSPORT-SAML
+Couldn't find consent form, presuming user already consented...
+https://chris.testingenv.org/
+https://chris.testingenv.org/
+Couldn't find email form, presuming user formerly entered...
+Couldn't find consent form, presuming user already consented...
+https://chris.testingenv.org/
+
+    When user tries to access protected content page     # tests/behaver/features/steps/protected-content.py:124
+
+    Then user should access protected content            # tests/behaver/features/steps/protected-content.py:148
+
+
+1 feature passed, 0 failed, 0 skipped
+2 scenarios passed, 0 failed, 0 skipped
+7 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m39.732s
+USER_INUM: 
+........................................................
+TEARDOWN:
+
+Deleting user  from IDP/OIDC Provider...
+TEST
+TEARDOWN: USER DELETED FROM IDP/OIDC PROVIDER
+Job finished.
+=====================================================================
+Setting up environment...
+Creating test user on chris.gluutwo.org...
+TEST
+...............................................
+ACCESS TOKEN IS bafbcc40-9ef2-4320-b28a-2ad76e768b55
+
+...............................................
+USER CREATION FOR: {"userName": "johndoe22", "password": "test123", "surName": "doe", "givenName": "john", "email": "johndoe22@test.ocom", "status": "ACTIVE", "displayName": "johndoe22"}
+...............................................
+
+response = : <Response [200]>
+b'{"inum":"4dea91ae-8751-4f16-85e3-85155f41a5a5","surName":"doe","givenName":"john","email":"johndoe22@test.ocom","password":null,"userName":"johndoe22","displayName":"johndoe22","creationDate":1593183498524,"status":"ACTIVE"}'
+
+json_resp = {'inum': '4dea91ae-8751-4f16-85e3-85155f41a5a5', 'surName': 'doe', 'givenName': 'john', 'email': 'johndoe22@test.ocom', 'password': None, 'userName': 'johndoe22', 'displayName': 'johndoe22', 'creationDate': 1593183498524, 'status': 'ACTIVE'}
+CREATED USER
+{'inum': '4dea91ae-8751-4f16-85e3-85155f41a5a5', 'surName': 'doe', 'givenName': 'john', 'email': 'johndoe22@test.ocom', 'password': None, 'userName': 'johndoe22', 'displayName': 'johndoe22', 'creationDate': 1593183498524, 'status': 'ACTIVE'}
+Starting case 1: PASSPORT-SAML-DEFAULT
+............................................
+Setting env for PASSPORT-SAML-DEFAULT...
+Provider type: IDP
+Type: passport-saml
+Flow: default
+Passport Provider ID: saml-only-1
+TO DO: Creating Trust Relation on chris.gluutwo.org
+Creating
+............................................
+
+
+RUNNING BLACKBOX TESTS:
+Feature: accessing protected content # tests/behaver/features/inbound-saml.feature:1
+
+  Scenario: Not authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:3
+    Given that user exists in provider                       # tests/behaver/features/steps/protected-content.py:29
+
+    When user tries to access protected content page         # tests/behaver/features/steps/protected-content.py:124
+
+    Then user should be redirected to login page             # tests/behaver/features/steps/protected-content.py:133
+
+
+ABORTED: By user.
+0 features passed, 1 failed, 0 skipped
+1 scenario passed, 0 failed, 0 skipped, 1 untested
+3 steps passed, 0 failed, 0 skipped, 0 undefined, 4 untested
+Took 0m9.097s
+TEST
+TEARDOWN: USER DELETED FROM IDP/OIDC PROVIDER
+TEST
+...............................................
+ACCESS TOKEN IS e8efbe6c-e4df-4d9e-bbb6-014411ca7750
+
+...............................................
+USER CREATION FOR: {"userName": "josephdoe", "password": "test123", "surName": "doe", "givenName": "john", "email": "jo-sef@test.com", "status": "ACTIVE", "displayName": "josephdoe"}
+...............................................
+
+response = : <Response [200]>
+b'{"inum":"99765e0a-c5cd-4cb2-b651-2ebaacd1bc92","surName":"doe","givenName":"john","email":"jo-sef@test.com","password":null,"userName":"josephdoe","displayName":"josephdoe","creationDate":1593183521104,"status":"ACTIVE"}'
+
+json_resp = {'inum': '99765e0a-c5cd-4cb2-b651-2ebaacd1bc92', 'surName': 'doe', 'givenName': 'john', 'email': 'jo-sef@test.com', 'password': None, 'userName': 'josephdoe', 'displayName': 'josephdoe', 'creationDate': 1593183521104, 'status': 'ACTIVE'}
+CREATED USER
+{'inum': '99765e0a-c5cd-4cb2-b651-2ebaacd1bc92', 'surName': 'doe', 'givenName': 'john', 'email': 'jo-sef@test.com', 'password': None, 'userName': 'josephdoe', 'displayName': 'josephdoe', 'creationDate': 1593183521104, 'status': 'ACTIVE'}
+Starting case 1: PASSPORT-SAML-DEFAULT-EMAILREQ
+............................................
+Setting env for PASSPORT-SAML-DEFAULT-EMAILREQ...
+Provider type: IDP
+Type: passport-saml
+Flow: default emailreq
+Passport Provider ID: saml-emailreq
+TO DO: Creating Trust Relation on chris.gluutwo.org
+Creating
+............................................
+
+
+RUNNING BLACKBOX TESTS:
+Feature: accessing protected content # tests/behaver/features/inbound-saml.feature:1
+
+  Scenario: Not authenticated user access protected content  # tests/behaver/features/inbound-saml.feature:3
+    Given that user exists in provider                       # tests/behaver/features/steps/protected-content.py:29
+
+    When user tries to access protected content page         # tests/behaver/features/steps/protected-content.py:124
+
+      ABORTED: By user (KeyboardInterrupt).
+
+HOOK-ERROR in after_scenario: MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=54129): Max retries exceeded with url: /session/93a6d51e-9fc9-48ba-8f06-f9e29489a771/cookie (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7efe4ff78550>: Failed to establish a new connection: [Errno 111] Connection refused',))
+    Then user should be redirected to login page             # None
+
+
+ABORTED: By user.
+
+Failing scenarios:
+  tests/behaver/features/inbound-saml.feature:3  Not authenticated user access protected content
+
+0 features passed, 1 failed, 0 skipped
+0 scenarios passed, 1 failed, 0 skipped, 1 untested
+1 step passed, 1 failed, 1 skipped, 0 undefined, 4 untested
+Took 0m0.425s
+USER_INUM: 
+........................................................
+TEARDOWN:
+
+Deleting user  from IDP/OIDC Provider...
+TEST
+TEARDOWN: USER DELETED FROM IDP/OIDC PROVIDER
+Job finished.
+=====================================================================
