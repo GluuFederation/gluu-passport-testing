@@ -72,6 +72,7 @@ function setup_test_client() {
 # - default emailreq
 # - default emaillink
 # - preselected provider
+# - idp-initiated
 export FLOW=default
 
 # PROVIDER_ID: setup manually - api not working
@@ -163,8 +164,6 @@ export PROVIDER_ID=saml-emailreq
 # $3 ACR
 # $4 FLOW
 
-
-
 export USER_NAME="josephdoe"
 export USER_MAIL="jo-sef@test.com"
 
@@ -203,13 +202,18 @@ run_blackbox_test
 delete_test_user
 
 
-# -----------
-# TEST 4: PASSPORT-SAML-DEFAULT-PRESELECTEDPROVIDER
+
+# TEST 4: PASSPORT-SAML-IDP-INITIATED
 # - Provider need to be configurated manually
 # - User will be created automatically
-
-export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT-PRESELECTEDPROVIDER
+export TEST_CASE_NAME=PASSPORT-SAML-IDP-INITIATED
 export ACR=passport-saml
+
+# PROVIDER_TYPE:
+# - IDP
+# - oauth provider
+# - oidc provider straight
+# - oidc provider oxd
 export PROVIDER_TYPE=IDP
 
 # FLOWS:
@@ -217,16 +221,19 @@ export PROVIDER_TYPE=IDP
 # - default emailreq
 # - default emaillink
 # - preselected provider
-export FLOW="preselected provider"
+# - idp-initiated
+export FLOW="idp-initiated"
 
 
 # PROVIDER_ID: setup manually - api not working
 # TODO: check if api works
-export PROVIDER_ID=saml-default
+export PROVIDER_ID=saml-idpinit
 
-# same e-mail from user josephdoe
-export USER_NAME="josephdoe2"
-export USER_MAIL="jo-sef@test.com"
+
+export USER_NAME=hansdoe
+export USER_MAIL="hansdoe@test.com"
+export USER_GIVEN=hans
+export USER_SUR=doe
 
 create_test_user
 setup_test_client
