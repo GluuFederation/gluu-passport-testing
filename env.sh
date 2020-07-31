@@ -8,6 +8,9 @@
 ##############################################################################
 echo "PLEASE DO NOT INTERRUPT"
 
+# exit when any command fails
+set -e
+
 ## Settings down here
 setup_test_env() {
     export PASSPORT_HOST=t1.techno24x7.com
@@ -112,14 +115,14 @@ function run_blackbox_test() {
     behave ./tests/behaver/features --include protected-content
     if [[ $FLOW == 'default emaillink' ]]
     then
-        behave ./tests/behaver/features --include email-linking
+        # behave ./tests/behaver/features --include email-linking
     fi
     echo
     echo ----------------------------------------------------------------------------
     echo
     echo "BLACKBOX BDT TESTS FINISHED FOR TEST CASE: $TEST_CASE_NAME"
     echo ============================================================================
-    #behave tests/behaver/features
+
 
 
 }
