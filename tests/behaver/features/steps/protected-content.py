@@ -27,6 +27,11 @@ def cookiesTransformer(sel_session_id,sel_other_cookies):
 
     return s
 
+def getIdpInitiatedLink(context):
+    return 'https://%s//idp/profile/SAML2/Unsolicited/SSO?providerId=%s&target=%s/protected-content' % (
+            context.provider_host, context.client_host, context.base_url )
+
+
 @given(u'that user exists in provider')
 def user_exists(context):
     assert context.user_name is not None
@@ -34,32 +39,18 @@ def user_exists(context):
 
 @given(u'user is authenticated')
 def user_authenticates(context):
-    context.web.get(context.base_url+"/login")
+    if context.flow == 'idp-initiated':
+        context.web.get(getIdpInitiatedLink(context))
+    else:
+        context.web.get(context.base_url+"/login")
+
     time.sleep(3)
-  
+
     try:
+
         if context.acr == "passport-saml":
-            
-            time.sleep(1)
-            context.web.save_screenshot("1_before_selecting_provider.png")
 
-            # if context.flow == "default":
-            #     # selects first provider
-            #     context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(2) > div > img").click()
-
-            #     # 5 | type | id=loginForm:username | johndoe |
-
-            # elif context.flow == "default emailreq":
-            #     # select second provider
-
-            #     context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(4) img").click()
-
-            # elif context.flow == "default emaillink":
-            #     context.web.find_element(By.CSS_SELECTOR, ".row:nth-child(3) img").click()
-
-
-            time.sleep(2)
-            context.web.save_screenshot("2_after_selecting_provider.png")
+            # for all samls..
 
             time.sleep(2)
             context.web.save_screenshot("3_before_username_typing.png")
@@ -68,26 +59,22 @@ def user_authenticates(context):
             context.web.find_element(By.ID, "password").send_keys(context.user_password)
             context.web.save_screenshot("4_before_login_button.png")
             context.web.find_element(By.ID, "loginButton").click()
-            # context.web.find_element(By.ID, "loginForm:username").send_keys(context.user_name)
-            # # 6 | type | id=loginForm:password | test123 |
-            # context.web.find_element(By.ID, "username").click()
-            # context.web.find_element(By.ID, "username").click()
-            # # 7 | click | id=loginForm:loginButton |  |
-    
+
+
             context.web.save_screenshot("5_after_login_button.png")
             time.sleep(3)
 
             try:
                 context.web.find_element(By.ID, "authorizeForm:allowButton").click()
             except NoSuchElementException:
-                # print("Couldn't find consent form, presuming user already consented...")
+                # Couldn't find consent form, presuming user already consented...
                 pass
 
             time.sleep(2)
 
 
             if context.flow == "default emailreq":
-
+                # should ask for e-mail input
                 context.web.save_screenshot("6_before_enter_email.png")
                 time.sleep(5)
 
@@ -98,13 +85,13 @@ def user_authenticates(context):
                     time.sleep(2)
                     context.web.save_screenshot("8_after_click_login_button.png")
                 except NoSuchElementException:
-                    # print("Couldn't find email form, presuming user formerly entered...")
+                    # Couldn't find email form, presuming user formerly entered...
                     pass
                 try:
                     context.web.find_element(By.ID, "authorizeForm:allowButton").click()
                 except NoSuchElementException:
                     pass
-                    # print("Couldn't find consent form, presuming user already consented...")
+                    # "Couldn't find consent form, presuming user already consented...")
 
             time.sleep(2)
 
@@ -139,12 +126,17 @@ def user_authenticates(context):
 
 
 
+
 @when(u'user tries to access protected content page')
 def user_clicks_protected_content_link(context):
-    context.web.get(context.base_url)
-    time.sleep(2)
-    context.web.find_element_by_xpath('//a[@href="'+context.base_url+"/protected-content"+'"]').click()
-    context.has_clicked = True
+    if context.flow == 'idp-initiated':
+        # acessing idp init link instead of demo app protected content.
+        context.web.get(getIdpInitiatedLink(context))
+    else:
+        context.web.get(context.base_url)
+        time.sleep(2)
+        context.web.find_element_by_xpath('//a[@href="'+context.base_url+"/protected-content"+'"]').click()
+        context.has_clicked = True
     time.sleep(2)
 
 
