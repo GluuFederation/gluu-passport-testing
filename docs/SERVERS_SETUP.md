@@ -51,8 +51,12 @@
 ### Setup /env.sh
 
 ### [t1] Enable pre-selected provider
+- Follow documentation https://gluu.org/docs/gluu-server/4.2/authn-guide/passport/#preselecting-an-external-provider
+
+### [t1] Select all ACRS on social and saml person scripts
 
 ### [t3] Activate basic script for authentication method
 - Custom Scripts -> Basic -> All ACRS -> Enabled
 
-### [t1] Create test users [AUTOMATED]
+### [t3] Create test users [AUTOMATED]
+
