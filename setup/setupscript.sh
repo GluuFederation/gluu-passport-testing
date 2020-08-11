@@ -1,4 +1,5 @@
-### Inside chroot
+### FILE: /opt/gluu-server/root/setupscript.sh
+### Inside chroot, run setup and take care of letsencrypt certs
 
 ### check for flag file
 if [ -f /root/fresh ]
@@ -8,4 +9,5 @@ then
     cd /root
     bash certbot.sh
     rm -f /root/fresh
+    logout
 fi
