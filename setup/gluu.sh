@@ -1,5 +1,6 @@
-# FILE: gluu.sh
-# Should be placed on /etc/profile.d of gluu w/ passport snapshot
+# FILE: /root/gluu.sh
+# File called by init.d on start. To be started, needs to have flag file /root/freshsnap
+# Can be created, for testing pruposes, w/ touch /root/freshsnap
 
 if [ -f /root/freshsnap ]
 then
@@ -24,13 +25,13 @@ then
     ### copy install script to profile
     cp /test-install-data/setupscript.sh /opt/gluu-server/etc/profile.d/.
 
+    ## extract certificates to fresh install
+    tar -zxvf /test-install-data/etcletsencrypt.tar -C /opt/gluu-server
+
     # Enable, start, login gluu
     gluu-serverd enable
-    gluu-serverd start
+    gluu-serverd restart
     gluu-serverd login
 
     rm -f /root/freshsnap
 fi
-
-
-
