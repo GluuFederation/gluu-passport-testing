@@ -113,10 +113,10 @@ function run_blackbox_test() {
     echo ----------------------------------------------------------------------------
     echo
     behave ./tests/behaver/features --include protected-content
-    if [[ $FLOW == 'default emaillink' ]]
-    then
-        # behave ./tests/behaver/features --include email-linking
-    fi
+    # if [[ $FLOW == 'default emaillink' ]]
+    # then
+    #     behave ./tests/behaver/features --include email-linking
+    # fi
     echo
     echo ----------------------------------------------------------------------------
     echo
@@ -193,7 +193,7 @@ export FLOW="default emaillink"
 
 # PROVIDER_ID: setup manually - api not working
 # TODO: check if api works
-export PROVIDER_ID=saml-email-link
+export PROVIDER_ID=saml-emaillink
 
 # same e-mail from user josephdoe
 export USER_NAME="josephdoe2"

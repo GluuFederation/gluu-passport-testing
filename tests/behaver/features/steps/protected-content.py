@@ -149,7 +149,7 @@ def user_redirected_to_external_login_page(context):
         #     external_login_page = "https://%s/oxauth/authorize.htm" % context.passport_host
         # else:
         external_login_page = "https://%s/oxauth/login" % context.provider_host
-        time.sleep(2)
+        time.sleep(4)
         #import ipdb; ipdb.set_trace()
     else:
         external_login_page = "https://%s/oxauth/login" % context.passport_host
