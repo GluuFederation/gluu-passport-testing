@@ -6,6 +6,8 @@
 
 ## How we do it
 
+Creating a **stage** environment like:
+
 ![How we do it](./docs/resources/passport_integration_tests.png)
 
 ## What to do
@@ -23,3 +25,11 @@
 - [ ] OIDC
 
 ### Setup should be done on env.sh file
+
+## TO BE
+
+### In the near future
+
+This is a nice milestone...
+
+![TO BE](./docs/resources/passport_integration_tests-TO-BE.png)
