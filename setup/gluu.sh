@@ -1,4 +1,4 @@
-# FILE: /root/gluu.sh
+# FILE: /test-install-data/gluu.sh
 # File called by init.d on start. To be started, needs to have flag file /root/freshsnap
 # Can be created, for testing pruposes, w/ touch /root/freshsnap
 
