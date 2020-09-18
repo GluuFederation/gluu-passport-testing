@@ -17,14 +17,33 @@ Creating a **stage** environment like:
 - Create tests users on idp/op server **automated**
 - Setup test client **done**
 
-### Automated Login Flows
+## Setup
 
-- SAML default
-- SAML email requiring
-- SAML email linking
-- [ ] OIDC
+- On a fresh droplet, create folder `test-install-data`:
 
-### Setup should be done on env.sh file
+``` sh
+ssh <yourhost> mkdir /test-install-data
+```
+
+- Copy files from setup folder to `test-install-data` that you just created on your fresh droplet:
+
+```sh
+scp -r ./setup/* t1.techno24x7.com:/test-data/.
+```
+
+- Run the `prepare.sh` file on your fresh droplet:
+
+```sh
+ssh <yourhost> /test-install-data/prepare.sh
+```
+
+- Check if flag file was created:
+
+```sh
+ssh <yourhost> ls /root
+```
+
+### Setup should be done on env.sh file, please check it
 
 ## TO BE
 
