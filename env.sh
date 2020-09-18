@@ -31,6 +31,19 @@ setup_test_env() {
 setup_test_env
 
 
+### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
+configure_client() {
+    register_client=$(curl -k -X POST 'https://'$CLIENT_HOST'/register' -H 'Content-Type: application/json' --data-raw '{
+    "op_url": "https://'$PASSPORT_HOST'",
+    "client_url": "https://'$CLIENT_HOST'"
+    }')
+    
+    curl -k -X POST 'https://'$CLIENT_HOST'/configuration' \
+    -H 'Content-Type: application/json' --data-raw "$register_client"
+}
+
+configure_client
+
 export USER_NAME=johndoe22
 export USER_PASSWORD=test123
 export USER_MAIL=johndoe22@test.ocom
@@ -68,7 +81,6 @@ function setup_test_client() {
     --data '{"provider_id":"'$PROVIDER_ID'"}' \
     https://$CLIENT_HOST/configuration
 }
-
 
 # FLOWS:
 # - default
@@ -122,9 +134,9 @@ function run_blackbox_test() {
     echo
     echo "BLACKBOX BDT TESTS FINISHED FOR TEST CASE: $TEST_CASE_NAME"
     echo ============================================================================
-
-
-
+    
+    
+    
 }
 
 run_blackbox_test
