@@ -5,3 +5,4 @@
 
 mv 9gluu /etc/init.d/.
 update-rc.d 9gluu defaults
+touch /root/freshsnap
