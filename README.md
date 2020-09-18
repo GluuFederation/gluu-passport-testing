@@ -28,22 +28,33 @@ ssh <yourhost> mkdir /test-install-data
 - Copy files from setup folder to `test-install-data` that you just created on your fresh droplet:
 
 ```sh
-scp -r ./setup/* t1.techno24x7.com:/test-data/.
+scp -r ./setup/* <your-host>:/test-install-data/.
 ```
 
-- Run the `prepare.sh` file on your fresh droplet:
-
+- Login to your droplet and run the `prepare.sh` file:
 ```sh
-ssh <yourhost> /test-install-data/prepare.sh
+cd /
+chmod -R 755 test-install-data
+cd /test-install/data
+./prepare.sh
 ```
 
-- Check if flag file was created:
+- Check if flag file `freshsnap` was created:
 
 ```sh
-ssh <yourhost> ls /root
+ls /root
 ```
 
 ### Setup should be done on env.sh file, please check it
+
+## Starting test server
+
+Just restart and see the magic happening on `/test-data/gluu.log`
+```sh
+shutdown -r
+```
+
+### Configyration should be done on env.sh file, please check it
 
 ## TO BE
 
