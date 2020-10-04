@@ -6,6 +6,9 @@
 ##     USERS ARE CREATED ON PROVIDER VIA API                                ##
 ##                                                                          ##
 ##############################################################################
+
+# SETUP OD_TOKEN (digital ocean token b4 stating)
+
 echo "PLEASE DO NOT INTERRUPT"
 
 # exit when any command fails
@@ -14,22 +17,71 @@ set -e
 ## Settings down here
 setup_test_env() {
     export PASSPORT_HOST=t1.techno24x7.com
+    export PASSPORT_IP="164.90.252.72"
+    export LATEST_DEV_SNAPSHOT_ID=70649304
+    export LATEST_STABLE_SNAPSHOT_ID=68259296
     export PROVIDER_HOST=t3.techno24x7.com
+    export PROVIDER_IP="167.172.15.77"
+    export PROVIDER_SNAPSHOT_ID=69107244
     export CLIENT_HOST=chris.testingenv.org
     export API_CLIENT_ID=5aba39e9-c8fe-47de-a231-1b57efb347ab
     export API_CLIENT_SECRET=FSjEHsqDPs5vVzdlF390D4EqeYd5noZqKymLjH1W
+    
+    
+    
     echo ============================================================================
     echo "Setting up environment...."
     echo PASSPORT_HOST=$PASSPORT_HOST
+    echo PASSPORT_IP=$PASSPORT_IP
     echo PROVIDER_HOST=$PROVIDER_HOST
+    echo PROVIDER_IP=$PROVIDER_IP
+    echo PROVIDER_SNAPSHOT_ID=$PROVIDER_SNAPSHOT_ID
     echo CLIENT_HOST=$CLIENT_HOST
     echo API_CLIENT_ID=$API_CLIENT_ID
     echo API_CLIENT_SECRET=$API_CLIENT_SECRET
+    echo LATEST_DEV_SNAPSHOT_ID=$LATEST_DEV_SNAPSHOT_ID
+    echo LATEST_STABLE_SNAPSHOT_ID=$LATEST_STABLE_SNAPSHOT_ID
     echo ============================================================================
+    
 }
+
 
 setup_test_env
 
+### creates passport droplet and wait till is up (takes a while)
+create_passport_droplet(){
+    export DROPLET_HOST=$PASSPORT_HOST
+    export FLOATING_IP=$PASSPORT_IP
+    export SNAPSHOT_ID=$LATEST_STABLE_SNAPSHOT_ID
+    python ./tests/helpers/create_droplet.py
+    export DROPLET_HOST=
+    export FLOATING_IP=
+    export SNAPSHOT_ID=
+}
+
+create_provider_droplet(){
+    export DROPLET_HOST=$PROVIDER_HOST
+    export FLOATING_IP=$PROVIDER_IP
+    export SNAPSHOT_ID=$PROVIDER_SNAPSHOT_ID
+    python ./tests/helpers/create_droplet.py
+    export DROPLET_HOST=
+    export FLOATING_IP=
+    export SNAPSHOT_ID=
+}
+
+wait_till_server_up(){
+    export SERVER=$1
+    python ./tests/helpers/server_up_check.py
+    export SERVER=
+}
+
+create_passport_droplet
+wait_till_server_up $PASSPORT_HOST
+create_provider_droplet
+wait_till_server_up $PROVIDER_HOST
+
+# give time to API respond
+sleep 1m
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
 configure_client() {
