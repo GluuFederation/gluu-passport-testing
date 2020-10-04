@@ -8,17 +8,16 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 db = dataset.connect('sqlite:///helper.db')
-helper = db['helper']
+user_helper = db['user_helper']
 
-USER_NAME=os.getenv('USER_NAME')
-USER_PASSWORD=os.getenv('USER_PASSWORD')
-USER_MAIL=os.getenv('USER_MAIL')
-USER_GIVEN=os.getenv('USER_GIVEN')
-USER_SUR=os.getenv('USER_SUR')
-PROVIDER_HOST=os.getenv('PROVIDER_HOST')
-API_CLIENT_ID=os.getenv('API_CLIENT_ID')
-API_CLIENT_SECRET=os.getenv('API_CLIENT_SECRET')
-
+USER_NAME = os.getenv('USER_NAME')
+USER_PASSWORD = os.getenv('USER_PASSWORD')
+USER_MAIL = os.getenv('USER_MAIL')
+USER_GIVEN = os.getenv('USER_GIVEN')
+USER_SUR = os.getenv('USER_SUR')
+PROVIDER_HOST = os.getenv('PROVIDER_HOST')
+API_CLIENT_ID = os.getenv('API_CLIENT_ID')
+API_CLIENT_SECRET = os.getenv('API_CLIENT_SECRET')
 
 
 class TestUser:
@@ -37,14 +36,16 @@ class TestUser:
         url = self.base_url + "/oxauth/restv1/token"
         payload = 'grant_type=client_credentials'
         headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
-        authentication = requests.auth.HTTPBasicAuth(self.api_client_id,self.api_client_secret)
-        
-        response = requests.request("POST", url, auth=authentication, headers=headers, data = payload, verify=False).json()
+        authentication = requests.auth.HTTPBasicAuth(
+            self.api_client_id, self.api_client_secret)
+
+        response = requests.request(
+            "POST", url, auth=authentication, headers=headers, data=payload, verify=False).json()
         return response['access_token']
 
-    def getUsers(self,token):
+    def get_users(self, token):
         url = self.base_url + "/identity/restv1/api/v1/users"
 
         headers = {
@@ -55,7 +56,7 @@ class TestUser:
         response = requests.request("GET", url, verify=False, headers=headers)
         print(response.json())
 
-    def create_user(self,token):
+    def create_user(self, token):
         url = self.base_url + "/identity/restv1/api/v1/users"
 
         headers = {
@@ -76,39 +77,34 @@ class TestUser:
 
         json_data = json.dumps(data)
 
-        response = requests.request("POST", url, headers=headers, data=json_data, verify=False)
-
+        response = requests.request(
+            "POST", url, headers=headers, data=json_data, verify=False)
 
         if response.status_code == 201:
             print("User created with success via API...")
             print(response.content)
             json_resp = response.json()
-            temp_db = helper.insert(json_resp)
+            user_helper.insert(json_resp)
             time.sleep(1)
         else:
             print("Error creating user, please check.")
             print('response status: %s' % response.status_code)
             print('reponse: %s' % response.content)
 
-        # temp_db = helper.insert(json_resp)
         time.sleep(1)
 
         return response
 
-
     def delete_user(self, token):
         url = self.base_url + "/identity/restv1/api/v1/users"
-        users = helper.all()
-
-
-
+        users = user_helper.all()
 
         # user = helper.find_one(userName=self.user_name)
 
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer %s' % token
-            }
+        }
 
         users_deleted = True
 
@@ -120,6 +116,6 @@ class TestUser:
             if response.status_code != 200:
                 users_deleted = False
 
-        helper.drop()
+        user_helper.drop()
 
         return users_deleted
