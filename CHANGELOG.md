@@ -1,3 +1,9 @@
+## Unreleased
+
+### Fix
+
+- **env.sh**: Uncomment droplet creation
+
 ## v0.4.2 (2020-10-05)
 
 ### Refactor
