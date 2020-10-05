@@ -21,7 +21,7 @@ case "$1" in
 	echo stop
     ;;
   *)
-    echo "Usage: /etc/init.d/css-servers {start|stop}"
+    echo "Usage: /etc/init.d/9gluu {start|stop}"
     exit 1
     ;;
 esac
