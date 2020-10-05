@@ -49,39 +49,39 @@ setup_test_env() {
 setup_test_env
 
 ### creates passport droplet and wait till is up (takes a while)
-# create_passport_droplet(){
-#     export DROPLET_HOST=$PASSPORT_HOST
-#     export FLOATING_IP=$PASSPORT_IP
-#     export SNAPSHOT_ID=$LATEST_STABLE_SNAPSHOT_ID
-#     python ./tests/helpers/create_droplet.py
-#     export DROPLET_HOST=
-#     export FLOATING_IP=
-#     export SNAPSHOT_ID=
-# }
+create_passport_droplet(){
+    export DROPLET_HOST=$PASSPORT_HOST
+    export FLOATING_IP=$PASSPORT_IP
+    export SNAPSHOT_ID=$LATEST_STABLE_SNAPSHOT_ID
+    python ./tests/helpers/create_droplet.py
+    export DROPLET_HOST=
+    export FLOATING_IP=
+    export SNAPSHOT_ID=
+}
 
-# create_provider_droplet(){
-#     export DROPLET_HOST=$PROVIDER_HOST
-#     export FLOATING_IP=$PROVIDER_IP
-#     export SNAPSHOT_ID=$PROVIDER_SNAPSHOT_ID
-#     python ./tests/helpers/create_droplet.py
-#     export DROPLET_HOST=
-#     export FLOATING_IP=
-#     export SNAPSHOT_ID=
-# }
+create_provider_droplet(){
+    export DROPLET_HOST=$PROVIDER_HOST
+    export FLOATING_IP=$PROVIDER_IP
+    export SNAPSHOT_ID=$PROVIDER_SNAPSHOT_ID
+    python ./tests/helpers/create_droplet.py
+    export DROPLET_HOST=
+    export FLOATING_IP=
+    export SNAPSHOT_ID=
+}
 
-# wait_till_server_up(){
-#     export SERVER=$1
-#     python ./tests/helpers/server_up_check.py
-#     export SERVER=
-# }
+wait_till_server_up(){
+    export SERVER=$1
+    python ./tests/helpers/server_up_check.py
+    export SERVER=
+}
 
-# create_passport_droplet
-# wait_till_server_up $PASSPORT_HOST
-# create_provider_droplet
-# wait_till_server_up $PROVIDER_HOST
+create_passport_droplet
+wait_till_server_up $PASSPORT_HOST
+create_provider_droplet
+wait_till_server_up $PROVIDER_HOST
 
-# # give time to API respond
-# sleep 1m
+# give time to API respond
+sleep 1m
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
 configure_client() {
