@@ -3,6 +3,5 @@ venv
 *.png
 *.xml
 *.db
-*.json
 *.log
 *.pyc
