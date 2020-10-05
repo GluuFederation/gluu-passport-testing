@@ -19,6 +19,8 @@ Creating a **stage** environment like:
 
 ## Setup
 
+### Setting up passport droplet
+
 - On a fresh droplet, create folder `test-install-data`:
 
 ``` sh
@@ -54,7 +56,35 @@ Just restart and see the magic happening on `/test-data/gluu.log`
 shutdown -r
 ```
 
-### Configyration should be done on env.sh file, please check it
+#### Configyration should be done on env.sh file, please check it
+
+
+### Setting up test suite
+
+Install Xvfb
+`sudo apt install xvfb`
+
+Add geckodriver to your path:
+`export PATH=$PATH:$PWD/tests/selenium/drivers/firefox`
+
+In your project root folder, create a virtual env using:
+`python3 -m venv venv`
+
+Enter the venv:
+`source venv/bin/activate`
+
+Install poetry if you don't have:
+`curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
+
+Install dependencies:
+`poetry install`
+
+If you don't have, install Firefox:
+`apt install firefox`
+
+Setup ENV on `env.sh` file
+
+run `env.sh`
 
 ## TO BE
 
