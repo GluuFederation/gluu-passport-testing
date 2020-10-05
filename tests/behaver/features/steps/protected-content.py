@@ -28,7 +28,7 @@ def cookiesTransformer(sel_session_id,sel_other_cookies):
     return s
 
 def getIdpInitiatedLink(context):
-    return 'https://%s//idp/profile/SAML2/Unsolicited/SSO?providerId=%s&target=%s/protected-content' % (
+    return 'https://%s/idp/profile/SAML2/Unsolicited/SSO?providerId=%s&target=%s/protected-content' % (
             context.provider_host, context.client_host, context.base_url )
 
 
