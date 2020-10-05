@@ -5,7 +5,7 @@ tag_format = "v$version"
 
 [tool.poetry]
 name = "gluu-passport-testing"
-version = "0.4.1"
+version = "0.4.3"
 description = "Stage testing for passport"
 authors = ["Christian Eland"]
 license = "Apache 2.0"
