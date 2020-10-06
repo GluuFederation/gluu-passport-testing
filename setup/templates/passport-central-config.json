@@ -1,117 +1,114 @@
 {
-    "conf": {
-        "serverURI": "https://%(hostname)s",
-        "serverWebPort": 8090,
-        "postProfileEndpoint": "https://%(hostname)s/oxauth/postlogin.htm",
-        "spTLSCert": "%(passportSpTLSCert)s",
-        "spTLSKey": "%(passportSpTLSKey)s",
-        "logging": {
-            "level": "info",
-            "consoleLogOnly" : false,
-            "activeMQConf": {
-                "enabled": false,
-                "host": "",
-                "username": "",
-                "password": "",
-                "port": 0
-            }
-        }
+  "conf": {
+    "serverURI": "https://%(hostname)s",
+    "serverWebPort": 8090,
+    "postProfileEndpoint": "https://%(hostname)s/oxauth/postlogin.htm",
+    "spTLSCert": "%(passportSpTLSCert)s",
+    "spTLSKey": "%(passportSpTLSKey)s",
+    "logging": {
+      "level": "info",
+      "consoleLogOnly": false,
+      "activeMQConf": {
+        "enabled": false,
+        "host": "",
+        "username": "",
+        "password": "",
+        "port": 0
+      }
+    }
+  },
+  "idpInitiated": {
+    "openidclient": {
+      "authorizationEndpoint": "https://%(hostname)s/oxauth/restv1/authorize",
+      "clientId": "%(passport_rp_ii_client_id)s",
+      "acrValues": "passport_saml"
     },
-
-    "idpInitiated": {
-        "openidclient": {
-            "authorizationEndpoint": "https://%(hostname)s/oxauth/restv1/authorize",
-            "clientId": "%(passport_rp_ii_client_id)s",
-            "acrValues": "passport_saml"
-        },
-        "authorizationParams": [
-            {
-                "provider": "saml-idpinit",
-                "extraParams": {},
-                "redirect_uri": "https://t1.techno24x7.com/oxauth/auth/passport/sample-redirector.htm",
-                "response_type": "code",
-                "scope": "openid"
-              }
-        ]
-    },
-
-    "providers": [
-        {
-            "id": "saml-default",
-            "displayName": "saml-default",
-            "type": "saml",
-            "mapping": "saml_ldap_profile",
-            "passportStrategyId": "passport-saml",
-            "enabled": true,
-            "callbackUrl": "https://t1.techno24x7.com/passport/auth/saml/saml-default/callback",
-            "requestForEmail": false,
-            "emailLinkingSafe": false,
-            "options": {
-              "skipRequestCompression": "true",
-              "authnRequestBinding": "HTTP-POST",
-              "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
-              "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
-              "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
-              "issuer": "urn:test:default"
-            }
-          },
-          {
-            "id": "saml-emailreq",
-            "displayName": "saml-emailreq",
-            "type": "saml",
-            "mapping": "saml_ldap_profile",
-            "passportStrategyId": "passport-saml",
-            "enabled": true,
-            "callbackUrl": "https://t1.techno24x7.com/passport/auth/saml/saml-emailreq/callback",
-            "requestForEmail": true,
-            "emailLinkingSafe": false,
-            "options": {
-              "skipRequestCompression": "true",
-              "authnRequestBinding": "HTTP-POST",
-              "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
-              "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
-              "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
-              "issuer": "urn:test:mailreq"
-            }
-          },
-          {
-            "id": "saml-emaillink",
-            "displayName": "saml-emaillink",
-            "type": "saml",
-            "mapping": "saml_ldap_profile",
-            "passportStrategyId": "passport-saml",
-            "enabled": true,
-            "callbackUrl": "https://t1.techno24x7.com/passport/auth/saml/saml-emaillink/callback",
-            "requestForEmail": false,
-            "emailLinkingSafe": true,
-            "options": {
-              "skipRequestCompression": "true",
-              "authnRequestBinding": "HTTP-POST",
-              "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
-              "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
-              "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
-              "issuer": "urn:test:link"
-            }
-          },
-          {
-            "id": "saml-idpinit",
-            "displayName": "saml-idpinit",
-            "type": "saml",
-            "mapping": "saml_ldap_profile",
-            "passportStrategyId": "passport-saml",
-            "enabled": true,
-            "callbackUrl": "https://t1.techno24x7.com/passport/auth/saml/saml-idpinit/callback",
-            "requestForEmail": false,
-            "emailLinkingSafe": false,
-            "options": {
-              "skipRequestCompression": "true",
-              "authnRequestBinding": "HTTP-POST",
-              "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
-              "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
-              "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
-              "issuer": "chris.testingenv.org"
-            }
-          }
+    "authorizationParams": [
+      {
+        "provider": "saml-idpinit",
+        "extraParams": {},
+        "redirect_uri": "https://%(hostname)s/oxauth/auth/passport/sample-redirector.htm",
+        "response_type": "code",
+        "scope": "openid"
+      }
     ]
-
+  },
+  "providers": [
+    {
+      "id": "saml-default",
+      "displayName": "saml-default",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://%(hostname)s/passport/auth/saml/saml-default/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
+        "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
+        "issuer": "urn:test:default"
+      }
+    },
+    {
+      "id": "saml-emailreq",
+      "displayName": "saml-emailreq",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://%(hostname)s/passport/auth/saml/saml-emailreq/callback",
+      "requestForEmail": true,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
+        "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
+        "issuer": "urn:test:mailreq"
+      }
+    },
+    {
+      "id": "saml-emaillink",
+      "displayName": "saml-emaillink",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://%(hostname)s/passport/auth/saml/saml-emaillink/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": true,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
+        "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
+        "issuer": "urn:test:link"
+      }
+    },
+    {
+      "id": "saml-idpinit",
+      "displayName": "saml-idpinit",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://%(hostname)s/passport/auth/saml/saml-idpinit/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=",
+        "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
+        "issuer": "dev.techno24x7.com"
+      }
+    }
+  ]
 }
