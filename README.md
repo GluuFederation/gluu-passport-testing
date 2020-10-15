@@ -86,6 +86,10 @@ Setup ENV on `env.sh` file
 
 run `env.sh`
 
+### Options
+You can run `env.sh` with options:
+- `-s`: skip droplet creation
+
 ## TO BE
 
 ### In the near future
