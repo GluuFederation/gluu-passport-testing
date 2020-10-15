@@ -62,7 +62,7 @@ setup_test_env() {
 
 setup_test_env
 
-if [ "$skip_droplets" = true ] ; then
+if [ "$skip_droplets" = false ] ; then
 
     echo 'Skipping droplets creation...'
 
