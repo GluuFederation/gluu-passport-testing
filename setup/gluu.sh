@@ -4,16 +4,19 @@
 
 if [ -f /root/freshsnap ]
 then
-    ### Ads and install package for ubuntu 18
-    echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
+    ### Ads and install latest STABLE package for ubuntu 18
+    # echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
+
+    ### Ads and install latest DEV package for ubuntu 18
+    echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
     curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
     apt update -y
-    apt install gluu-server=4.2.0~bionic -y
+    apt install gluu-server -y
     apt-mark hold gluu-server -y
     ### copy setup files to chmod
     echo "Copying setup files to chmod..."
     cp /test-install-data/setup.properties /opt/gluu-server/install/community-edition-setup/.
-    ### In case of 4.2.0 needs setup.py
+    ### In case of 4.2.0 needs to overwrite setup.py
     cp /test-install-data/setup.py /opt/gluu-server/install/community-edition-setup/.
     echo "Copying templates files to chmod..."
     ### Templates
@@ -41,5 +44,6 @@ then
     echo "Loggin in to execute next script..."
     gluu-serverd login
 
+    echo "Deleting flag file /root/freshsnap"
     rm -f /root/freshsnap
 fi
