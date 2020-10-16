@@ -46,83 +46,82 @@ def user_authenticates(context):
 
     time.sleep(3)
 
-    try:
 
-        if context.acr == "passport-saml":
+    if context.acr == "passport-saml":
 
-            # for all samls..
+        # for all samls..
 
-            time.sleep(2)
-            context.web.save_screenshot("3_before_username_typing.png")
-            context.web.find_element(By.ID, "username").click()
-            context.web.find_element(By.ID, "username").send_keys(context.user_name)
-            context.web.find_element(By.ID, "password").send_keys(context.user_password)
-            context.web.save_screenshot("4_before_login_button.png")
-            context.web.find_element(By.ID, "loginButton").click()
-
-
-            context.web.save_screenshot("5_after_login_button.png")
-            time.sleep(3)
-
-            try:
-                context.web.find_element(By.ID, "authorizeForm:allowButton").click()
-            except NoSuchElementException:
-                # Couldn't find consent form, presuming user already consented...
-                pass
-
-            time.sleep(2)
+        time.sleep(2)
+        context.web.save_screenshot("3_before_username_typing.png")
+        context.web.find_element(By.ID, "username").click()
+        context.web.find_element(By.ID, "username").send_keys(context.user_name)
+        context.web.find_element(By.ID, "password").send_keys(context.user_password)
+        context.web.save_screenshot("4_before_login_button.png")
+        context.web.find_element(By.ID, "loginButton").click()
 
 
-            if context.flow == "default emailreq":
-                # should ask for e-mail input
-                context.web.save_screenshot("6_before_enter_email.png")
-                time.sleep(5)
+        context.web.save_screenshot("5_after_login_button.png")
+        time.sleep(3)
 
-                try:
-                    context.web.find_element(By.ID, "loginForm:email").send_keys(context.user_mail)
-                    context.web.save_screenshot("7_after_enter_email.png")
-                    context.web.find_element(By.ID, "loginForm:j_idt14").click()
-                    time.sleep(2)
-                    context.web.save_screenshot("8_after_click_login_button.png")
-                except NoSuchElementException:
-                    # Couldn't find email form, presuming user formerly entered...
-                    pass
-                try:
-                    context.web.find_element(By.ID, "authorizeForm:allowButton").click()
-                except NoSuchElementException:
-                    pass
-                    # "Couldn't find consent form, presuming user already consented...")
-
-            time.sleep(2)
-
-
-            time.sleep(2)
-            # print(context.web.current_url)
-
-
-        if context.acr == "oidc":
-
-            time.sleep(1)
-            context.web.set_window_size(625, 638)
-            context.web.find_element(By.ID, "username").click()
-            context.web.find_element(By.ID, "username").send_keys(context.username)
-            time.sleep(2)
-            context.web.find_element(By.ID, "password").send_keys(context.user_password)
-            context.web.find_element(By.ID, "loginButton").click()
-            time.sleep(2)
-
-        assert context.web.current_url.startswith(context.base_url)
+        try:
+            context.web.find_element(By.ID, "authorizeForm:allowButton").click()
+        except NoSuchElementException:
+            # Couldn't find consent form, presuming user already consented...
+            pass
 
         time.sleep(2)
 
-    except Exception as e:
-        print("Error ocurred on %s" % context.web.current_url)
-        print(e)
-        filename = str(datetime.now())+"_error.png"
-        context.web.save_screenshot(filename)
-        print("Error print screen saved as %s" % filename)
-        import ipdb; ipdb.set_trace()
-        ipdb.post_mortem()
+
+        if context.flow == "default emailreq":
+            # should ask for e-mail input
+            context.web.save_screenshot("6_before_enter_email.png")
+            time.sleep(5)
+
+            try:
+                context.web.find_element(By.ID, "loginForm:email").send_keys(context.user_mail)
+                context.web.save_screenshot("7_after_enter_email.png")
+                context.web.find_element(By.ID, "loginForm:j_idt14").click()
+                time.sleep(2)
+                context.web.save_screenshot("8_after_click_login_button.png")
+            except NoSuchElementException:
+                # Couldn't find email form, presuming user formerly entered...
+                pass
+            try:
+                context.web.find_element(By.ID, "authorizeForm:allowButton").click()
+            except NoSuchElementException:
+                pass
+                # "Couldn't find consent form, presuming user already consented...")
+
+        time.sleep(2)
+
+
+        time.sleep(2)
+        # print(context.web.current_url)
+
+
+    if context.acr == "oidc":
+
+        time.sleep(1)
+        context.web.set_window_size(625, 638)
+        context.web.find_element(By.ID, "username").click()
+        context.web.find_element(By.ID, "username").send_keys(context.username)
+        time.sleep(2)
+        context.web.find_element(By.ID, "password").send_keys(context.user_password)
+        context.web.find_element(By.ID, "loginButton").click()
+        time.sleep(2)
+
+    assert context.web.current_url.startswith(context.base_url)
+
+    time.sleep(2)
+
+    # except Exception as e:
+    #     print("Error ocurred on %s" % context.web.current_url)
+    #     print(e)
+    #     print()
+    #     filename = str(datetime.now())+"_error.png"
+    #     context.web.save_screenshot(filename)
+    #     print("Error print screen saved as %s" % filename)
+    #     raise e
 
 
 

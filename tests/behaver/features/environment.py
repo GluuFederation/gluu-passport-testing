@@ -49,6 +49,8 @@ def after_step(context, step):
         import ipdb
         ipdb.post_mortem(step.exc_traceback)
 
+    if not BEHAVE_DEBUG_ON_ERROR and step.status == "failed":
+        print(sys.exc_info())
 
 def after_all(context):
     pass
