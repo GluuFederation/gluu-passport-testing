@@ -8,18 +8,21 @@
 ##############################################################################
 
 
-# Default value: false
-skip_droplets=false
+# Default value: true
+create_drplet=true
+run_tests=true
 
 ## CLI options
-# -s skip droplets creation automation
-while getopts ":sp:" option; do
+# -s skip droplets creation automation (tests only)
+# -t skip tests
+
+while getopts ":s:t" option; do
    case $option in
-      s) skip_droplets=true;;
+      s) create_drplet=false;;
+      t) run_tests=false
      \?) # incorrect option
          echo "Error: Invalid option"
          exit;;
-      p) export PULL_REQUEST=${OPTARG}
    esac
 done
 
@@ -63,9 +66,9 @@ setup_test_env() {
 
 setup_test_env
 
-if [ "$skip_droplets" = false ] ; then
+create_droplets() {
 
-    echo 'Skipping droplets creation...'
+    echo 'Creating droplets...'
 
     ## creates passport droplet and wait till is up (takes a while)
     create_passport_droplet(){
@@ -101,7 +104,8 @@ if [ "$skip_droplets" = false ] ; then
 
     # give time to API respond
     sleep 1m
-fi
+}
+
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
 configure_client() {
@@ -114,35 +118,16 @@ configure_client() {
     -H 'Content-Type: application/json' --data-raw "$register_client"
 }
 
-configure_client
-
-export USER_NAME=johndoe22
-export USER_PASSWORD=test123
-export USER_MAIL=johndoe22@test.ocom
-export USER_GIVEN=john
-export USER_SUR=doe
-
-
 # DEPENDS ON ADMIN API
 function create_test_user(){
     echo "Creating test user on $PROVIDER_HOST..."
     python ./tests/helpers/create_test_user.py
 }
-create_test_user
 
-# TEST 1: PASSPORT-SAML-DEFAULT
-# - Provider need to be configurated manually
-# - User will be created automatically
-
-export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT
-export ACR=passport-saml
-
-# PROVIDER_TYPE:
-# - IDP
-# - oauth provider
-# - oidc provider straight
-# - oidc provider oxd
-export PROVIDER_TYPE=IDP
+function delete_test_user() {
+    echo "Deleting test users on $PROVIDER_HOST..."
+    python ./tests/helpers/delete_test_user.py
+}
 
 function setup_test_client() {
     # setup custom provider on test client
@@ -154,24 +139,6 @@ function setup_test_client() {
     https://$CLIENT_HOST/configuration
 }
 
-# FLOWS:
-# - default
-# - default emailreq
-# - default emaillink
-# - preselected provider
-# - idp-initiated
-export FLOW=default
-
-# PROVIDER_ID: setup manually - api not working
-# TODO: check if api works
-export PROVIDER_ID=saml-default
-setup_test_client
-
-# function run_blackbox_test
-# $1 TEST_CASE_NAME
-# $2 PROVIDER_TYPE
-# $3 ACR
-# $4 FLOW
 function run_blackbox_test() {
     echo ============================================================================
     echo
@@ -206,130 +173,178 @@ function run_blackbox_test() {
     echo
     echo "BLACKBOX BDT TESTS FINISHED FOR TEST CASE: $TEST_CASE_NAME"
     echo ============================================================================
-
-
-
 }
 
-run_blackbox_test
-function delete_test_user() {
-    echo "Deleting test users on $PROVIDER_HOST..."
-    python ./tests/helpers/delete_test_user.py
+run_all_tests(){
+    configure_client
+
+    export USER_NAME=johndoe22
+    export USER_PASSWORD=test123
+    export USER_MAIL=johndoe22@test.ocom
+    export USER_GIVEN=john
+    export USER_SUR=doe
+
+    create_test_user
+
+    # TEST 1: PASSPORT-SAML-DEFAULT
+    # - Provider need to be configurated manually
+    # - User will be created automatically
+
+    export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT
+    export ACR=passport-saml
+
+    # PROVIDER_TYPE:
+    # - IDP
+    # - oauth provider
+    # - oidc provider straight
+    # - oidc provider oxd
+    export PROVIDER_TYPE=IDP
+
+    # FLOWS:
+    # - default
+    # - default emailreq
+    # - default emaillink
+    # - preselected provider
+    # - idp-initiated
+    export FLOW=default
+
+    # PROVIDER_ID: setup manually - api not working
+    # TODO: check if api works
+    export PROVIDER_ID=saml-default
+    setup_test_client
+
+    # function run_blackbox_test
+    # $1 TEST_CASE_NAME
+    # $2 PROVIDER_TYPE
+    # $3 ACR
+    # $4 FLOW
+
+
+    run_blackbox_test
+
+    delete_test_user
+
+
+
+    # TEST 2: PASSPORT-SAML-DEFAULT-EMAILREQ
+    # - Provider need to be configurated manually
+    # - User will be created automatically
+    export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT-EMAILREQ
+    export ACR=passport-saml
+
+    # PROVIDER_TYPE:
+    # - IDP
+    # - oauth provider
+    # - oidc provider straight
+    # - oidc provider oxd
+    export PROVIDER_TYPE=IDP
+
+    # FLOWS:
+    # - default
+    # - default emailreq
+    # - default emaillink
+    # - preselected provider
+    export FLOW="default emailreq"
+
+
+    # PROVIDER_ID: setup manually - api not working
+    # TODO: check if api works
+    export PROVIDER_ID=saml-emailreq
+
+    # function run_blackbox_test
+    # $1 TEST_CASE_NAME
+    # $2 PROVIDER_TYPE
+    # $3 ACR
+    # $4 FLOW
+
+    export USER_NAME="josephdoe"
+    export USER_MAIL="jo-sef@test.com"
+
+    create_test_user
+    setup_test_client
+    run_blackbox_test
+    delete_test_user
+
+    # -----------
+    # TEST 3: PASSPORT-SAML-DEFAULT-EMAILLINK
+    # - Provider need to be configurated manually
+    # - User will be created automatically
+    export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT-EMAILLINK
+    export ACR=passport-saml
+    export PROVIDER_TYPE=IDP
+
+    # FLOWS:
+    # - default
+    # - default emailreq
+    # - default emaillink
+    # - preselected provider
+    export FLOW="default emaillink"
+
+
+    # PROVIDER_ID: setup manually - api not working
+    # TODO: check if api works
+    export PROVIDER_ID=saml-emaillink
+
+    # same e-mail from user josephdoe
+    export USER_NAME="josephdoe2"
+    export USER_MAIL="jo-sef@test.com"
+
+    create_test_user
+    setup_test_client
+    run_blackbox_test
+    delete_test_user
+
+
+
+    # TEST 4: PASSPORT-SAML-IDP-INITIATED
+    # - Provider need to be configurated manually
+    # - User will be created automatically
+    export TEST_CASE_NAME=PASSPORT-SAML-IDP-INITIATED
+    export ACR=passport-saml
+
+    # PROVIDER_TYPE:
+    # - IDP
+    # - oauth provider
+    # - oidc provider straight
+    # - oidc provider oxd
+    export PROVIDER_TYPE=IDP
+
+    # FLOWS:
+    # - default
+    # - default emailreq
+    # - default emaillink
+    # - preselected provider
+    # - idp-initiated
+    export FLOW="idp-initiated"
+
+
+    # PROVIDER_ID: setup manually - api not working
+    # TODO: check if api works
+    export PROVIDER_ID=saml-idpinit
+
+
+    export USER_NAME=hansdoe
+    export USER_MAIL="hansdoe@test.com"
+    export USER_GIVEN=hans
+    export USER_SUR=doe
+
+    create_test_user
+    setup_test_client
+    run_blackbox_test
+    delete_test_user
+
+    echo "ALL TEST FINISHED."
+
+    echo "====================================================================="
 }
-delete_test_user
 
 
+### RUN IT ALL
 
-# TEST 2: PASSPORT-SAML-DEFAULT-EMAILREQ
-# - Provider need to be configurated manually
-# - User will be created automatically
-export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT-EMAILREQ
-export ACR=passport-saml
+if [ "$create_drplet" = true ] ; then
+    create_droplets
+fi
 
-# PROVIDER_TYPE:
-# - IDP
-# - oauth provider
-# - oidc provider straight
-# - oidc provider oxd
-export PROVIDER_TYPE=IDP
-
-# FLOWS:
-# - default
-# - default emailreq
-# - default emaillink
-# - preselected provider
-export FLOW="default emailreq"
-
-
-# PROVIDER_ID: setup manually - api not working
-# TODO: check if api works
-export PROVIDER_ID=saml-emailreq
-
-# function run_blackbox_test
-# $1 TEST_CASE_NAME
-# $2 PROVIDER_TYPE
-# $3 ACR
-# $4 FLOW
-
-export USER_NAME="josephdoe"
-export USER_MAIL="jo-sef@test.com"
-
-create_test_user
-setup_test_client
-run_blackbox_test
-delete_test_user
-
-# -----------
-# TEST 3: PASSPORT-SAML-DEFAULT-EMAILLINK
-# - Provider need to be configurated manually
-# - User will be created automatically
-export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT-EMAILLINK
-export ACR=passport-saml
-export PROVIDER_TYPE=IDP
-
-# FLOWS:
-# - default
-# - default emailreq
-# - default emaillink
-# - preselected provider
-export FLOW="default emaillink"
-
-
-# PROVIDER_ID: setup manually - api not working
-# TODO: check if api works
-export PROVIDER_ID=saml-emaillink
-
-# same e-mail from user josephdoe
-export USER_NAME="josephdoe2"
-export USER_MAIL="jo-sef@test.com"
-
-create_test_user
-setup_test_client
-run_blackbox_test
-delete_test_user
-
-
-
-# TEST 4: PASSPORT-SAML-IDP-INITIATED
-# - Provider need to be configurated manually
-# - User will be created automatically
-export TEST_CASE_NAME=PASSPORT-SAML-IDP-INITIATED
-export ACR=passport-saml
-
-# PROVIDER_TYPE:
-# - IDP
-# - oauth provider
-# - oidc provider straight
-# - oidc provider oxd
-export PROVIDER_TYPE=IDP
-
-# FLOWS:
-# - default
-# - default emailreq
-# - default emaillink
-# - preselected provider
-# - idp-initiated
-export FLOW="idp-initiated"
-
-
-# PROVIDER_ID: setup manually - api not working
-# TODO: check if api works
-export PROVIDER_ID=saml-idpinit
-
-
-export USER_NAME=hansdoe
-export USER_MAIL="hansdoe@test.com"
-export USER_GIVEN=hans
-export USER_SUR=doe
-
-create_test_user
-setup_test_client
-run_blackbox_test
-delete_test_user
-
-
-echo "ALL TEST FINISHED."
-
-
-echo "====================================================================="
-
+if [ "$run_tests" = true ] ; then
+    run_all_tests
+fi
