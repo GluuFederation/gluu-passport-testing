@@ -1,3 +1,23 @@
+## v0.5.0 (2020-10-16)
+
+### Feat
+
+- **env.sh**: skip tests option so can be triggered by jenkins etc
+- **gluu.sh**: Choose to install latest stable / latest dev
+- **env.sh**: Add -s option to skipp droplet creation
+
+### Fix
+
+- **environment.py**: add correct behaviour for debug on error
+- **environment**: Handles DEBUG_ON_ERROR and stack trace
+- **env.sh**: settings
+- **env.sh**: Correct boolean value of skip_droplets condition
+- **passport-central-config.json**: Change issuer and add hostname jinja
+
+### Refactor
+
+- **create_droplet.py**: add jenkins ssh key
+
 ## v0.4.3 (2020-10-05)
 
 ### Fix
