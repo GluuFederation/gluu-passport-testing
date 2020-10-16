@@ -50,18 +50,17 @@ def user_authenticates(context):
     if context.acr == "passport-saml":
 
         # for all samls..
-
         time.sleep(2)
-        context.web.save_screenshot("3_before_username_typing.png")
+        context.web.save_screenshot(str(datetime.now())+"3_before_username_typing.png")
         context.web.find_element(By.ID, "username").click()
         context.web.find_element(By.ID, "username").send_keys(context.user_name)
         context.web.find_element(By.ID, "password").send_keys(context.user_password)
-        context.web.save_screenshot("4_before_login_button.png")
+        context.web.save_screenshot(str(datetime.now())+"4_before_login_button.png")
         context.web.find_element(By.ID, "loginButton").click()
 
-
-        context.web.save_screenshot("5_after_login_button.png")
         time.sleep(3)
+        context.web.save_screenshot(str(datetime.now())+"5_after_login_button.png")
+
 
         try:
             context.web.find_element(By.ID, "authorizeForm:allowButton").click()
@@ -74,15 +73,15 @@ def user_authenticates(context):
 
         if context.flow == "default emailreq":
             # should ask for e-mail input
-            context.web.save_screenshot("6_before_enter_email.png")
+            context.web.save_screenshot(str(datetime.now())+"6_before_enter_email.png")
             time.sleep(5)
 
             try:
                 context.web.find_element(By.ID, "loginForm:email").send_keys(context.user_mail)
-                context.web.save_screenshot("7_after_enter_email.png")
+                context.web.save_screenshot(str(datetime.now())+"7_after_enter_email.png")
                 context.web.find_element(By.ID, "loginForm:j_idt14").click()
                 time.sleep(2)
-                context.web.save_screenshot("8_after_click_login_button.png")
+                context.web.save_screenshot(str(datetime.now())+"8_after_click_login_button.png")
             except NoSuchElementException:
                 # Couldn't find email form, presuming user formerly entered...
                 pass
@@ -110,20 +109,10 @@ def user_authenticates(context):
         context.web.find_element(By.ID, "loginButton").click()
         time.sleep(2)
 
+
     assert context.web.current_url.startswith(context.base_url)
-
+    context.web.save_screenshot(str(datetime.now())+"_authenticated.png")
     time.sleep(2)
-
-    # except Exception as e:
-    #     print("Error ocurred on %s" % context.web.current_url)
-    #     print(e)
-    #     print()
-    #     filename = str(datetime.now())+"_error.png"
-    #     context.web.save_screenshot(filename)
-    #     print("Error print screen saved as %s" % filename)
-    #     raise e
-
-
 
 
 @when(u'user tries to access protected content page')
@@ -167,3 +156,4 @@ def user_access_protected_content(context):
     res = new_sess.get(context.base_url + "/protected-content",verify = False)
 
     assert res.url == context.base_url + "/protected-content"
+    context.web.save_screenshot(str(datetime.now())+"_protected-content.png")

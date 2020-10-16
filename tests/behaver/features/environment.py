@@ -42,10 +42,10 @@ def after_scenario(context, scenario):
 
 
 def after_step(context, step):
-    print()
     if BEHAVE_DEBUG_ON_ERROR and step.status == "failed":
         # -- ENTER DEBUGGER: Zoom in on failure location.
         # NOTE: Use IPython debugger, same for pdb (basic python debugger).
+        context.web.save_screenshot("ERROR.png")
         import ipdb
         ipdb.post_mortem(step.exc_traceback)
 
