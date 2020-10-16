@@ -13,12 +13,13 @@ skip_droplets=false
 
 ## CLI options
 # -s skip droplets creation automation
-while getopts ":s" option; do
+while getopts ":sp:" option; do
    case $option in
       s) skip_droplets=true;;
      \?) # incorrect option
          echo "Error: Invalid option"
          exit;;
+      p) export PULL_REQUEST=${OPTARG}
    esac
 done
 
@@ -33,10 +34,10 @@ setup_test_env() {
     export PASSPORT_HOST=t1.techno24x7.com
     export PASSPORT_IP="164.90.252.72"
     export LATEST_DEV_SNAPSHOT_ID=70649304
-    export LATEST_STABLE_SNAPSHOT_ID=68259296
+    export LATEST_STABLE_SNAPSHOT_ID=71801028
     export PROVIDER_HOST=t3.techno24x7.com
-    export PROVIDER_IP="167.172.15.77"
-    export PROVIDER_SNAPSHOT_ID=69107244
+    export PROVIDER_IP="178.128.133.101"
+    export PROVIDER_SNAPSHOT_ID=71800849
     export CLIENT_HOST=dev.techno24x7.com
     export API_CLIENT_ID=5aba39e9-c8fe-47de-a231-1b57efb347ab
     export API_CLIENT_SECRET=FSjEHsqDPs5vVzdlF390D4EqeYd5noZqKymLjH1W
