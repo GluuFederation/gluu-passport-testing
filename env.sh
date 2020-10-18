@@ -19,7 +19,7 @@ run_tests=true
 while getopts ":s:t" option; do
    case $option in
       s) create_drplet=false;;
-      t) run_tests=false
+      t) run_tests=false;;
      \?) # incorrect option
          echo "Error: Invalid option"
          exit;;
