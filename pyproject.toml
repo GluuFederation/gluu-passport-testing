@@ -1,11 +1,11 @@
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.5.0"
+version = "0.6.0"
 tag_format = "v$version"
 
 [tool.poetry]
 name = "gluu-passport-testing"
-version = "0.4.3"
+version = "0.6.0"
 description = "Stage testing for passport"
 authors = ["Christian Eland"]
 license = "Apache 2.0"
