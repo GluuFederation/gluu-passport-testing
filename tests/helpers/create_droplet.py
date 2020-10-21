@@ -16,9 +16,8 @@ droplet_data = {
     "region": "nyc1",
     "size": "s-8vcpu-16gb",
     "image": snapshot,
-    "ssh_keys": [27410347, 27608055, 27590881, 28749641],
+    "ssh_keys": [28792503, 28790914],
     "private_networking": True,
-    "vpc_uuid": "47e5c00a-2b23-4dac-bed4-0e44659941f3",
     "monitoring": True
 }
 
