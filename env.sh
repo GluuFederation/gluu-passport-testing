@@ -7,10 +7,9 @@
 ##                                                                          ##
 ##############################################################################
 
-
 # Default value: true
-create_drplet=true
-run_tests=true
+create_drplet=true;
+run_tests=true;
 
 ## CLI options
 # -s skip droplets creation automation (tests only)
@@ -25,6 +24,10 @@ while getopts ":s:t" option; do
          exit;;
    esac
 done
+
+# geckodriver
+export PATH=$PATH:$PWD/tests/selenium/drivers/firefox
+
 
 # SETUP OD_TOKEN (digital ocean token b4 stating)
 echo "PLEASE DO NOT INTERRUPT"
@@ -66,6 +69,23 @@ setup_test_env() {
 
 setup_test_env
 
+delete_droplets() {
+
+    delete_passport_droplet(){
+        export DROPLET_HOST=$PASSPORT_HOST
+        python ./tests/helpers/destroy_droplet.py
+        export DROPLET_HOST=
+    }
+
+    delete_provider_droplet(){
+        export DROPLET_HOST=$PROVIDER_HOST
+        python ./tests/helpers/destroy_droplet.py
+        export DROPLET_HOST
+    }
+    delete_provider_droplet
+    delete_passport_droplet
+
+}
 create_droplets() {
 
     echo 'Creating droplets...'
@@ -81,6 +101,8 @@ create_droplets() {
         export SNAPSHOT_ID=
     }
 
+
+
     create_provider_droplet(){
         export DROPLET_HOST=$PROVIDER_HOST
         export FLOATING_IP=$PROVIDER_IP
@@ -90,6 +112,9 @@ create_droplets() {
         export FLOATING_IP=
         export SNAPSHOT_ID=
     }
+
+
+
 
     wait_till_server_up(){
         export SERVER=$1
@@ -339,7 +364,8 @@ run_all_tests(){
 }
 
 
-### RUN IT ALL
+echo "create_drplet=$create_drplet"
+echo "run_tests=$run_tests"
 
 if [ "$create_drplet" = true ] ; then
     create_droplets
@@ -348,3 +374,10 @@ fi
 if [ "$run_tests" = true ] ; then
     run_all_tests
 fi
+
+if [ "$create_drplet" = true ] ; then
+    echo "Deleting droplets..."
+    delete_droplets
+    echo "finished with success!!!"
+fi
+

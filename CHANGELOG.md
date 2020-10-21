@@ -1,3 +1,13 @@
+## v0.6.0 (2020-10-20)
+
+### Feat
+
+- **destroy_droplet.py**: destroy droplet after test
+
+### Fix
+
+- **env.sh**: syntax: add ;; line 22
+
 ## v0.5.0 (2020-10-16)
 
 ### Feat
