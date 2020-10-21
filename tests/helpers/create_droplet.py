@@ -17,6 +17,7 @@ droplet_data = {
     "size": "s-8vcpu-16gb",
     "image": snapshot,
     "ssh_keys": [28792503, 28790914],
+    "vpc_uuid": "b356c33e-dc84-11e8-8650-3cfdfea9f8c8",
     "private_networking": True,
     "monitoring": True
 }
