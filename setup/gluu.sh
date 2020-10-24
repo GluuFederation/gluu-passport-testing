@@ -46,4 +46,5 @@ then
 
     echo "Deleting flag file /root/freshsnap"
     rm -f /root/freshsnap
+    echo "All finished!"
 fi

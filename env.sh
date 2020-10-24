@@ -15,7 +15,7 @@ run_tests=true;
 # -s skip droplets creation automation (tests only)
 # -t skip tests
 
-while getopts ":s:t" option; do
+while getopts ":st" option; do
    case $option in
       s) create_drplet=false;;
       t) run_tests=false;;
@@ -38,7 +38,7 @@ set -e
 ## Settings down here
 setup_test_env() {
     export PASSPORT_HOST=t1.techno24x7.com
-    export PASSPORT_IP="164.90.252.72"
+    export PASSPORT_IP="134.209.130.157"
     export LATEST_DEV_SNAPSHOT_ID=70649304
     export LATEST_STABLE_SNAPSHOT_ID=71801028
     export PROVIDER_HOST=t3.techno24x7.com

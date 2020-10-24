@@ -24,6 +24,7 @@ importlib-metadata = "^2.0.0"
 [tool.poetry.dev-dependencies]
 commitizen = "^2.4.1"
 autopep8 = "^1.5.4"
+pre-commit = "^2.7.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
