@@ -69,14 +69,11 @@ cd /test-install/data
 ls /root
 ```
 
-### Setup should be done on env.sh file, please check it
 
 ## Starting test server
 
-Just restart and see the magic happening on `/test-data/gluu.log`
-```sh
-shutdown -r
-```
+Just restart (`shutdown -r`) and gluu-server will be installed w/ testing-data. Follow it on `/test-data/gluu.log`
+
 
 #### Configyration should be done on env.sh file, please check it
 
@@ -85,15 +82,6 @@ shutdown -r
 
 Install Xvfb
 `sudo apt install xvfb`
-
-Add geckodriver to your path:
-`export PATH=$PATH:$PWD/tests/selenium/drivers/firefox`
-
-In your project root folder, create a virtual env using:
-`python3 -m venv venv`
-
-Enter the venv:
-`source venv/bin/activate`
 
 Install poetry if you don't have:
 `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
@@ -106,7 +94,7 @@ If you don't have, install Firefox:
 
 Setup ENV on `env.sh` file
 
-run `env.sh`
+run `poetry run env.sh`
 
 ### Options
 You can run `env.sh` with skip options:
