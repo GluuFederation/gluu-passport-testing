@@ -1,3 +1,13 @@
+## v0.7.0 (2020-10-24)
+
+### Fix
+
+- **setup.properties**: fix floating ip
+- **gluu.sh**: finished message on setup
+- **env.sh**: getopts was expecting arg
+- **create_droplet.py**: vpc_uuid cannot be null
+- **create_droplet.py**: workaround to config - setting up key ids
+
 ## v0.6.0 (2020-10-20)
 
 ### Feat
