@@ -40,11 +40,13 @@ setup_test_env() {
     export PASSPORT_HOST=t1.techno24x7.com
     export PASSPORT_IP="134.209.130.157"
     export LATEST_DEV_SNAPSHOT_ID=70649304
-    export LATEST_STABLE_SNAPSHOT_ID=71801028
+    export LATEST_STABLE_SNAPSHOT_ID=72400785
     export PROVIDER_HOST=t3.techno24x7.com
-    export PROVIDER_IP="178.128.133.101"
-    export PROVIDER_SNAPSHOT_ID=71800849
+    export PROVIDER_IP="161.35.253.175"
+    export PROVIDER_SNAPSHOT_ID=72125590
+    # RP CLIENT_HOST (auth-tdd-client)
     export CLIENT_HOST=dev.techno24x7.com
+    # provider api for user automation
     export API_CLIENT_ID=5aba39e9-c8fe-47de-a231-1b57efb347ab
     export API_CLIENT_SECRET=FSjEHsqDPs5vVzdlF390D4EqeYd5noZqKymLjH1W
 
