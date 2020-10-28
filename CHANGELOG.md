@@ -1,3 +1,13 @@
+## v0.8.0 (2020-10-28)
+
+### Fix
+
+- **env.Sh**: fixed review changes
+
+### Feat
+
+- **env.Sh**: take a configuration from file
+
 ## v0.7.0 (2020-10-24)
 
 ### Fix
