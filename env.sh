@@ -377,6 +377,7 @@ if [ "$run_tests" = true ] ; then
     run_all_tests
 fi
 
+# Try to delete droplet after tests
 if [ "$create_drplet" = false ] ; then
     echo "Deleting droplets..."
     delete_droplets
