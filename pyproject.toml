@@ -1,6 +1,6 @@
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.7.0"
+version = "0.8.0"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:version"
@@ -8,7 +8,7 @@ version_files = [
 
 [tool.poetry]
 name = "gluu-passport-testing"
-version = "0.7.0"
+version = "0.8.0"
 description = "Stage testing for passport"
 authors = ["Christian Eland"]
 license = "Apache 2.0"
@@ -25,7 +25,7 @@ ipdb = "^0.13.4"
 importlib-metadata = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
-commitizen = "^2.4.1"
+commitizen = "^2.4.2"
 autopep8 = "^1.5.4"
 pre-commit = "^2.7.1"
 
