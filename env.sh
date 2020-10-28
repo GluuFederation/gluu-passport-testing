@@ -14,15 +14,15 @@ run_tests=true;
 ## CLI options
 # -s skip droplets creation automation (tests only)
 # -t skip tests
-# -c <file> : to load config from file 
+# -c <file> : to load config from file
 
 while getopts ":stc:" option; do
    case $option in
       s) create_drplet=false;;
       t) run_tests=false;;
       c)
-        config_file=${OPTARG} 
-        if [ ! -s ${config_file} ]; 
+        config_file=${OPTARG}
+        if [ ! -s ${config_file} ];
         then
             echo "Configuration file not found. Pass it using './enc.sh -c <file>' option or skip '-c' option to take config from 'test.conf'"
             exit
@@ -47,14 +47,14 @@ set -e
 ## Settings down here
 setup_test_env() {
     echo ============================================================================
-    if [ -z ${config_file} ]; 
+    if [ -z ${config_file} ];
     then
         config_file="test.conf"
     fi
     echo "Configuration is loading from $config_file file"
     . $config_file
     export $(cut -d= -f1 $config_file)
-    
+
     echo ============================================================================
     echo "Setting up environment...."
     echo PASSPORT_HOST=$PASSPORT_HOST
@@ -380,7 +380,8 @@ if [ "$run_tests" = true ] ; then
     run_all_tests
 fi
 
-if [ "$create_drplet" = true ] ; then
+# Try to delete droplet after tests
+if [ "$create_drplet" = false ] ; then
     echo "Deleting droplets..."
     delete_droplets
     echo "finished with success!!!"
