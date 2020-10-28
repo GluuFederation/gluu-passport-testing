@@ -22,9 +22,9 @@ while getopts ":stc:" option; do
       t) run_tests=false;;
       c)
         config_file=${OPTARG} 
-        if [ -z ${config_file+x} ]; 
+        if [ ! -s ${config_file} ]; 
         then
-            echo "Configuration file not found. Pass it using './enc.sh -c <file>' option"
+            echo "Configuration file not found. Pass it using './enc.sh -c <file>' option or skip '-c' option to take config from 'test.conf'"
             exit
         fi
         ;;
@@ -47,6 +47,10 @@ set -e
 ## Settings down here
 setup_test_env() {
     echo ============================================================================
+    if [ -z ${config_file} ]; 
+    then
+        config_file="test.conf"
+    fi
     echo "Configuration is loading from $config_file file"
     . $config_file
     export $(cut -d= -f1 $config_file)
