@@ -1,3 +1,18 @@
+## v0.8.1 (2020-10-28)
+
+### Refactor
+
+- **test.conf**: change default values
+- **env.sh**: merging master
+- **env.sh**: droplet deletion
+- **env.sh**: fix changed snapshot ids
+- **env.sh**: update droplet id
+
+### Fix
+
+- **env.sh**: remove auto-merge comments
+- **env.sh**: droplet deletion if create_drplet = false
+
 ## v0.8.0 (2020-10-28)
 
 ### Fix
