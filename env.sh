@@ -377,7 +377,7 @@ if [ "$run_tests" = true ] ; then
     run_all_tests
 fi
 
-if [ "$create_drplet" = true ] ; then
+if [ "$create_drplet" = false ] ; then
     echo "Deleting droplets..."
     delete_droplets
     echo "finished with success!!!"
