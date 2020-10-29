@@ -1,3 +1,9 @@
+## v0.9.0 (2020-10-29)
+
+### Feat
+
+- **create_Droplet.Py**: added tag psp-stage
+
 ## v0.8.1 (2020-10-28)
 
 ### Refactor
