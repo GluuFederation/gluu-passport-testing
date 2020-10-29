@@ -19,7 +19,8 @@ droplet_data = {
     "ssh_keys": [28792503, 28790914],
     "vpc_uuid": "b356c33e-dc84-11e8-8650-3cfdfea9f8c8",
     "private_networking": True,
-    "monitoring": True
+    "monitoring": True,
+    "tags": ["psp-stage"]
 }
 
 droplet = Droplet(**droplet_data)
