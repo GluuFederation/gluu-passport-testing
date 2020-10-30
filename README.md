@@ -75,8 +75,24 @@ ls /root
 Just restart (`shutdown -r`) and gluu-server will be installed w/ testing-data. Follow it on `/test-data/gluu.log`
 
 
-#### Configyration should be done on env.sh file, please check it
+### Configuration
 
+Use `test.conf` for configuration. You can pass any file by using option `-c <file>`.
+
+Configuration details are as given below:
+
+| Env | Description |
+|-----|-------------|
+|**PASSPORT_HOST**|Use to set Host for Passport Droplet|
+|**PASSPORT_IP**|Use to set floating IP for Passport Droplet|
+|**LATEST_DEV_SNAPSHOT_ID**|It is `Dev Passport Snapshot Id` from which you want to create droplet for Passport|
+|**LATEST_STABLE_SNAPSHOT_ID**|It is `Stable Passport Snapshot Id` from which you want to create droplet for Passport|
+|**PROVIDER_HOST**|Use to set Host for SAML IDP Provider Droplet|
+|**PROVIDER_IP**|Use to set floating IP for SAML IDP Provider Droplet|
+|**PROVIDER_SNAPSHOT_ID**|It is `SAML IDP Provider Snapshot Id` from which you want to create droplet for SAML IDP Provider|
+|**CLIENT_HOST**|It is use to set Host for Request Party Client i.e. [auth-tdd-client](https://github.com/christian-hawk/auth-tdd-client)|
+|**API_CLIENT_ID**|Providers' gluu-server [Admin REST API](https://gluu.org/docs/gluu-server/4.1/api-guide/oxtrust-api/) client_id *(used for automated user creation/deletion)*|
+|**API_CLIENT_SECRET**|Providers' gluu-server [Admin REST API](https://gluu.org/docs/gluu-server/4.1/api-guide/oxtrust-api/) client_secret *(used for automated user creation/deletion)*|
 
 ### Setting up test suite
 
@@ -100,6 +116,7 @@ run `poetry run env.sh`
 You can run `env.sh` with skip options:
 - `-s`: skip droplet creation
 - `-t`: skip tests
+- `-c <file>`: Pass configuration file
 
 ## TO BE
 
