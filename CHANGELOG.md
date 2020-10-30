@@ -1,3 +1,10 @@
+## v0.9.1 (2020-10-30)
+
+### Fix
+
+- **test.conf**: removed comments
+- **destroy_droplet.py**: fix pagination bumping pydoautomator version
+
 ## v0.9.0 (2020-10-29)
 
 ### Feat
