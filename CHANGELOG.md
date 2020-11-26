@@ -1,3 +1,9 @@
+## v0.9.2 (2020-11-26)
+
+### Fix
+
+- **.gitignore**: add test.conf to gitignore to avoid overwriting
+
 ## v0.9.1 (2020-10-30)
 
 ### Fix
