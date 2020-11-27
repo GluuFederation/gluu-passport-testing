@@ -16,5 +16,7 @@ droplets = aut.get_all_droplets()
 
 for droplet in droplets:
     if droplet['name'] == name:
+        print('turning off droplet {name}...')
         aut.turnoff_droplet(droplet['id'])
+        print('destroying droplet {name}...')
         aut.destroy_droplet(droplet['id'])
