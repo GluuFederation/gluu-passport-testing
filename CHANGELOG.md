@@ -1,3 +1,16 @@
+## v0.9.2 (2020-11-26)
+
+### Fix
+
+- **.gitignore**: add test.conf to gitignore to avoid overwriting
+
+## v0.9.1 (2020-10-30)
+
+### Fix
+
+- **test.conf**: removed comments
+- **destroy_droplet.py**: fix pagination bumping pydoautomator version
+
 ## v0.9.0 (2020-10-29)
 
 ### Feat
