@@ -41,8 +41,21 @@ export PATH=$PATH:$PWD/tests/selenium/drivers/firefox
 # SETUP OD_TOKEN (digital ocean token b4 stating)
 echo "PLEASE DO NOT INTERRUPT"
 
+teardown() {
+    exit_status=$(echo "$?")
+    echo "entered teardown..."
+    echo "EXIT detected with exit status $exit_status"
+    if [[ $exit_status != 0 ]]
+    then
+        echo "Deleting droplets..."
+        delete_droplets
+    fi
+}
+
 # exit when any command fails
 set -e
+trap 'teardown' EXIT
+
 
 ## Settings down here
 setup_test_env() {
@@ -135,7 +148,6 @@ create_droplets() {
     # give time to API respond
     sleep 1m
 }
-
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
 configure_client() {

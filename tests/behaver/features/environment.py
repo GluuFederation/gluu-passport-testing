@@ -4,6 +4,7 @@
 from selenium import webdriver
 import os
 from pyvirtualdisplay import Display
+import sys
 #import ldap
 
 display = Display(visible=0, size=(1024, 768))
