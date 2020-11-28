@@ -1,3 +1,16 @@
+## v0.10.0 (2020-11-28)
+
+### Feat
+
+- **destroy_droplets**: print droplets actions to fup w/ deleting
+
+### Fix
+
+- **env.sh**: Add teardown function that delete droplets on exit status != 0
+- **behave**: add import sys to behaves env
+- **test.conf**: delete test.conf from repo
+- **.gitignore**: add test.conf to gitignore to avoid overwrite
+
 ## v0.9.2 (2020-11-26)
 
 ### Fix
