@@ -181,6 +181,9 @@ function setup_test_client() {
     https://$CLIENT_HOST/configuration
 }
 
+# Input
+# $1 - feature file name
+# example: run_blackbox_test protected-content
 function run_blackbox_test() {
     echo ============================================================================
     echo
@@ -205,7 +208,7 @@ function run_blackbox_test() {
     echo "RUNNING BLACKBOX BDT TESTS:"
     echo ----------------------------------------------------------------------------
     echo
-    behave ./tests/behaver/features --include protected-content
+    behave ./tests/behaver/features --include $1
     # if [[ $FLOW == 'default emaillink' ]]
     # then
     #     behave ./tests/behaver/features --include email-linking
@@ -262,7 +265,7 @@ run_all_tests(){
     # $4 FLOW
 
 
-    run_blackbox_test
+    run_blackbox_test protected-content
 
     delete_test_user
 
@@ -304,7 +307,7 @@ run_all_tests(){
 
     create_test_user
     setup_test_client
-    run_blackbox_test
+    run_blackbox_test protected-content
     delete_test_user
 
     # -----------
@@ -333,7 +336,7 @@ run_all_tests(){
 
     create_test_user
     setup_test_client
-    run_blackbox_test
+    run_blackbox_test protected-content
     delete_test_user
 
 
@@ -372,7 +375,44 @@ run_all_tests(){
 
     create_test_user
     setup_test_client
-    run_blackbox_test
+    run_blackbox_test protected-content
+    delete_test_user
+
+    # TEST 5: User deny consent
+    # - Provider need to be configurated manually
+    # - User will be created automatically
+    export TEST_CASE_NAME=USER_DENY_CONSENT
+    export ACR=passport-openidconnect
+
+    # PROVIDER_TYPE:
+    # - IDP
+    # - oauth provider
+    # - oidc provider straight
+    # - oidc provider oxd
+    export PROVIDER_TYPE=oauth provider
+
+    # FLOWS:
+    # - default
+    # - default emailreq
+    # - default emaillink
+    # - preselected provider
+    # - idp-initiated
+    export FLOW="default"
+
+
+    # PROVIDER_ID: setup manually - api not working
+    # TODO: check if api works
+    export PROVIDER_ID=oidc-default
+
+
+    export USER_NAME=hansdoe
+    export USER_MAIL="hansdoe@test.com"
+    export USER_GIVEN=hans
+    export USER_SUR=doe
+
+    create_test_user
+    setup_test_client
+    run_blackbox_test error-handling
     delete_test_user
 
     echo "ALL TEST FINISHED."

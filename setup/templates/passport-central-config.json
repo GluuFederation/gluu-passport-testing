@@ -109,6 +109,34 @@
         "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO",
         "issuer": "dev.techno24x7.com"
       }
+    },
+    {
+      "id": "oidc-default",
+      "displayName": "p2gluu",
+      "type": "openidconnect",
+      "mapping": "openidconnect-default",
+      "passportStrategyId": "passport-openidconnect",
+      "enabled": true,
+      "callbackUrl": "https://%(hostname)s/passport/auth/p2gluu/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "userInfoURL": "https://t3.techno24x7.com/oxauth/restv1/userinfo",
+        "clientID": "<client_id>",
+        "tokenURL": "https://t3.techno24x7.com/oxauth/restv1/token",
+        "authorizationURL": "https://t3.techno24x7.com/oxauth/restv1/authorize",
+        "scope": [
+          "openid",
+          "email",
+          "profile"
+        ],
+        "clientSecret": "<client_secret>",
+        "issuer": "https://t3.techno24x7.com",
+        "callbackURL": "https://%(hostname)s/passport/auth/p2gluu/callback",
+        "state": true
+      },
+      "passportAuthnParams": {},
+      "verifyCallbackArity": 4
     }
   ]
 }
