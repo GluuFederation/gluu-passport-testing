@@ -15,8 +15,8 @@ aut = Automator(digital_ocean_token)
 droplets = aut.get_all_droplets()
 
 for droplet in droplets:
+    print('trying to turn off droplet named %s' % name )
     if droplet['name'] == name:
-        print('turning off droplet {name}...')
         aut.turnoff_droplet(droplet['id'])
-        print('destroying droplet {name}...')
+        print('destroying droplet id' % droplet['id'])
         aut.destroy_droplet(droplet['id'])
