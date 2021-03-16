@@ -1,3 +1,9 @@
+## v0.11.0 (2021-03-16)
+
+### Feat
+
+- add info to stdout on droplet destroy
+
 ## v0.10.0 (2020-11-28)
 
 ### Feat
