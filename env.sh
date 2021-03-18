@@ -144,7 +144,7 @@ create_droplets() {
     wait_till_server_up $PASSPORT_HOST
     create_provider_droplet
     wait_till_server_up $PROVIDER_HOST
-    wait_till_server_up ${PROVIDER_HOST}/idp/shibboleth
+    wait_till_server_up "${PROVIDER_HOST}/idp/shibboleth"
     echo "Yeah well, looks like they're up!"
 
     # Is not possible to set / force metadata retrieve in shibboleth
