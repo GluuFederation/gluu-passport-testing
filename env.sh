@@ -144,9 +144,13 @@ create_droplets() {
     wait_till_server_up $PASSPORT_HOST
     create_provider_droplet
     wait_till_server_up $PROVIDER_HOST
+    wait_till_server_up ${PROVIDER_HOST}/idp/shibboleth
+    echo "Yeah well, looks like they're up!"
 
-    # give time to API respond
-    sleep 1m
+    # Is not possible to set / force metadata retrieve in shibboleth
+    echo "Waiting 5 minutes till IDP fetches SPs metadata..."
+    sleep 5m
+
 }
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
