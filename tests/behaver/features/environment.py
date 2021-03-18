@@ -51,6 +51,7 @@ def after_step(context, step):
         ipdb.post_mortem(step.exc_traceback)
 
     if not BEHAVE_DEBUG_ON_ERROR and step.status == "failed":
+        context.web.save_screenshot("ERROR.png")
         print(sys.exc_info())
 
 def after_all(context):
