@@ -1,3 +1,17 @@
+## v0.12.0 (2021-03-19)
+
+### Fix
+
+- **env.sh**: Double quote to prevent globbing and word splitting. "
+- **env.sh**: wait provider (IDP) to fetch metadata
+- **destroy_droplet**: fix missing variable reference
+
+### Feat
+
+- **environment**: screenshot on fail
+- **protected-content**: add assertion error message
+- **create_droplet**: add droplets params to output
+
 ## v0.11.0 (2021-03-16)
 
 ### Feat
