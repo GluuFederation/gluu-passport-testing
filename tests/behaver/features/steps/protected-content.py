@@ -118,7 +118,8 @@ def user_authenticates(context):
         context.web.find_element(By.ID, "loginButton").click()
         time.sleep(2)
 
-    assert context.web.current_url.startswith(context.base_url)
+    assert context.web.current_url.startswith(context.base_url), "%s does not start with %s" % (
+        context.web.current_url, context.base_url)
     context.web.save_screenshot(str(datetime.now())+"_authenticated.png")
     time.sleep(2)
 
@@ -153,7 +154,7 @@ def user_redirected_to_external_login_page(context):
     time.sleep(4)
 
     selenium_url = context.web.current_url
-    assert selenium_url.startswith(external_login_page)
+    assert selenium_url.startswith(external_login_page), '%s does not starts with %s' % (selenium_url, external_login_page)
 
 
 @then(u'user should access protected content')
@@ -162,6 +163,6 @@ def user_access_protected_content(context):
     new_sess = cookiesTransformer(
         context.web.session_id, context.web.get_cookies())
     res = new_sess.get(context.base_url + "/protected-content", verify=False)
-
-    assert res.url == context.base_url + "/protected-content"
+    expected = context.base_url + "/protected-content"
+    assert (res.url == expected), '%s is not equal %s' % (res.url, expected)
     context.web.save_screenshot(str(datetime.now())+"_protected-content.png")
