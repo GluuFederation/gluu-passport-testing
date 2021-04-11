@@ -118,6 +118,14 @@ You can run `env.sh` with skip options:
 - `-t`: skip tests
 - `-c <file>`: Pass configuration file
 
+
+## Test logs / artifacts
+Test Server will collect logs through ssh (ensure you have authorized test server to connect`PROVIDER_HOST` and `PASSPORT_HOST` through `ssh`)
+
+Logs (such as `idp-process.log`, `passport.log`, `oxauth_script.log`, etc)  will be stored ar `server_artifacts/provider` and `server_artifacts/passport` so they can be analyzed when needed. (i.e. to dig in a failing test case). 
+
+Your CI may handle to fetch and/or publish artifacts from this folder.
+
 ## TO BE
 
 ### In the near future
