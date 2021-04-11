@@ -118,7 +118,6 @@ You can run `env.sh` with skip options:
 - `-t`: skip tests
 - `-c <file>`: Pass configuration file
 
-
 ## Test logs / artifacts
 Test Server will collect logs through ssh (ensure you have authorized test server to connect`PROVIDER_HOST` and `PASSPORT_HOST` through `ssh`)
 
