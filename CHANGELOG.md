@@ -1,3 +1,14 @@
+## v0.13.0 (2021-04-14)
+
+### Fix
+
+- remove unecessary echo prints
+- **artifacts**: double quotes to avoid globbing
+
+### Feat
+
+- **artifacts**: fetch and save servers artifacts Create function to fetch logs by ssh from both servers b4 destroy
+
 ## v0.12.0 (2021-03-19)
 
 ### Fix
