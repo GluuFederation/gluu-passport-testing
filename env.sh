@@ -94,20 +94,14 @@ fetch_artifacts() {
 
     mkdir -p server_artifacts/passport
     echo "Fetching logs from passport server $PASSPORT_HOST"
-    echo "Fetching oxAuth logs..."
     scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PASSPORT_HOST":/opt/gluu-server/opt/gluu/jetty/oxauth/logs/*.log ./server_artifacts/passport/.
-    echo "Fetching oxTrust logs..."
     scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PASSPORT_HOST":/opt/gluu-server/opt/gluu/jetty/identity/logs/*.log ./server_artifacts/passport/.
-    echo "Fetching passport logs..."
     scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PASSPORT_HOST":/opt/gluu-server/opt/gluu/node/passport/logs/*.log ./server_artifacts/passport/.
 
     mkdir -p server_artifacts/provider
     echo "Fetching logs from passport server $PROVIDER_HOST"
-    echo "Fetching shibboleth logs..."
     scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PROVIDER_HOST":/opt/gluu-server/opt/gluu/jetty/oxauth/logs/*.log ./server_artifacts/provider/.
-    echo "Fetching oxTrust logs..."
     scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PROVIDER_HOST":/opt/gluu-server/opt/gluu/jetty/identity/logs/*.log ./server_artifacts/provider/.
-    echo "Fetching passport logs..."
     scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PROVIDER_HOST":/opt/gluu-server/opt/shibboleth-idp/logs/*.log ./server_artifacts/provider/.
 }
 
