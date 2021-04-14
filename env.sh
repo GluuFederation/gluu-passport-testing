@@ -47,6 +47,8 @@ teardown() {
     echo "EXIT detected with exit status $exit_status"
     if [[ $exit_status != 0 ]]
     then
+        echo "Fetching artifacts from teardown..."
+        fetch_artifacts
         echo "Deleting droplets..."
         delete_droplets
     fi
@@ -86,6 +88,22 @@ setup_test_env() {
 
 
 setup_test_env
+fetch_artifacts() {
+    echo "cleaning up old artifacts"
+    rm -r server_artifacts
+
+    mkdir -p server_artifacts/passport
+    echo "Fetching logs from passport server $PASSPORT_HOST"
+    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PASSPORT_HOST":/opt/gluu-server/opt/gluu/jetty/oxauth/logs/*.log ./server_artifacts/passport/.
+    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PASSPORT_HOST":/opt/gluu-server/opt/gluu/jetty/identity/logs/*.log ./server_artifacts/passport/.
+    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PASSPORT_HOST":/opt/gluu-server/opt/gluu/node/passport/logs/*.log ./server_artifacts/passport/.
+
+    mkdir -p server_artifacts/provider
+    echo "Fetching logs from passport server $PROVIDER_HOST"
+    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PROVIDER_HOST":/opt/gluu-server/opt/gluu/jetty/oxauth/logs/*.log ./server_artifacts/provider/.
+    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PROVIDER_HOST":/opt/gluu-server/opt/gluu/jetty/identity/logs/*.log ./server_artifacts/provider/.
+    scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@"$PROVIDER_HOST":/opt/gluu-server/opt/shibboleth-idp/logs/*.log ./server_artifacts/provider/.
+}
 
 delete_droplets() {
 
@@ -398,6 +416,8 @@ fi
 
 # Try to delete droplet after tests
 if [ "$create_drplet" = false ] ; then
+    echo "Fetching artifacts from teardown..."
+    fetch_artifacts
     echo "Deleting droplets..."
     delete_droplets
     echo "finished with success!!!"
