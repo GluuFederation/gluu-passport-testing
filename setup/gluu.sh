@@ -5,10 +5,10 @@
 if [ -f /root/freshsnap ]
 then
     ### Ads and install latest STABLE package for ubuntu 18
-    # echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
+    echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
 
     ### Ads and install latest DEV package for ubuntu 18
-    echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+    ### echo "deb https://repo.gluu.org/ubuntu/ focal-devel main" > /etc/apt/sources.list.d/gluu-repo.list
     curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
     apt update -y
     apt install gluu-server -y
@@ -17,7 +17,7 @@ then
     echo "Copying setup files to chmod..."
     cp /test-install-data/setup.properties /opt/gluu-server/install/community-edition-setup/.
     ### In case of 4.2.0 needs to overwrite setup.py
-    cp /test-install-data/setup.py /opt/gluu-server/install/community-edition-setup/.
+    # cp /test-install-data/setup.py /opt/gluu-server/install/community-edition-setup/.
     echo "Copying templates files to chmod..."
     ### Templates
     cp /test-install-data/templates/*.* /opt/gluu-server/install/community-edition-setup/templates/.

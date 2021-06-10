@@ -6,7 +6,7 @@
     "spTLSCert": "%(passportSpTLSCert)s",
     "spTLSKey": "%(passportSpTLSKey)s",
     "logging": {
-      "level": "info",
+      "level": "debug",
       "consoleLogOnly": false,
       "activeMQConf": {
         "enabled": false,
