@@ -1,3 +1,14 @@
+## v0.14.0 (2021-06-10)
+
+### Fix
+
+- **setupscript**: remove python from setup cmd
+- **gluu.sh**: change default to focal
+
+### Feat
+
+- **passport-config**: change log level to debug
+
 ## v0.13.0 (2021-04-14)
 
 ### Fix
