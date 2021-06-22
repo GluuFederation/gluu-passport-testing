@@ -54,14 +54,14 @@ def user_authenticates(context):
         time.sleep(2)
         context.web.save_screenshot(
             str(datetime.now())+"3_before_username_typing.png")
-        context.web.find_element(By.ID, "username").click()
+        context.web.find_element(By.ID, "loginForm:username").click()
         context.web.find_element(
-            By.ID, "username").send_keys(context.user_name)
-        context.web.find_element(By.ID, "password").send_keys(
+            By.ID, "loginForm:username").send_keys(context.user_name)
+        context.web.find_element(By.ID, "loginForm:password").send_keys(
             context.user_password)
         context.web.save_screenshot(
             str(datetime.now())+"4_before_login_button.png")
-        context.web.find_element(By.ID, "loginButton").click()
+        context.web.find_element(By.ID, "loginForm:loginButton").click()
 
         time.sleep(3)
         context.web.save_screenshot(
@@ -146,7 +146,7 @@ def user_redirected_to_external_login_page(context):
         # if context.flow != 'preselected provider':
         #     external_login_page = "https://%s/oxauth/authorize.htm" % context.passport_host
         # else:
-        external_login_page = "https://%s/oxauth/login" % context.provider_host
+        external_login_page = context.external_login_page
         time.sleep(4)
         #import ipdb; ipdb.set_trace()
     else:
