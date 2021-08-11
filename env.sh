@@ -239,7 +239,22 @@ function run_blackbox_test() {
     echo ============================================================================
 }
 
+function run_config_fetch_blackbox_test() {
+    echo ----------------------------------------------------------------------------
+    echo "RUNNING CONFIG FETCH BLACKBOX BDT TESTS:"
+    echo ----------------------------------------------------------------------------
+    export PASSPORT_PORT=8090
+    export OXAUTH_PORT=8081
+    export PASSPORT_LOG_FILE='./server_artifacts/passport/passport.log'
+    echo "PASSPORT_PORT: $PASSPORT_PORT"
+    echo "OXAUTH_PORT: $OXAUTH_PORT"
+    echo "PASSPORT_LOG_FILE: $PASSPORT_LOG_FILE"
+
+    behave ./tests/behaver/features --include fetch-config
+}
+
 run_all_tests(){
+    run_config_fetch_blackbox_test
     configure_client
 
     export USER_NAME=johndoe22

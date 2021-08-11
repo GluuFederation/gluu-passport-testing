@@ -26,6 +26,9 @@ def before_all(context):
     context.base_url = "https://" + context.client_host
     os.environ['CURL_CA_BUNDLE'] = ""
     context.SSL_verify = False
+    context.passport_port = int(os.getenv('PASSPORT_PORT'))
+    context.oxauth_port = int(os.getenv('OXAUTH_PORT'))
+    context.passport_log_file = os.getenv('PASSPORT_LOG_FILE')
     display.start()
 
 
