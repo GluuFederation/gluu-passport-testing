@@ -1,6 +1,7 @@
 Feature: Fetch Configuration
     Get full configuration from oxauth
 
+    @fetch_config
     Scenario: Successful get configuration
         Given passport is not running
             And oxauth is running

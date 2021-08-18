@@ -240,15 +240,15 @@ function run_blackbox_test() {
 }
 
 function run_config_fetch_blackbox_test() {
+    # this test uses gluu server which is on testing server(the server where we deploy this tests)
     echo ----------------------------------------------------------------------------
     echo "RUNNING CONFIG FETCH BLACKBOX BDT TESTS:"
     echo ----------------------------------------------------------------------------
-    export PASSPORT_PORT=8090
-    export OXAUTH_PORT=8081
-    export PASSPORT_LOG_FILE='./server_artifacts/passport/passport.log'
-    echo "PASSPORT_PORT: $PASSPORT_PORT"
-    echo "OXAUTH_PORT: $OXAUTH_PORT"
+    export PASSPORT_LOG_FILE='/opt/gluu-server/opt/gluu/node/passport/passport.log'
+    export TEST_SERVER_HOST=$TEST_SERVER_HOST
+
     echo "PASSPORT_LOG_FILE: $PASSPORT_LOG_FILE"
+    echo "TEST_SERVER_HOST: $TEST_SERVER_HOST"
 
     behave ./tests/behaver/features --include fetch-config
 }

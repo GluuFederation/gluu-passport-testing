@@ -1,11 +1,10 @@
 import socket
+from tests.helpers.utils import run_command
+from behave import when, then, given
 import time
-
-def check_port_running(port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    res = sock.connect_ex(('localhost', port))
-    sock.close()
-    return res == 0
+from selenium.webdriver.common.by import By
+import subprocess
+from datetime import datetime
 
 def check_string_in_file(file_path, searchText):
     with open(file_path) as f:
@@ -15,19 +14,37 @@ def check_string_in_file(file_path, searchText):
 
 @given(u'passport is not running')
 def check_passport_is_not_running(context):
-    assert not check_port_running(context.passport_port)
+    context.web.get("https://%s/passport/health-check" % context.test_server_host)
+    context.web.save_screenshot(str(datetime.now())+"after_health_check.png")
+    responseMessage = context.web.find_element(By.TAG_NAME, "p").text
+    assert "503" in responseMessage
 
 @given(u'oxauth is running')
 def check_oxauth_is_running(context):
-    assert check_port_running(context.oxauth_port)
+    context.web.get("https://%s" % context.test_server_host)
+    time.sleep(2)
+    context.web.save_screenshot(str(datetime.now())+"check_oxauth_is_running.png")
+    loginButton = context.web.find_element(By.ID, "loginForm:loginButton")
+    assert "Login" in loginButton.get_attribute("value")
 
 @when(u'passport is started')
-def check_passport_is_running(context):
-    assert check_port_running(context.passport_port)
+def start_passport(context):
+    run_command('''ssh -o IdentityFile=/etc/gluu/keys/gluu-console \
+        -o Port=60022  \
+        -o StrictHostKeyChecking=no \
+        -o UserKnownHostsFile=/dev/null \
+        -o PubkeyAuthentication=yes \
+        root@localhost \
+        "service passport start"''')
+    time.sleep(2)
 
 @when(u'wait for the fetch configuration time')
-def wait_to_fetch_config():
-    time.sleep(6)
+def wait_to_fetch_config(context):
+    context.web.get("https://%s/passport/health-check" % context.test_server_host)
+    time.sleep(2)
+    context.web.save_screenshot(str(datetime.now())+"after_health_check2_fetched.png")
+    responseMessage = context.web.find_element(By.ID, "/message").text
+    assert "Cool" in responseMessage
 
 @then(u'configuration should be correctly fetched')
 def check_configuration_fetch_or_not(context):

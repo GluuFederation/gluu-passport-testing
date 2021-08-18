@@ -1,6 +1,7 @@
 # FILE for setting behave environment
 # Currently supporting firefox
 
+from tests.helpers.utils import run_command
 from selenium import webdriver
 import os
 from pyvirtualdisplay import Display
@@ -26,9 +27,8 @@ def before_all(context):
     context.base_url = "https://" + context.client_host
     os.environ['CURL_CA_BUNDLE'] = ""
     context.SSL_verify = False
-    context.passport_port = int(os.getenv('PASSPORT_PORT'))
-    context.oxauth_port = int(os.getenv('OXAUTH_PORT'))
     context.passport_log_file = os.getenv('PASSPORT_LOG_FILE')
+    context.test_server_host = os.getenv('TEST_SERVER_HOST')
     display.start()
 
 
@@ -59,3 +59,13 @@ def after_step(context, step):
 
 def after_all(context):
     pass
+
+def before_tag(context, tag):
+    if tag == "fetch_config":
+        run_command('''ssh -o IdentityFile=/etc/gluu/keys/gluu-console \
+        -o Port=60022  \
+        -o StrictHostKeyChecking=no \
+        -o UserKnownHostsFile=/dev/null \
+        -o PubkeyAuthentication=yes \
+        root@localhost \
+        "service passport stop"''')
