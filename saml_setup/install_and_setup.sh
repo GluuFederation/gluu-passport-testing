@@ -18,8 +18,7 @@ echo "All finished!"
 cp /test-install-data/setup.properties /opt/gluu-server/install/community-edition-setup
 
 ### Setup Gluu Server
-ssh -o IdentityFile=/etc/gluu/keys/gluu-console -o Port=60022 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PubkeyAuthentication=yes root@localhost <<EOF
+gluu-serverd login << EOF
 cd /install/community-edition-setup/
-./setup.py
+./setup.py -n -c
 EOF
-
