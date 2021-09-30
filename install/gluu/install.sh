@@ -4,7 +4,7 @@
 ### Accept two command line argument
 ### Need two environment PASSPORT_HOST PASSPORT_HOST_IP PASSPORT_HOST_GLUU_ADMIN_PASSWORD
 
-### Ads and install latest STABLE package for ubuntu 18
+### Ads and install latest STABLE package for ubuntu 20
 echo "Installing Gluu..."
 echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
 curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
