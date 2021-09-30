@@ -1,4 +1,8 @@
+#!/bin/bash
+
 ### This setup just install the fresh gluu server
+### Accept two command line argument
+### Need two environment PASSPORT_HOST_IP PASSPORT_HOST_GLUU_ADMIN_PASSWORD
 
 ### Ads and install latest STABLE package for ubuntu 18
 echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -15,6 +19,8 @@ gluu-serverd login
 echo "All finished!"
 
 ### Move preconfigured setup.properties to gluu setup directory
+sed -i "1s/.*/$PASSPORT_HOST_IP/" /test-install-data/setup.properties
+
 cp /test-install-data/setup.properties /opt/gluu-server/install/community-edition-setup
 
 ### Setup Gluu Server
