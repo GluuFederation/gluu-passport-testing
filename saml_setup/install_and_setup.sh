@@ -19,7 +19,9 @@ gluu-serverd login
 echo "All finished!"
 
 ### Move preconfigured setup.properties to gluu setup directory
-sed -i "1s/.*/$PASSPORT_HOST_IP/" /test-install-data/setup.properties
+sed -i "1s/.*/ip=$PASSPORT_HOST_IP/" /test-install-data/setup.properties
+sed -i "2s/.*/ldapPass=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" /test-install-data/setup.properties
+sed -i "3s/.*/oxtrust_admin_password=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" /test-install-data/setup.properties
 
 cp /test-install-data/setup.properties /opt/gluu-server/install/community-edition-setup
 
