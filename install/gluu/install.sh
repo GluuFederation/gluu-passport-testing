@@ -19,12 +19,13 @@ gluu-serverd login
 echo "All finished!"
 
 ### Move preconfigured setup.properties to gluu setup directory
-test_data_dir=/root/gluu-passport-testing/install/gluu/templates/setup.properties 
-sed -i "1s/.*/ip=$PASSPORT_HOST_IP/" $test_data_dir
-sed -i "2s/.*/ldapPass=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $test_data_dir
-sed -i "3s/.*/oxtrust_admin_password=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $test_data_dir
+test_data_dir=/root/gluu-passport-testing/install
+setup_property_file=$test_data_dir/gluu/templates/setup.properties 
+sed -i "1s/.*/ip=$PASSPORT_HOST_IP/" $setup_property_file
+sed -i "2s/.*/ldapPass=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $setup_property_file
+sed -i "3s/.*/oxtrust_admin_password=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $setup_property_file
 
-cp $test_data_dir /opt/gluu-server/install/community-edition-setup
+cp $setup_property_file /opt/gluu-server/install/community-edition-setup
 
 ### Setup Gluu Server
 gluu-serverd login << EOF
