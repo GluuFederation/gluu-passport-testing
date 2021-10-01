@@ -2,11 +2,17 @@
 
 ### This setup just install the fresh gluu server
 ### Accept two command line argument
-### Need two environment PASSPORT_HOST PASSPORT_HOST_IP PASSPORT_HOST_GLUU_ADMIN_PASSWORD
+### Need two environment GLUU_VERSION PASSPORT_HOST PASSPORT_HOST_IP PASSPORT_HOST_GLUU_ADMIN_PASSWORD
 
 ### Ads and install latest STABLE package for ubuntu 20
 echo "Installing Gluu..."
-echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
+if [ $GLUU_VERSION == "LATEST" ]
+then
+  echo "deb https://repo.gluu.org/ubuntu/ focal-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+else
+  echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
+fi
+
 curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 apt update -y
 apt install gluu-server -y
