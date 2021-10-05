@@ -54,6 +54,16 @@ class DBUtils:
           ldap_operation_result = self.ldap_conn.add(dn, attributes=entry)
           self.log_ldap_result(ldap_operation_result)
 
+  def delete_ldif(self, ldif_files, bucket=None, force=None):
+    print("Deleting records, ldif file(s): {} ".format(', '.join(ldif_files)))
+    
+    for ldif_fn in ldif_files:
+      print("Deleting entries from " + ldif_fn)
+      parser = ldif_utils.myLdifParser(ldif_fn)
+      parser.parse()
+      for dn, entry in parser.entries:
+        self.ldap_conn.delete(dn)
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument(
@@ -69,10 +79,16 @@ if __name__ == '__main__':
   dbUtils.bind()
 
   if args.action == 'import':
-    print("Importing", args['filename'], '...')
+    print('Importing', args['filename'])
     dbUtils.enable_script(args['filename'])
 
   if args.action == 'update':
     scriptInum = args.get('enable-script')
     if scriptInum:
       dbUtils.enable_script(scriptInum)
+
+  if args.action == 'delete':
+    print('Deleting entries from', args['filename'])
+    filename = args.get('filename')
+    if filename:
+      dbUtils.delete_ldif(filename)
