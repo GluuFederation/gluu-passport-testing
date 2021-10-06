@@ -1,4 +1,3 @@
-version: 1
 dn: ou=people,o=gluu
 objectClass: organizationalunit
 objectClass: top
