@@ -13,7 +13,7 @@ class Utils:
     self.passport_host = os.environ.get('PASSPORT_HOST')
     self.idp_host = os.environ.get('IDP_HOST')
 
-  def bind(self, use_ssl=True, force=False):
+  def connect_db(self, use_ssl=True, force=False):
     print("Bind to database")
     print("Making LDAP Conncetion")
     ldap_server = ldap3.Server(self.ldap_hostname, port=int(self.ldaps_port), use_ssl=use_ssl)
@@ -30,7 +30,7 @@ class Utils:
       'inum={},ou=scripts,o=gluu'.format(inum),
       {"oxEnabled": [ldap3.MODIFY_REPLACE, 'true']}
       )
-    self.log_ldap_result(ldap_operation_result)
+    print(ldap_operation_result)
 
   def import_ldif(self, ldif_files, bucket=None, force=None):
     print("Importing ldif file(s): {} ".format(', '.join(ldif_files)))
@@ -45,16 +45,16 @@ class Utils:
           print("LDAP modify add dn:{} entry:{}".format(dn, dict(entry)))
           change_attr = entry['add'][0]
           ldap_operation_result = self.ldap_conn.modify(dn, {change_attr: [(ldap3.MODIFY_ADD, entry[change_attr])]})
-          self.log_ldap_result(ldap_operation_result)
+          print(ldap_operation_result)
         elif 'replace' in  entry and 'changetype' in entry:
           print("LDAP modify replace dn:{} entry:{}".format(dn, dict(entry)))
           change_attr = entry['replace'][0]
           ldap_operation_result = self.ldap_conn.modify(dn, {change_attr: [(ldap3.MODIFY_REPLACE, [entry[change_attr][0]])]})
-          self.log_ldap_result(ldap_operation_result)
+          print(ldap_operation_result)
         elif not self.dn_exists(dn):
           print("Adding LDAP dn:{} entry:{}".format(dn, dict(entry)))
           ldap_operation_result = self.ldap_conn.add(dn, attributes=entry)
-          self.log_ldap_result(ldap_operation_result)
+          print(ldap_operation_result)
 
   def delete_ldif(self, ldif_files, bucket=None, force=None):
     print("Deleting records, ldif file(s): {} ".format(', '.join(ldif_files)))

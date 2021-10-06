@@ -3,6 +3,9 @@
 import os
 from utils import utils
 
+# Connect ldap
+utils.connect_db()
+
 # enable passport social and saml script
 # 2FDB-CF02 - passport_social
 # D40C-1CA4 - passport_saml
