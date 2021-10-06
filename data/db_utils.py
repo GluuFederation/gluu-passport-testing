@@ -8,8 +8,10 @@ class DBUtils:
   def __init__(self):
     self.ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost' 
     self.ldaps_port = os.environ.get('LDAP_PORT') or '1636'
-    self.ldapPass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
+    self.ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
     self.ldap_binddn = 'cn=directory manager'
+    self.passport_host = os.environ.get('PASSPORT_HOST')
+    self.idp_host = os.environ.get('IDP_HOST')
 
   def bind(self, use_ssl=True, force=False):
     print("Bind to database")
@@ -18,7 +20,7 @@ class DBUtils:
     self.ldap_conn = ldap3.Connection(
                 ldap_server,
                 user=self.ldap_binddn,
-                password=self.ldapPass,
+                password=self.ldap_pass,
                 )
     print("Making LDAP Connection to host {}:{} with user {}".format(self.ldap_hostname, self.ldaps_port, self.ldap_binddn))
     self.ldap_conn.bind()
@@ -64,13 +66,33 @@ class DBUtils:
       for dn, entry in parser.entries:
         self.ldap_conn.delete(dn)
 
+
+  def populate_file(self, filename, values):
+    print("Populating file", filename)
+    readf = open(filename)
+    file_text = readf.read()
+    readf.close()
+
+    newf = open(filename, 'w')
+    newf.write(file_text.format(**(values or self.__dict__)))
+
+  def build_passport_ldif(self, passport_config_file, passport_ldif_file):
+    self.populate_file(passport_config_file)
+
+    passport_file = open(passport_config_file)
+    passport_file_text = passport_file.read()
+    passport_file.close()
+
+    self.gluu_passport_configuration = passport_file_text.replace('\n', '')
+    self.populate_file(passport_ldif_file)
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument(
     "action", help="the action you want to perform.",
-    choices=["import", "update", "delete"])
+    choices=["import", "update", "delete", "populate"])
   parser.add_argument(
-    "--filename", help="accept the the .ldif file which you want to import")
+    "--filename", help="accept the the file with path")
   parser.add_argument(
     "--enable-script", help="accept inum to update the Personal and Custom script")
 
@@ -92,3 +114,9 @@ if __name__ == '__main__':
     filename = args.get('filename')
     if filename:
       dbUtils.delete_ldif(filename)
+
+  if args.action == 'populate':
+    print('Populating...')
+    filename = args.get('filename')
+    if filename:
+      dbUtils.populate_file(filename)

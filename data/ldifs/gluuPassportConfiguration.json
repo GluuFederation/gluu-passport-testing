@@ -1,8 +1,8 @@
 {
   "conf": {
-    "serverURI": "https://%(PASSPORT_HOST)",
+    "serverURI": "https://%(passport_host)",
     "serverWebPort": 8090,
-    "postProfileEndpoint": "https://%(PASSPORT_HOST)/oxauth/postlogin.htm",
+    "postProfileEndpoint": "https://%(passport_host)/oxauth/postlogin.htm",
     "spTLSCert": "/etc/certs/passport-sp.crt",
     "spTLSKey": "/etc/certs/passport-sp.key",
     "logging": {
@@ -19,7 +19,7 @@
   },
   "idpInitiated": {
     "openidclient": {
-      "authorizationEndpoint": "https://%(PASSPORT_HOST)/oxauth/restv1/authorize",
+      "authorizationEndpoint": "https://%(passport_host)/oxauth/restv1/authorize",
       "clientId": "1503.b7b8708b-1f63-4649-a466-2674a55ddb05",
       "acrValues": "passport_saml"
     },
@@ -27,7 +27,7 @@
       {
         "provider": "saml-idpinit",
         "extraParams": {},
-        "redirect_uri": "https://%(PASSPORT_HOST)/oxauth/auth/passport/sample-redirector.htm",
+        "redirect_uri": "https://%(passport_host)/oxauth/auth/passport/sample-redirector.htm",
         "response_type": "code",
         "scope": "openid"
       }
@@ -41,7 +41,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(PASSPORT_HOST)/passport/auth/saml/saml-default/callback",
+      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-default/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -49,7 +49,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "MIIDUjCCAjoCCQD4Kr87gBKDNTANBgkqhkiG9w0BAQsFADBrMQswCQYDVQQGEwJ1 czELMAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYD VQQDDAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcw HhcNMjEwMzI1MTQxNDM5WhcNMjIwMzI1MTQxNDM5WjBrMQswCQYDVQQGEwJ1czEL MAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYDVQQD DAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcwggEi MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPfv/Q+X1arY5p9L0YwBzNrg6X L+c8N/GlUp+97FoFSQyVarwEp26zrAIAHBkBFoHQN1bcwtj2uzRIPj7JsOo7N4DX kGsPX4bieuHi2QsloKasC2Djorw0Irxob2sFlk2v9dh6ExFDh3msCNdJzo7RiEN9 Be12x//2A5PhqCCS7RRY4qoBGxEgixQZzI5qUKDkEhiClal4Vx2t7eGMJxPQJDS4 QsBL0xrUZ3IgA57QiG69MFBTMCqMCSio2yGiYXbMBbdQjkKgTXiXZR069Cm0U09X 0C9z/V8VbASjLEgpN1D9QVUDm/d+fRcCF14TcXlKZft9dczsqsXKnBgIFl6DAgMB AAEwDQYJKoZIhvcNAQELBQADggEBAH2P2GW327Rg+7JeMPS75cxmfoQaB9yodDUw er++0uqfw0POB2m6FbSGTEQ+ZTpopSKzITKk6MqDZ/AcXC6iXuVt5nzBN1mM5NCX WEx0US4Qo+BwQdfL/eod9oBf6pV+c/CPQEJHFzF1jyEAjtFYL458zNju/5M5vVz0 T1u0C1jSMQC8cdgJuc17tn3twTCcIVx+Ak49lGlOBIl39AqFwg2NnhB0eMEuZIYY +6Yoi3WCOnadsZbZanUKvNDJ0OXosI4yGA7VDTl8hHsn5+8vKgF5giVI83XvNiFl +4fqEIQhc4zMYYb9L/hjuTTnQ6Ez5S6Cp92wbJ55c8VLQqsklng=",
-        "entryPoint": "https://%(IDP_HOST)/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://%(idp_host)/idp/profile/SAML2/POST/SSO",
         "issuer": "urn:test:default"
       }
     },
@@ -60,7 +60,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(PASSPORT_HOST)/passport/auth/saml/saml-emailreq/callback",
+      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-emailreq/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -68,7 +68,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "MIIDUjCCAjoCCQD4Kr87gBKDNTANBgkqhkiG9w0BAQsFADBrMQswCQYDVQQGEwJ1 czELMAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYD VQQDDAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcw HhcNMjEwMzI1MTQxNDM5WhcNMjIwMzI1MTQxNDM5WjBrMQswCQYDVQQGEwJ1czEL MAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYDVQQD DAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcwggEi MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPfv/Q+X1arY5p9L0YwBzNrg6X L+c8N/GlUp+97FoFSQyVarwEp26zrAIAHBkBFoHQN1bcwtj2uzRIPj7JsOo7N4DX kGsPX4bieuHi2QsloKasC2Djorw0Irxob2sFlk2v9dh6ExFDh3msCNdJzo7RiEN9 Be12x//2A5PhqCCS7RRY4qoBGxEgixQZzI5qUKDkEhiClal4Vx2t7eGMJxPQJDS4 QsBL0xrUZ3IgA57QiG69MFBTMCqMCSio2yGiYXbMBbdQjkKgTXiXZR069Cm0U09X 0C9z/V8VbASjLEgpN1D9QVUDm/d+fRcCF14TcXlKZft9dczsqsXKnBgIFl6DAgMB AAEwDQYJKoZIhvcNAQELBQADggEBAH2P2GW327Rg+7JeMPS75cxmfoQaB9yodDUw er++0uqfw0POB2m6FbSGTEQ+ZTpopSKzITKk6MqDZ/AcXC6iXuVt5nzBN1mM5NCX WEx0US4Qo+BwQdfL/eod9oBf6pV+c/CPQEJHFzF1jyEAjtFYL458zNju/5M5vVz0 T1u0C1jSMQC8cdgJuc17tn3twTCcIVx+Ak49lGlOBIl39AqFwg2NnhB0eMEuZIYY +6Yoi3WCOnadsZbZanUKvNDJ0OXosI4yGA7VDTl8hHsn5+8vKgF5giVI83XvNiFl +4fqEIQhc4zMYYb9L/hjuTTnQ6Ez5S6Cp92wbJ55c8VLQqsklng=",
-        "entryPoint": "https://%(IDP_HOST)/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://%(idp_host)/idp/profile/SAML2/POST/SSO",
         "issuer": "urn:test:mailreq"
       }
     },
@@ -79,7 +79,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(PASSPORT_HOST)/passport/auth/saml/saml-emaillink/callback",
+      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-emaillink/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -87,7 +87,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "MIIDUjCCAjoCCQD4Kr87gBKDNTANBgkqhkiG9w0BAQsFADBrMQswCQYDVQQGEwJ1 czELMAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYD VQQDDAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcw HhcNMjEwMzI1MTQxNDM5WhcNMjIwMzI1MTQxNDM5WjBrMQswCQYDVQQGEwJ1czEL MAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYDVQQD DAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcwggEi MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPfv/Q+X1arY5p9L0YwBzNrg6X L+c8N/GlUp+97FoFSQyVarwEp26zrAIAHBkBFoHQN1bcwtj2uzRIPj7JsOo7N4DX kGsPX4bieuHi2QsloKasC2Djorw0Irxob2sFlk2v9dh6ExFDh3msCNdJzo7RiEN9 Be12x//2A5PhqCCS7RRY4qoBGxEgixQZzI5qUKDkEhiClal4Vx2t7eGMJxPQJDS4 QsBL0xrUZ3IgA57QiG69MFBTMCqMCSio2yGiYXbMBbdQjkKgTXiXZR069Cm0U09X 0C9z/V8VbASjLEgpN1D9QVUDm/d+fRcCF14TcXlKZft9dczsqsXKnBgIFl6DAgMB AAEwDQYJKoZIhvcNAQELBQADggEBAH2P2GW327Rg+7JeMPS75cxmfoQaB9yodDUw er++0uqfw0POB2m6FbSGTEQ+ZTpopSKzITKk6MqDZ/AcXC6iXuVt5nzBN1mM5NCX WEx0US4Qo+BwQdfL/eod9oBf6pV+c/CPQEJHFzF1jyEAjtFYL458zNju/5M5vVz0 T1u0C1jSMQC8cdgJuc17tn3twTCcIVx+Ak49lGlOBIl39AqFwg2NnhB0eMEuZIYY +6Yoi3WCOnadsZbZanUKvNDJ0OXosI4yGA7VDTl8hHsn5+8vKgF5giVI83XvNiFl +4fqEIQhc4zMYYb9L/hjuTTnQ6Ez5S6Cp92wbJ55c8VLQqsklng=",
-        "entryPoint": "https://%(IDP_HOST)/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://%(idp_host)/idp/profile/SAML2/POST/SSO",
         "issuer": "urn:test:link"
       }
     },
@@ -98,7 +98,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(PASSPORT_HOST)/passport/auth/saml/saml-idpinit/callback",
+      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-idpinit/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -106,7 +106,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "MIIDUjCCAjoCCQD4Kr87gBKDNTANBgkqhkiG9w0BAQsFADBrMQswCQYDVQQGEwJ1 czELMAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYD VQQDDAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcw HhcNMjEwMzI1MTQxNDM5WhcNMjIwMzI1MTQxNDM5WjBrMQswCQYDVQQGEwJ1czEL MAkGA1UECAwCdXMxCzAJBgNVBAcMAnVzMQ0wCwYDVQQKDARHbHV1MRQwEgYDVQQD DAtwMi5nbHV1Lm9yZzEdMBsGCSqGSIb3DQEJARYOa2lyYW5AZ2x1dS5vcmcwggEi MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPfv/Q+X1arY5p9L0YwBzNrg6X L+c8N/GlUp+97FoFSQyVarwEp26zrAIAHBkBFoHQN1bcwtj2uzRIPj7JsOo7N4DX kGsPX4bieuHi2QsloKasC2Djorw0Irxob2sFlk2v9dh6ExFDh3msCNdJzo7RiEN9 Be12x//2A5PhqCCS7RRY4qoBGxEgixQZzI5qUKDkEhiClal4Vx2t7eGMJxPQJDS4 QsBL0xrUZ3IgA57QiG69MFBTMCqMCSio2yGiYXbMBbdQjkKgTXiXZR069Cm0U09X 0C9z/V8VbASjLEgpN1D9QVUDm/d+fRcCF14TcXlKZft9dczsqsXKnBgIFl6DAgMB AAEwDQYJKoZIhvcNAQELBQADggEBAH2P2GW327Rg+7JeMPS75cxmfoQaB9yodDUw er++0uqfw0POB2m6FbSGTEQ+ZTpopSKzITKk6MqDZ/AcXC6iXuVt5nzBN1mM5NCX WEx0US4Qo+BwQdfL/eod9oBf6pV+c/CPQEJHFzF1jyEAjtFYL458zNju/5M5vVz0 T1u0C1jSMQC8cdgJuc17tn3twTCcIVx+Ak49lGlOBIl39AqFwg2NnhB0eMEuZIYY +6Yoi3WCOnadsZbZanUKvNDJ0OXosI4yGA7VDTl8hHsn5+8vKgF5giVI83XvNiFl +4fqEIQhc4zMYYb9L/hjuTTnQ6Ez5S6Cp92wbJ55c8VLQqsklng=",
-        "entryPoint": "https://%(IDP_HOST)/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://idp_hostidp_host)/idp/profile/SAML2/POST/SSO",
         "issuer": "dev.techno24x7.com"
       }
     }
