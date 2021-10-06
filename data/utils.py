@@ -3,7 +3,7 @@ import os
 import argparse
 import ldif_utils
 
-class DBUtils:
+class Utils:
 
   def __init__(self):
     self.ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost' 
@@ -76,16 +76,6 @@ class DBUtils:
     newf = open(filename, 'w')
     newf.write(file_text.format(**(values or self.__dict__)))
 
-  def build_passport_ldif(self, passport_config_file, passport_ldif_file):
-    self.populate_file(passport_config_file)
-
-    passport_file = open(passport_config_file)
-    passport_file_text = passport_file.read()
-    passport_file.close()
-
-    self.gluu_passport_configuration = passport_file_text.replace('\n', '')
-    self.populate_file(passport_ldif_file)
-
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument(
@@ -97,26 +87,28 @@ if __name__ == '__main__':
     "--enable-script", help="accept inum to update the Personal and Custom script")
 
   args = parser.parse_args()
-  dbUtils = DBUtils()
-  dbUtils.bind()
+  utils = Utils()
+  utils.bind()
 
   if args.action == 'import':
     print('Importing', args['filename'])
-    dbUtils.enable_script(args['filename'])
+    utils.import_ldif(args['filename'])
 
   if args.action == 'update':
     scriptInum = args.get('enable-script')
     if scriptInum:
-      dbUtils.enable_script(scriptInum)
+      utils.enable_script(scriptInum)
 
   if args.action == 'delete':
     print('Deleting entries from', args['filename'])
     filename = args.get('filename')
     if filename:
-      dbUtils.delete_ldif(filename)
+      utils.delete_ldif(filename)
 
   if args.action == 'populate':
     print('Populating...')
     filename = args.get('filename')
     if filename:
-      dbUtils.populate_file(filename)
+      utils.populate_file(filename)
+
+utils = Utils()
