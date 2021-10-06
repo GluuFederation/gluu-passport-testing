@@ -24,6 +24,6 @@ passport_file = open(passport_config_file)
 passport_file_text = passport_file.read()
 passport_file.close()
 
-gluu_passport_configuration = passport_file_text.replace('\n', '')
+utils.gluu_passport_configuration = passport_file_text.replace('\n', '')
 utils.populate_file(passport_ldif_file)
 utils.import_ldif(passport_ldif_file)

@@ -66,8 +66,7 @@ class Utils:
       for dn, entry in parser.entries:
         self.ldap_conn.delete(dn)
 
-
-  def populate_file(self, filename, values = {}):
+  def populate_file(self, filename, values = None):
     print("Populating file", filename)
     readf = open(filename)
     file_text = readf.read()
