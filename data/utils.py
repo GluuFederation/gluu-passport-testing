@@ -74,7 +74,7 @@ class Utils:
   
   def write_data_in_file(self, filename, filetext):
     file_write = open(filename, 'w')
-    file_write.write(utils.preformat(filetext))
+    file_write.write(filetext)
     file_write.close()
 
   def populate_file(self, filename, values = None, is_file_json = False):
@@ -83,13 +83,13 @@ class Utils:
       # due to format function filename problem 
       # https://stackoverflow.com/questions/5466451/how-can-i-print-literal-curly-brace-characters-in-a-string-and-also-use-format
       filetext = self.get_file_data(filename)
-      self.write_data_in_file(filename, filetext)
+      self.write_data_in_file(filename, self.preformat(filetext))
 
     filetext = self.get_file_data(filename)
 
     self.write_data_in_file(filename, filetext.format(**(values or self.__dict__)))
 
-  def preformat(msg):
+  def preformat(self, msg):
     """ allow {{key}} to be used for formatting in text
     that already uses curly braces.  First switch this into
     something else, replace curlies with double curlies, and then
