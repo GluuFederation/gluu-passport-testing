@@ -19,7 +19,7 @@ ldifs_dir = '{}/data/ldifs'.format(test_dir)
 passport_config_file = '{}/gluuPassportConfiguration.json'.format(ldifs_dir)
 passport_ldif_file = '{}/passport.ldif'.format(ldifs_dir)
 
-utils.populate_file(passport_config_file)
+utils.populate_file(passport_config_file, is_file_json=True)
 passport_file = open(passport_config_file)
 passport_file_text = passport_file.read()
 passport_file.close()

@@ -1,5 +1,5 @@
 dn: ou=oxpassport,ou=configuration,o=gluu
 objectClass: oxPassportConfiguration
 objectClass: top
-gluuPassportConfiguration: %(gluu_passport_configuration)
+gluuPassportConfiguration: {gluu_passport_configuration}
 ou: oxpassport

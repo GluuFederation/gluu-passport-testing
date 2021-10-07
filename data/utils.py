@@ -66,14 +66,39 @@ class Utils:
       for dn, entry in parser.entries:
         self.ldap_conn.delete(dn)
 
-  def populate_file(self, filename, values = None):
-    print("Populating file", filename)
-    readf = open(filename)
-    file_text = readf.read()
-    readf.close()
+  def get_file_data(self, filename):
+    file_read = open(filename)
+    file_text = file_read.read()
+    file_read.close()
+    return file_text
+  
+  def write_data_in_file(self, filename, filetext):
+    file_write = open(filename, 'w')
+    file_write.write(utils.preformat(filetext))
+    file_write.close()
 
-    newf = open(filename, 'w')
-    newf.write(file_text.format(**(values or self.__dict__)))
+  def populate_file(self, filename, values = None, is_file_json = False):
+    print("Populating file", filename)
+    if is_file_json:
+      # due to format function filename problem 
+      # https://stackoverflow.com/questions/5466451/how-can-i-print-literal-curly-brace-characters-in-a-string-and-also-use-format
+      filetext = self.get_file_data(filename)
+      self.write_data_in_file(filename, filetext)
+
+    filetext = self.get_file_data(filename)
+
+    self.write_data_in_file(filename, filetext.format(**(values or self.__dict__)))
+
+  def preformat(msg):
+    """ allow {{key}} to be used for formatting in text
+    that already uses curly braces.  First switch this into
+    something else, replace curlies with double curlies, and then
+    switch back to regular braces
+    """
+    msg = msg.replace('{{', '<<<').replace('}}', '>>>')
+    msg = msg.replace('{', '{{').replace('}', '}}')
+    msg = msg.replace('<<<', '{').replace('>>>', '}')
+    return msg
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
@@ -87,27 +112,30 @@ if __name__ == '__main__':
 
   args = parser.parse_args()
   utils = Utils()
-  utils.bind()
+  utils.connect_db()
 
   if args.action == 'import':
     print('Importing', args['filename'])
     utils.import_ldif(args['filename'])
 
   if args.action == 'update':
-    scriptInum = args.get('enable-script')
+    scriptInum = args['enable-script']
     if scriptInum:
       utils.enable_script(scriptInum)
 
   if args.action == 'delete':
     print('Deleting entries from', args['filename'])
-    filename = args.get('filename')
+    filename = args.filename
     if filename:
       utils.delete_ldif(filename)
 
   if args.action == 'populate':
     print('Populating...')
-    filename = args.get('filename')
+    filename = args.filename
     if filename:
-      utils.populate_file(filename)
+      if filename[-5:] == '.json':
+        utils.populate_file(filename, is_file_json=True)
+      else:
+        utils.populate_file(filename)
 
 utils = Utils()

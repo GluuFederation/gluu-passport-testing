@@ -1,8 +1,8 @@
 {
   "conf": {
-    "serverURI": "https://%(passport_host)",
+    "serverURI": "https://{{passport_host}}",
     "serverWebPort": 8090,
-    "postProfileEndpoint": "https://%(passport_host)/oxauth/postlogin.htm",
+    "postProfileEndpoint": "https://{{passport_host}}/oxauth/postlogin.htm",
     "spTLSCert": "/etc/certs/passport-sp.crt",
     "spTLSKey": "/etc/certs/passport-sp.key",
     "logging": {
@@ -19,7 +19,7 @@
   },
   "idpInitiated": {
     "openidclient": {
-      "authorizationEndpoint": "https://%(passport_host)/oxauth/restv1/authorize",
+      "authorizationEndpoint": "https://{{passport_host}}/oxauth/restv1/authorize",
       "clientId": "1503.b7b8708b-1f63-4649-a466-2674a55ddb05",
       "acrValues": "passport_saml"
     },
@@ -27,7 +27,7 @@
       {
         "provider": "saml-idpinit",
         "extraParams": {},
-        "redirect_uri": "https://%(passport_host)/oxauth/auth/passport/sample-redirector.htm",
+        "redirect_uri": "https://{{passport_host}}/oxauth/auth/passport/sample-redirector.htm",
         "response_type": "code",
         "scope": "openid"
       }
@@ -41,7 +41,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-default/callback",
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-default/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -60,7 +60,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-emailreq/callback",
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-emailreq/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -79,7 +79,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-emaillink/callback",
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-emaillink/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
@@ -98,7 +98,7 @@
       "mapping": "saml_ldap_profile",
       "passportStrategyId": "passport-saml",
       "enabled": true,
-      "callbackUrl": "https://%(passport_host)/passport/auth/saml/saml-idpinit/callback",
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-idpinit/callback",
       "requestForEmail": false,
       "emailLinkingSafe": false,
       "options": {
