@@ -74,15 +74,12 @@ class Utils:
         self.ldap_conn.delete(dn)
 
   def get_file_data(self, filename):
-    file_read = open(filename)
-    file_text = file_read.read()
-    file_read.close()
-    return file_text
+    with open(filename) as f:
+      return f.read()
   
   def write_data_in_file(self, filename, filetext):
-    file_write = open(filename, 'w')
-    file_write.write(filetext)
-    file_write.close()
+    with open(filename) as f:
+      return f.write(filetext)
 
   def populate_file(self, filename, values = None, is_file_json = False):
     print("Populating file", filename)
