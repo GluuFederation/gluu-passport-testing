@@ -1,6 +1,5 @@
 import os
 import datetime
-from utils import base
 from collections import OrderedDict
 import json
 
@@ -36,7 +35,8 @@ class AttribDataTypes:
 
         self.processGluuSchema()
 
-    def readJsonFile(jsonFile, ordered=False):
+    def readJsonFile(self, jsonFile, ordered=False):
+        print('reading json file', jsonFile)
         object_pairs_hook = OrderedDict if ordered else None
         if os.path.exists(jsonFile):
             with open(jsonFile) as f:
