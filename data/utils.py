@@ -32,6 +32,14 @@ class Utils:
       )
     print(ldap_operation_result)
 
+  def dn_exists(self, dn):
+    print("Querying LDAP for dn {}".format(dn))
+    result = self.ldap_conn.search(search_base=dn, search_filter='(objectClass=*)', search_scope=ldap3.BASE, attributes=['*'])
+    if result:
+        key_doc = ldif_utils.get_document_from_entry(self.ldap_conn.response[0]['dn'], self.ldap_conn.response[0]['attributes'])
+        if key_doc:
+            return key_doc[1]
+
   def import_ldif(self, ldif_files, bucket=None, force=None):
     print("Importing ldif file(s): {} ".format(', '.join(ldif_files)))
     
@@ -40,7 +48,6 @@ class Utils:
       parser = ldif_utils.myLdifParser(ldif_fn)
       parser.parse()
       for dn, entry in parser.entries:
-        backend_location = force if force else self.get_backend_location_for_dn(dn)
         if 'add' in  entry and 'changetype' in entry:
           print("LDAP modify add dn:{} entry:{}".format(dn, dict(entry)))
           change_attr = entry['add'][0]
