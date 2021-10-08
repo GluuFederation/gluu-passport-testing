@@ -26,4 +26,4 @@ passport_file.close()
 
 gluu_passport_configuration = passport_file_text.replace('\n', '')
 utils.populate_file(passport_ldif_file, { "gluu_passport_configuration": gluu_passport_configuration })
-utils.import_ldif(passport_ldif_file)
+utils.import_ldif([passport_ldif_file])
