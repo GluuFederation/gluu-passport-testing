@@ -14,6 +14,9 @@ idp_host = os.environ.get('IDP_HOST')
 # Init utils
 utils = Utils(ldap_hostname, ldaps_port, ldap_pass, ldap_binddn)
 
+# Connect ldap
+utils.connect_db()
+
 # enable passport social and saml script
 # 2FDB-CF02 - passport_social
 # D40C-1CA4 - passport_saml
@@ -27,17 +30,25 @@ ldifs_dir = '{}/data/ldifs'.format(test_dir)
 passport_config_file = '{}/gluuPassportConfiguration.json'.format(ldifs_dir)
 passport_ldif_file = '{}/passport.ldif'.format(ldifs_dir)
 
+# fetch idp cert
+idp_cert = utils.get_idp_signing_cert(idp_host)
+
+# populate passport json config
 passport_config_props = {
   "passport_host": passport_host,
-  "idp_host": idp_host
+  "idp_host": idp_host,
+  "idp_cert": idp_cert
 }
 utils.populate_file(passport_config_file, passport_config_props , is_file_json=True)
-passport_file = open(passport_config_file)
-passport_file_text = passport_file.read()
-passport_file.close()
+
+# remove extra new lines from json config
+with open(passport_config_file) as f:
+  passport_file_text = f.read()
 
 gluu_passport_configuration = passport_file_text.replace('\n', '')
+
+# populate passport ldif
 utils.populate_file(passport_ldif_file, { "gluu_passport_configuration": gluu_passport_configuration })
 
-utils.connect_db()
+# import passport config and providers
 utils.import_ldif([passport_ldif_file])

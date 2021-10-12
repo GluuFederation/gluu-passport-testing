@@ -78,7 +78,7 @@ class Utils:
       return f.read()
   
   def write_data_in_file(self, filename, filetext):
-    with open(filename) as f:
+    with open(filename, 'w') as f:
       return f.write(filetext)
 
   def populate_file(self, filename, values, is_file_json = False):
@@ -114,8 +114,10 @@ class Utils:
         if item.parentNode.parentNode.parentNode.getAttribute('use') == 'signing':
             x509CertificateText =  item.firstChild.data
             break
-          
+
+    # remove two new line character at first
     x509CertificateText = x509CertificateText.replace('\n', '', 2)
+    # replace others with space
     x509CertificateText = x509CertificateText.replace('\n', ' ')
     return x509CertificateText
 
