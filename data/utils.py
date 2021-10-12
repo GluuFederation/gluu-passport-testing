@@ -7,13 +7,11 @@ from urllib import request
 
 class Utils:
 
-  def __init__(self):
-    self.ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost' 
-    self.ldaps_port = os.environ.get('LDAP_PORT') or '1636'
-    self.ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
-    self.ldap_binddn = 'cn=directory manager'
-    self.passport_host = os.environ.get('PASSPORT_HOST')
-    self.idp_host = os.environ.get('IDP_HOST')
+  def __init__(self, ldap_hostname, ldaps_port, ldap_pass, ldap_binddn):
+    self.ldap_hostname = ldap_hostname
+    self.ldaps_port = ldaps_port
+    self.ldap_pass = ldap_pass
+    self.ldap_binddn = ldap_binddn
 
   def connect_db(self, use_ssl=True, force=False):
     print("Bind to database")
@@ -83,7 +81,7 @@ class Utils:
     with open(filename) as f:
       return f.write(filetext)
 
-  def populate_file(self, filename, values = None, is_file_json = False):
+  def populate_file(self, filename, values, is_file_json = False):
     print("Populating file", filename)
     if is_file_json:
       # due to format function filename problem 
@@ -93,7 +91,7 @@ class Utils:
 
     filetext = self.get_file_data(filename)
 
-    self.write_data_in_file(filename, filetext.format(**(values or self.__dict__)))
+    self.write_data_in_file(filename, filetext.format(**values))
 
   def preformat(self, msg):
     """ allow {{key}} to be used for formatting in text
@@ -158,5 +156,3 @@ if __name__ == '__main__':
         utils.populate_file(filename, is_file_json=True)
       else:
         utils.populate_file(filename)
-
-utils = Utils()

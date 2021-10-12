@@ -1,10 +1,18 @@
 # Start configuring and insert data into ldap
 # Insert and manage all data operations for passport provider host
 import os
-from utils import utils
+from utils import Utils
 
-# Connect ldap
-utils.connect_db()
+# Values
+ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost' 
+ldaps_port = os.environ.get('LDAP_PORT') or '1636'
+ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
+ldap_binddn = 'cn=directory manager'
+passport_host = os.environ.get('PASSPORT_HOST')
+idp_host = os.environ.get('IDP_HOST')
+
+# Init utils
+utils = Utils(ldap_hostname, ldaps_port, ldap_pass, ldap_binddn)
 
 # enable passport social and saml script
 # 2FDB-CF02 - passport_social
@@ -19,11 +27,17 @@ ldifs_dir = '{}/data/ldifs'.format(test_dir)
 passport_config_file = '{}/gluuPassportConfiguration.json'.format(ldifs_dir)
 passport_ldif_file = '{}/passport.ldif'.format(ldifs_dir)
 
-utils.populate_file(passport_config_file, is_file_json=True)
+passport_config_props = {
+  "passport_host": passport_host,
+  "idp_host": idp_host
+}
+utils.populate_file(passport_config_file, passport_config_props , is_file_json=True)
 passport_file = open(passport_config_file)
 passport_file_text = passport_file.read()
 passport_file.close()
 
 gluu_passport_configuration = passport_file_text.replace('\n', '')
 utils.populate_file(passport_ldif_file, { "gluu_passport_configuration": gluu_passport_configuration })
+
+utils.connect_db()
 utils.import_ldif([passport_ldif_file])
