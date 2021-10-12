@@ -2,6 +2,8 @@ import ldap3
 import os
 import argparse
 import ldif_utils
+from xml.dom import minidom
+from urllib import request
 
 class Utils:
 
@@ -103,6 +105,21 @@ class Utils:
     msg = msg.replace('{', '{{').replace('}', '}}')
     msg = msg.replace('<<<', '{').replace('>>>', '}')
     return msg
+  
+  def get_idp_signing_cert(self, idp_host):
+    url = request.urlopen('https://{}/idp/shibboleth'.format(idp_host))
+    xmldoc = minidom.parse(url)
+    itemlist = xmldoc.getElementsByTagName('ds:X509Certificate')
+    x509CertificateText = ''
+
+    for item in itemlist:
+        if item.parentNode.parentNode.parentNode.getAttribute('use') == 'signing':
+            x509CertificateText =  item.firstChild.data
+            break
+          
+    x509CertificateText = x509CertificateText.replace('\n', '', 2)
+    x509CertificateText = x509CertificateText.replace('\n', ' ')
+    return x509CertificateText
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
