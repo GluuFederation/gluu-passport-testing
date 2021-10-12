@@ -40,3 +40,18 @@ gluu-serverd login << EOF
 cd /install/community-edition-setup/
 ./setup.py -n -c
 EOF
+
+### Wait for services to start
+wait_until_port_start () {
+	port=$1
+	while ! lsof -Pi :$port -sTCP:LISTEN -t >/dev/null ; do
+	  echo "waiting for port $port"
+	  sleep 5
+	done
+
+	echo "Port $port started"
+}
+
+wait_until_port_start 8081
+wait_until_port_start 8082
+wait_until_port_start 8090
