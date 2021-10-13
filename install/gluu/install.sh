@@ -24,7 +24,6 @@ gluu-serverd start
 
 ### Move preconfigured setup.properties to gluu setup directory
 echo "Making Config File..."
-export TEST_DIR=/root/gluu-passport-testing
 install_dir=$TEST_DIR/install
 setup_property_file=$install_dir/gluu/templates/setup.properties 
 sed -i "1s/.*/ip=$PASSPORT_HOST_IP/" $setup_property_file
