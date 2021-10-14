@@ -22,8 +22,8 @@ class AttribDataTypes:
 
     def __init__(self):
         self.test_dir = os.environ.get('TEST_DIR')
-        self.ldifs_dir = '{}/data/ldifs'.format(self.test_dir)
-        opendjTypesFn = '{}/opendj_types.json'.format(self.ldifs_dir)
+        self.common_dir = '{}/data/ldifs/common'.format(self.test_dir)
+        opendjTypesFn = '{}/opendj_types.json'.format(self.common_dir)
         self.attribTypes = self.readJsonFile(opendjTypesFn)
 
         for v in syntaxType.values():
@@ -43,7 +43,7 @@ class AttribDataTypes:
                 return json.load(f, object_pairs_hook=object_pairs_hook)
 
     def processGluuSchema(self):
-        gluuSchemaFn = '{}/gluu_schema.json'.format(self.ldifs_dir)
+        gluuSchemaFn = '{}/gluu_schema.json'.format(self.common_dir)
         gluuSchema = self.readJsonFile(gluuSchemaFn)
         gluuAtrribs = gluuSchema['attributeTypes']
 

@@ -1,7 +1,7 @@
 # Start configuring and insert data into ldap
 # Insert and manage all data operations for passport provider host
 import os
-from utils import Utils
+from utils.utils import Utils
 
 # Values
 ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost' 
@@ -26,9 +26,9 @@ for inum in ['2FDB-CF02', 'D40C-1CA4', '2DAF-F9A5']:
 
 # import passport config and providers
 test_dir = os.environ.get('TEST_DIR')
-ldifs_dir = '{}/data/ldifs'.format(test_dir)
-passport_config_file = '{}/gluuPassportConfiguration.json'.format(ldifs_dir)
-passport_ldif_file = '{}/passport.ldif'.format(ldifs_dir)
+pasport_ldifs_dir = '{}/data/ldifs/passport_host'.format(test_dir)
+passport_config_file = '{}/gluuPassportConfiguration.json'.format(pasport_ldifs_dir)
+passport_ldif_file = '{}/passport.ldif'.format(pasport_ldifs_dir)
 
 # fetch idp cert
 idp_cert = utils.get_idp_signing_cert(idp_host)
