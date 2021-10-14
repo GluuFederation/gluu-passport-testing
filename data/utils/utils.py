@@ -1,7 +1,7 @@
 import ldap3
 import os
 import argparse
-import ldif_utils
+from utils import ldif_utils
 from xml.dom import minidom
 from urllib import request
 

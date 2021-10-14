@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 from ldap3.utils import dn as dnutils
 from pylib.ldif4.ldif import LDIFParser
-from attributes import attribDataTypes
+from utils.attributes import attribDataTypes
 
 class myLdifParser(LDIFParser):
     def __init__(self, ldif_file):
