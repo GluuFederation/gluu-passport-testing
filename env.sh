@@ -78,8 +78,6 @@ setup_test_env() {
     echo PROVIDER_IP=$PROVIDER_IP
     echo PROVIDER_SNAPSHOT_ID=$PROVIDER_SNAPSHOT_ID
     echo CLIENT_HOST=$CLIENT_HOST
-    echo API_CLIENT_ID=$API_CLIENT_ID
-    echo API_CLIENT_SECRET=$API_CLIENT_SECRET
     echo LATEST_DEV_SNAPSHOT_ID=$LATEST_DEV_SNAPSHOT_ID
     echo LATEST_STABLE_SNAPSHOT_ID=$LATEST_STABLE_SNAPSHOT_ID
     echo ============================================================================
