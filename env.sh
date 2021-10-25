@@ -8,7 +8,7 @@
 ##############################################################################
 
 # Default value: true
-create_drplet=true;
+create_droplet=true;
 run_tests=true;
 
 ## CLI options
@@ -18,7 +18,7 @@ run_tests=true;
 
 while getopts ":stc:" option; do
    case $option in
-      s) create_drplet=false;;
+      s) create_droplet=false;;
       t) run_tests=false;;
       c)
         config_file=${OPTARG}
@@ -36,7 +36,6 @@ done
 
 # geckodriver
 export PATH=$PATH:$PWD/tests/selenium/drivers/firefox
-
 
 # SETUP OD_TOKEN (digital ocean token b4 stating)
 echo "PLEASE DO NOT INTERRUPT"
@@ -57,7 +56,6 @@ teardown() {
 # exit when any command fails
 set -e
 trap 'teardown' EXIT
-
 
 ## Settings down here
 setup_test_env() {
@@ -80,12 +78,11 @@ setup_test_env() {
     echo CLIENT_HOST=$CLIENT_HOST
     echo LATEST_DEV_SNAPSHOT_ID=$LATEST_DEV_SNAPSHOT_ID
     echo LATEST_STABLE_SNAPSHOT_ID=$LATEST_STABLE_SNAPSHOT_ID
+    export TEST_DIR=/root/gluu-passport-testing
     echo ============================================================================
-
 }
-
-
 setup_test_env
+
 fetch_artifacts() {
     echo "cleaning up old artifacts"
     rm -r server_artifacts
@@ -104,7 +101,6 @@ fetch_artifacts() {
 }
 
 delete_droplets() {
-
     delete_passport_droplet(){
         export DROPLET_HOST=$PASSPORT_HOST
         python ./tests/helpers/destroy_droplet.py
@@ -118,10 +114,9 @@ delete_droplets() {
     }
     delete_provider_droplet
     delete_passport_droplet
-
 }
-create_droplets() {
 
+create_droplets() {
     echo 'Creating droplets...'
 
     ## creates passport droplet and wait till is up (takes a while)
@@ -135,8 +130,6 @@ create_droplets() {
         export SNAPSHOT_ID=
     }
 
-
-
     create_provider_droplet(){
         export DROPLET_HOST=$PROVIDER_HOST
         export FLOATING_IP=$PROVIDER_IP
@@ -146,9 +139,6 @@ create_droplets() {
         export FLOATING_IP=
         export SNAPSHOT_ID=
     }
-
-
-
 
     wait_till_server_up(){
         export SERVER=$1
@@ -166,7 +156,6 @@ create_droplets() {
     # Is not possible to set / force metadata retrieve in shibboleth
     echo "Waiting 5 minutes till IDP fetches SPs metadata..."
     sleep 5m
-
 }
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
@@ -180,18 +169,7 @@ configure_client() {
     -H 'Content-Type: application/json' --data-raw "$register_client"
 }
 
-# DEPENDS ON ADMIN API
-function create_test_user(){
-    echo "Creating test user on $PROVIDER_HOST..."
-    python ./tests/helpers/create_test_user.py
-}
-
-function delete_test_user() {
-    echo "Deleting test users on $PROVIDER_HOST..."
-    python ./tests/helpers/delete_test_user.py
-}
-
-function setup_test_client() {
+setup_test_client() {
     # setup custom provider on test client
     echo "Setting up test client with pre-selected provider $PROVIDER_ID..."
     echo "https://$CLIENT_HOST/configuration"
@@ -201,7 +179,7 @@ function setup_test_client() {
     https://$CLIENT_HOST/configuration
 }
 
-function run_blackbox_test() {
+run_blackbox_test() {
     echo ============================================================================
     echo
     echo "STARTING: $TEST_CASE_NAME"
@@ -237,36 +215,17 @@ function run_blackbox_test() {
     echo ============================================================================
 }
 
-function run_config_fetch_blackbox_test() {
-    # this test uses gluu server which is on testing server(the server where we deploy this tests)
-    echo ----------------------------------------------------------------------------
-    echo "RUNNING CONFIG FETCH BLACKBOX BDT TESTS:"
-    echo ----------------------------------------------------------------------------
-    export PASSPORT_LOG_FILE='/opt/gluu-server/opt/gluu/node/passport/passport.log'
-    export TEST_SERVER_HOST=$TEST_SERVER_HOST
-
-    echo "PASSPORT_LOG_FILE: $PASSPORT_LOG_FILE"
-    echo "TEST_SERVER_HOST: $TEST_SERVER_HOST"
-
-    behave ./tests/behaver/features --include fetch-config
-}
-
 run_all_tests(){
     run_config_fetch_blackbox_test
     configure_client
 
-    export USER_NAME=johndoe22
-    export USER_PASSWORD=test123
-    export USER_MAIL=johndoe22@test.ocom
-    export USER_GIVEN=john
-    export USER_SUR=doe
-
-    create_test_user
-
+    #---------------------------------------------------
     # TEST 1: PASSPORT-SAML-DEFAULT
     # - Provider need to be configurated manually
     # - User will be created automatically
 
+    export USER_NAME="dada"
+    export USER_PASSWORD="dada@123"
     export TEST_CASE_NAME=PASSPORT-SAML-DEFAULT
     export ACR=passport-saml
 
@@ -296,13 +255,9 @@ run_all_tests(){
     # $3 ACR
     # $4 FLOW
 
-
     run_blackbox_test
 
-    delete_test_user
-
-
-
+    #---------------------------------------------------
     # TEST 2: PASSPORT-SAML-DEFAULT-EMAILREQ
     # - Provider need to be configurated manually
     # - User will be created automatically
@@ -334,15 +289,13 @@ run_all_tests(){
     # $3 ACR
     # $4 FLOW
 
-    export USER_NAME="josephdoe"
-    export USER_MAIL="jo-sef@test.com"
+    export USER_NAME="mama"
+    export USER_PASSWORD="mama@123"
 
-    create_test_user
     setup_test_client
     run_blackbox_test
-    delete_test_user
 
-    # -----------
+    #---------------------------------------------------
     # TEST 3: PASSPORT-SAML-DEFAULT-EMAILLINK
     # - Provider need to be configurated manually
     # - User will be created automatically
@@ -363,8 +316,8 @@ run_all_tests(){
     export PROVIDER_ID=saml-emaillink
 
     # same e-mail from user josephdoe
-    export USER_NAME="josephdoe2"
-    export USER_MAIL="jo-sef@test.com"
+    export USER_NAME="kaka"
+    export USER_PASSWORD="kaka@123"
 
     create_test_user
     setup_test_client
@@ -372,7 +325,7 @@ run_all_tests(){
     delete_test_user
 
 
-
+    #---------------------------------------------------
     # TEST 4: PASSPORT-SAML-IDP-INITIATED
     # - Provider need to be configurated manually
     # - User will be created automatically
@@ -400,10 +353,8 @@ run_all_tests(){
     export PROVIDER_ID=saml-idpinit
 
 
-    export USER_NAME=hansdoe
-    export USER_MAIL="hansdoe@test.com"
-    export USER_GIVEN=hans
-    export USER_SUR=doe
+    export USER_NAME="nana"
+    export USER_PASSWORD="nana@123"
 
     create_test_user
     setup_test_client
@@ -415,11 +366,10 @@ run_all_tests(){
     echo "====================================================================="
 }
 
-
-echo "create_drplet=$create_drplet"
+echo "create_droplet=$create_droplet"
 echo "run_tests=$run_tests"
 
-if [ "$create_drplet" = true ] ; then
+if [ "$create_droplet" = true ] ; then
     create_droplets
 fi
 
@@ -428,12 +378,10 @@ if [ "$run_tests" = true ] ; then
 fi
 
 # Try to delete droplet after tests
-if [ "$create_drplet" = false ] ; then
+if [ "$create_droplet" = false ] ; then
     echo "Fetching artifacts from teardown..."
     fetch_artifacts
     echo "Deleting droplets..."
     delete_droplets
     echo "finished with success!!!"
 fi
-
-
