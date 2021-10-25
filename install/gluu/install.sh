@@ -2,7 +2,7 @@
 
 ### This setup just install the fresh gluu server
 ### Accept two command line argument
-### Need two environment GLUU_VERSION PASSPORT_HOST PASSPORT_HOST_IP PASSPORT_HOST_GLUU_ADMIN_PASSWORD
+### Need two environment GLUU_VERSION PASSPORT_HOST PASSPORT_IP PASSPORT_HOST_GLUU_ADMIN_PASSWORD
 
 ### Ads and install latest STABLE package for ubuntu 20
 echo "Installing Gluu..."
@@ -26,7 +26,7 @@ gluu-serverd start
 echo "Making Config File..."
 install_dir=$TEST_DIR/install
 setup_property_file=$install_dir/gluu/templates/setup.properties 
-sed -i "1s/.*/ip=$PASSPORT_HOST_IP/" $setup_property_file
+sed -i "1s/.*/ip=$PASSPORT_IP/" $setup_property_file
 sed -i "2s/.*/ldapPass=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $setup_property_file
 sed -i "3s/.*/oxtrust_admin_password=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $setup_property_file
 sed -i "4s/.*/hostname=$PASSPORT_HOST/" $setup_property_file

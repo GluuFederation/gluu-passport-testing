@@ -72,6 +72,7 @@ setup_test_env() {
     echo "Setting up environment...."
     echo PASSPORT_HOST=$PASSPORT_HOST
     echo PASSPORT_IP=$PASSPORT_IP
+    echo ADMIN_PASS=$ADMIN_PASS
     echo PROVIDER_HOST=$PROVIDER_HOST
     echo PROVIDER_IP=$PROVIDER_IP
     echo PROVIDER_SNAPSHOT_ID=$PROVIDER_SNAPSHOT_ID
@@ -156,6 +157,41 @@ create_droplets() {
     # Is not possible to set / force metadata retrieve in shibboleth
     echo "Waiting 5 minutes till IDP fetches SPs metadata..."
     sleep 5m
+}
+
+setup_passport_host() {
+    echo "Installing Gluu...."
+
+    ssh root@$PASSPORT_HOST << EOF
+
+    export GLUU_VERSION=LATEST
+    export PASSPORT_IP=$PASSPORT_IP
+    export PASSPORT_HOST=$PASSPORT_HOST
+    export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
+    export IDP_HOST=$PROVIDER_HOST
+    export TEST_DIR=/root/gluu-passport-testing
+
+    rm -rf /root/gluu-passport-testing
+    git clone -b 63_config_test https://github.com/GluuFederation/gluu-passport-testing.git
+
+    . /root/gluu-passport-testing/install/gluu/install.sh
+    
+EOF
+
+    echo "Inserting data...."
+
+    ssh root@ub20.mali.org << EOF
+
+    export GLUU_VERSION=LATEST
+    export PASSPORT_IP=$PASSPORT_IP
+    export PASSPORT_HOST=$PASSPORT_HOST
+    export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
+    export IDP_HOST=$PROVIDER_HOST
+    export TEST_DIR=/root/gluu-passport-testing
+
+    python3 /root/gluu-passport-testing/data/passport_host_data.py
+
+EOF
 }
 
 ### Calls register and configuration endpoint to register and setup client/secret at auth-tdd-client
@@ -371,6 +407,7 @@ echo "run_tests=$run_tests"
 
 if [ "$create_droplet" = true ] ; then
     create_droplets
+    install_gluu
 fi
 
 if [ "$run_tests" = true ] ; then
