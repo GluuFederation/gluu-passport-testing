@@ -8,19 +8,22 @@
 ##############################################################################
 
 # Default value: true
-create_droplet=true;
-run_tests=true;
+create_droplet=false;
+run_tests=false;
+setup_gluu=false;
 
 ## CLI options
-# -s skip droplets creation automation (tests only)
-# -t skip tests
-# -c <file> : to load config from file
+# -c droplets creation automation (tests only)
+# -t tests
+# -s setup and install gluu CE on Passport and IDP Host
+# -f <file> : to load config from file
 
 while getopts ":stc:" option; do
    case $option in
-      s) create_droplet=false;;
-      t) run_tests=false;;
-      c)
+      c) create_droplet=true;;
+      t) run_tests=true;;
+      s) setup_gluu=true;;
+      f)
         config_file=${OPTARG}
         if [ ! -s ${config_file} ];
         then
@@ -70,6 +73,7 @@ setup_test_env() {
 
     echo ============================================================================
     echo "Setting up environment...."
+    echo GLUU_VERSION=$GLUU_VERSION
     echo PASSPORT_HOST=$PASSPORT_HOST
     echo PASSPORT_IP=$PASSPORT_IP
     echo ADMIN_PASS=$ADMIN_PASS
@@ -164,7 +168,7 @@ setup_passport_host() {
 
     ssh root@$PASSPORT_HOST << EOF
 
-    export GLUU_VERSION=LATEST
+    export GLUU_VERSION=$GLUU_VERSION
     export PASSPORT_IP=$PASSPORT_IP
     export PASSPORT_HOST=$PASSPORT_HOST
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
@@ -182,7 +186,7 @@ EOF
 
     ssh root@ub20.mali.org << EOF
 
-    export GLUU_VERSION=LATEST
+    export GLUU_VERSION=$GLUU_VERSION
     export PASSPORT_IP=$PASSPORT_IP
     export PASSPORT_HOST=$PASSPORT_HOST
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
@@ -407,7 +411,10 @@ echo "run_tests=$run_tests"
 
 if [ "$create_droplet" = true ] ; then
     create_droplets
-    install_gluu
+fi
+
+if [ "$setup_gluu" = true ] ; then
+    setup_passport_host
 fi
 
 if [ "$run_tests" = true ] ; then
