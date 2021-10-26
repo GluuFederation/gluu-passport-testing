@@ -6,7 +6,7 @@
 
 ### Ads and install latest STABLE package for ubuntu 20
 echo "Installing Gluu..."
-if [ $GLUU_VERSION == "LATEST" ]
+if [ $GLUU_VERSION == "LATEST-DEV" ]
 then
   echo "deb https://repo.gluu.org/ubuntu/ focal-devel main" > /etc/apt/sources.list.d/gluu-repo.list
 else
