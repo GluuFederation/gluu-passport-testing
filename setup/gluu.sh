@@ -20,7 +20,7 @@ then
     # cp /test-install-data/setup.py /opt/gluu-server/install/community-edition-setup/.
     echo "Copying templates files to chmod..."
     ### Templates
-    cp /test-install-data/templates/*.* /opt/gluu-server/install/community-edition-setup/templates/.
+    cp -R /test-install-data/templates /opt/gluu-server/install/community-edition-setup/
     echo "Copying certbot script to chmod..."
     ### Certbot to root chmod
     cp /test-install-data/certbot.sh /opt/gluu-server/root/.
