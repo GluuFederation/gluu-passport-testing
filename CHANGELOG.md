@@ -1,3 +1,10 @@
+## v0.14.1 (2021-10-27)
+
+### Fix
+
+- **gluu.sh**: replace all templates files in gluu setup
+- **passport**: fix config files path for templates
+
 ## v0.14.0 (2021-06-10)
 
 ### Fix
