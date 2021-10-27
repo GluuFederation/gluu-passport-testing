@@ -18,7 +18,7 @@ setup_gluu=false;
 # -s setup and install gluu CE on Passport and IDP Host
 # -f <file> : to load config from file
 
-while getopts ":stc:" option; do
+while getopts ":ctsf:" option; do
    case $option in
       c) create_droplet=true;;
       t) run_tests=true;;
@@ -184,7 +184,7 @@ EOF
 
     echo "Inserting data...."
 
-    ssh root@ub20.mali.org << EOF
+    ssh root@$PASSPORT_HOST << EOF
 
     export GLUU_VERSION=$GLUU_VERSION
     export PASSPORT_IP=$PASSPORT_IP
