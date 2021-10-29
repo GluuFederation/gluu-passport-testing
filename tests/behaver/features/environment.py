@@ -26,6 +26,9 @@ def before_all(context):
     context.base_url = "https://" + context.client_host
     os.environ['CURL_CA_BUNDLE'] = ""
     context.SSL_verify = False
+    # context.external_login_page = "https://%s/oxauth/login" % context.provider_host
+    # changed somewhere after 4.1
+    context.external_login_page = "https://%s/oxauth/authorize.htm?" % context.provider_host
     display.start()
 
 

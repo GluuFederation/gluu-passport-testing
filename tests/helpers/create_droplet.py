@@ -16,7 +16,7 @@ print('name = %s, floating = %s, snapshot = %s' % (name, floating, snapshot))
 droplet_data = {
     "name": name,
     "region": "nyc1",
-    "size": "s-8vcpu-16gb",
+    "size": "s-8vcpu-16gb-intel",
     "image": snapshot,
     "ssh_keys": [28792503, 28790914, 29619091, 29435734],
     "vpc_uuid": "b356c33e-dc84-11e8-8650-3cfdfea9f8c8",
