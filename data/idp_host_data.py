@@ -26,9 +26,9 @@ for inum in ['2FDB-CF02', 'D40C-1CA4', '2DAF-F9A5']:
 
 # import idp users and trust relationship data
 test_dir = os.environ.get('TEST_DIR')
-idp_ldifs_dir = '{}/data/ldifs/provider_host'.format(test_dir)
-tr_file = '{}/trust_relationships.ldif'.format(idp_ldifs_dir)
-people_ldif_file = '{}/peoples.ldif'.format(idp_ldifs_dir)
+provider_ldifs_dir = '{}/data/ldifs/provider_host'.format(test_dir)
+tr_file = '{}/trust_relationships.ldif'.format(provider_ldifs_dir)
+people_ldif_file = '{}/peoples.ldif'.format(provider_ldifs_dir)
 
 # populate tr ldif
 utils.populate_file(tr_file, { "passport_host": passport_host })
