@@ -164,7 +164,7 @@ create_droplets() {
 }
 
 setup_passport_host() {
-    echo "Installing Gluu...."
+    echo "Passport Host: Installing Gluu...."
 
     ssh root@$PASSPORT_HOST << EOF
 
@@ -182,7 +182,7 @@ setup_passport_host() {
     
 EOF
 
-    echo "Inserting data...."
+    echo "Passport Host: Inserting data...."
 
     ssh root@$PASSPORT_HOST << EOF
 
@@ -194,6 +194,23 @@ EOF
     export TEST_DIR=/root/gluu-passport-testing
 
     python3 /root/gluu-passport-testing/data/passport_host_data.py
+
+EOF
+}
+
+setup_provider_host() {
+    echo "Provider Host: Inserting data...."
+
+    ssh root@$PROVIDER_HOST << EOF
+
+    export GLUU_VERSION=$GLUU_VERSION
+    export PASSPORT_IP=$PASSPORT_IP
+    export PASSPORT_HOST=$PASSPORT_HOST
+    export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
+    export PROVIDER_HOST=$PROVIDER_HOST
+    export TEST_DIR=/root/gluu-passport-testing
+
+    python3 /root/gluu-passport-testing/data/provider_host_data.py
 
 EOF
 }
@@ -415,6 +432,7 @@ fi
 
 if [ "$setup_gluu" = true ] ; then
     setup_passport_host
+    setup_provider_host
 fi
 
 if [ "$run_tests" = true ] ; then
