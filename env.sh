@@ -432,6 +432,8 @@ fi
 
 if [ "$setup_gluu" = true ] ; then
     setup_passport_host
+    echo "Waiting 5 minutes for passport host to fetch config and setup providers"
+    sleep 5m
     setup_provider_host
 fi
 
