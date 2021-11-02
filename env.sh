@@ -176,7 +176,7 @@ setup_passport_host() {
     export TEST_DIR=/root/gluu-passport-testing
 
     rm -rf /root/gluu-passport-testing
-    git clone -b 63_config_test https://github.com/GluuFederation/gluu-passport-testing.git
+    git clone https://github.com/GluuFederation/gluu-passport-testing.git
 
     . /root/gluu-passport-testing/install/gluu/install.sh
     
@@ -209,6 +209,10 @@ setup_provider_host() {
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
     export PROVIDER_HOST=$PROVIDER_HOST
     export TEST_DIR=/root/gluu-passport-testing
+
+
+    rm -rf /root/gluu-passport-testing
+    git clone https://github.com/GluuFederation/gluu-passport-testing.git
 
     python3 /root/gluu-passport-testing/data/provider_host_data.py
 
