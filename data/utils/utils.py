@@ -104,8 +104,8 @@ class Utils:
     msg = msg.replace('<<<', '{').replace('>>>', '}')
     return msg
   
-  def get_idp_signing_cert(self, idp_host):
-    url = request.urlopen('https://{}/idp/shibboleth'.format(idp_host))
+  def get_idp_signing_cert(self, provider_host):
+    url = request.urlopen('https://{}/idp/shibboleth'.format(provider_host))
     xmldoc = minidom.parse(url)
     itemlist = xmldoc.getElementsByTagName('ds:X509Certificate')
     x509CertificateText = ''

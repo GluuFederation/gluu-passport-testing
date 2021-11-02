@@ -172,7 +172,7 @@ setup_passport_host() {
     export PASSPORT_IP=$PASSPORT_IP
     export PASSPORT_HOST=$PASSPORT_HOST
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
-    export IDP_HOST=$PROVIDER_HOST
+    export PROVIDER_HOST=$PROVIDER_HOST
     export TEST_DIR=/root/gluu-passport-testing
 
     rm -rf /root/gluu-passport-testing
@@ -190,7 +190,7 @@ EOF
     export PASSPORT_IP=$PASSPORT_IP
     export PASSPORT_HOST=$PASSPORT_HOST
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
-    export IDP_HOST=$PROVIDER_HOST
+    export PROVIDER_HOST=$PROVIDER_HOST
     export TEST_DIR=/root/gluu-passport-testing
 
     python3 /root/gluu-passport-testing/data/passport_host_data.py

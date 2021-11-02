@@ -49,7 +49,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "{{idp_cert}}",
-        "entryPoint": "https://{{idp_host}}/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://{{provider_host}}/idp/profile/SAML2/POST/SSO",
         "issuer": "urn:test:default"
       }
     },
@@ -68,7 +68,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "{{idp_cert}}",
-        "entryPoint": "https://{{idp_host}}/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://{{provider_host}}/idp/profile/SAML2/POST/SSO",
         "issuer": "urn:test:mailreq"
       }
     },
@@ -87,7 +87,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "{{idp_cert}}",
-        "entryPoint": "https://{{idp_host}}/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://{{provider_host}}/idp/profile/SAML2/POST/SSO",
         "issuer": "urn:test:link"
       }
     },
@@ -106,7 +106,7 @@
         "authnRequestBinding": "HTTP-POST",
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "{{idp_cert}}",
-        "entryPoint": "https://idp_hostidp_host)/idp/profile/SAML2/POST/SSO",
+        "entryPoint": "https://provider_hostprovider_host)/idp/profile/SAML2/POST/SSO",
         "issuer": "dev.techno24x7.com"
       }
     }

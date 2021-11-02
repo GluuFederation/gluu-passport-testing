@@ -9,7 +9,7 @@ ldaps_port = os.environ.get('LDAP_PORT') or '1636'
 ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
 ldap_binddn = 'cn=directory manager'
 passport_host = os.environ.get('PASSPORT_HOST')
-idp_host = os.environ.get('IDP_HOST')
+provider_host = os.environ.get('PROVIDER_HOST')
 
 # Init utils
 utils = Utils(ldap_hostname, ldaps_port, ldap_pass, ldap_binddn)
@@ -26,7 +26,7 @@ for inum in ['2FDB-CF02', 'D40C-1CA4', '2DAF-F9A5']:
 
 # import idp users and trust relationship data
 test_dir = os.environ.get('TEST_DIR')
-idp_ldifs_dir = '{}/data/ldifs/idp_host'.format(test_dir)
+idp_ldifs_dir = '{}/data/ldifs/provider_host'.format(test_dir)
 tr_file = '{}/trust_relationships.ldif'.format(idp_ldifs_dir)
 people_ldif_file = '{}/peoples.ldif'.format(idp_ldifs_dir)
 

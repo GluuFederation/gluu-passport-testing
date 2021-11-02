@@ -9,7 +9,7 @@ ldaps_port = os.environ.get('LDAP_PORT') or '1636'
 ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
 ldap_binddn = 'cn=directory manager'
 passport_host = os.environ.get('PASSPORT_HOST')
-idp_host = os.environ.get('IDP_HOST')
+provider_host = os.environ.get('PROVIDER_HOST')
 
 # Init utils
 utils = Utils(ldap_hostname, ldaps_port, ldap_pass, ldap_binddn)
@@ -31,12 +31,12 @@ passport_config_file = '{}/gluuPassportConfiguration.json'.format(pasport_ldifs_
 passport_ldif_file = '{}/passport.ldif'.format(pasport_ldifs_dir)
 
 # fetch idp cert
-idp_cert = utils.get_idp_signing_cert(idp_host)
+idp_cert = utils.get_idp_signing_cert(provider_host)
 
 # populate passport json config
 passport_config_props = {
   "passport_host": passport_host,
-  "idp_host": idp_host,
+  "provider_host": provider_host,
   "idp_cert": idp_cert
 }
 utils.populate_file(passport_config_file, passport_config_props , is_file_json=True)
