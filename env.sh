@@ -277,7 +277,6 @@ run_blackbox_test() {
 }
 
 run_all_tests(){
-    run_config_fetch_blackbox_test
     configure_client
 
     #---------------------------------------------------
