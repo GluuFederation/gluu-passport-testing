@@ -11,18 +11,24 @@
 create_droplet=false;
 run_tests=false;
 setup_gluu=false;
+fetch_artifacts=false;
+tear_down=false;
 
 ## CLI options
 # -c droplets creation automation (tests only)
 # -t tests
 # -s setup and install gluu CE on Passport and IDP Host
 # -f <file> : to load config from file
+# -l fetch logs artifacts
+# -d tear down droplets
 
 while getopts ":ctsf:" option; do
    case $option in
       c) create_droplet=true;;
       t) run_tests=true;;
       s) setup_gluu=true;;
+      l) fetch_artifacts=true;;
+      d) tear_down=true;;
       f)
         config_file=${OPTARG}
         if [ ! -s ${config_file} ];
@@ -90,7 +96,7 @@ setup_test_env
 
 fetch_artifacts() {
     echo "cleaning up old artifacts"
-    rm -r server_artifacts
+    rm -rf server_artifacts
 
     mkdir -p server_artifacts/passport
     echo "Fetching logs from passport server $PASSPORT_HOST"
@@ -427,7 +433,10 @@ run_all_tests(){
 }
 
 echo "create_droplet=$create_droplet"
+echo "setup_gluu=$setup_gluu"
 echo "run_tests=$run_tests"
+echo "fetch_artifacts=$fetch_artifacts"
+echo "tear_down=$tear_down"
 
 if [ "$create_droplet" = true ] ; then
     create_droplets
@@ -444,10 +453,12 @@ if [ "$run_tests" = true ] ; then
     run_all_tests
 fi
 
-# Try to delete droplet after tests
-if [ "$create_droplet" = false ] ; then
+if [ "$fetch_artifacts" = true ] ; then
     echo "Fetching artifacts from teardown..."
     fetch_artifacts
+fi
+
+if [ "$tear_down" = true ] ; then
     echo "Deleting droplets..."
     delete_droplets
     echo "finished with success!!!"
