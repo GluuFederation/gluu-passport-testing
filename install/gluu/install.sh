@@ -24,14 +24,21 @@ gluu-serverd start
 
 ### Move preconfigured setup.properties to gluu setup directory
 echo "Making Config File..."
+community_setup_dir=/opt/gluu-server/install/community-edition-setup
 install_dir=$TEST_DIR/install
-setup_property_file=$install_dir/gluu/templates/setup.properties 
+templates_dir=$install_dir/gluu/templates
+setup_property_file=$templates_dir/setup.properties 
 sed -i "1s/.*/ip=$PASSPORT_IP/" $setup_property_file
 sed -i "2s/.*/ldapPass=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $setup_property_file
 sed -i "3s/.*/oxtrust_admin_password=$PASSPORT_HOST_GLUU_ADMIN_PASSWORD/" $setup_property_file
 sed -i "4s/.*/hostname=$PASSPORT_HOST/" $setup_property_file
 
-cp $setup_property_file /opt/gluu-server/install/community-edition-setup
+cp $setup_property_file $community_setup_dir
+
+# apache ssl and config setup
+apache_dir=$templates_dir/apache
+tar -zxvf $apache_dir/etcletsencrypt.tar -C /opt/gluu-server
+cp -R $apache_dir/https_gluu.conf $community_setup_dir/templates/apache
 
 ### Setup Gluu Server
 echo "Setuping Gluu..."
