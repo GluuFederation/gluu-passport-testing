@@ -22,7 +22,7 @@ tear_down=false;
 # -l fetch logs artifacts
 # -d tear down droplets
 
-while getopts ":ctsf:" option; do
+while getopts ":ctsldf:" option; do
    case $option in
       c) create_droplet=true;;
       t) run_tests=true;;
