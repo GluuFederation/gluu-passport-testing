@@ -24,7 +24,7 @@ gluuReleasedAttribute: inum=29DA,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=42E0,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=BCA8,ou=attributes,o=gluu
 gluuSAMLmaxRefreshDelay: PT8H
-gluuSAMLspMetaDataFN: 2587f827-da84-4cd7-bd99-cf6667dc73dc-sp-metadata.xml
+gluuSAMLspMetaDataFN: saml-default.xml
 gluuSAMLspMetaDataSourceType: file
 gluuSAMLspMetaDataURL: https://{passport_host}/passport/auth/meta/idp/saml-default
 gluuSpecificRelyingPartyConfig: true
@@ -53,7 +53,7 @@ gluuReleasedAttribute: inum=29DA,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=42E0,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=BCA8,ou=attributes,o=gluu
 gluuSAMLmaxRefreshDelay: PT8H
-gluuSAMLspMetaDataFN: 5a32f883-4190-437f-ac08-24f662fe345a-sp-metadata.xml
+gluuSAMLspMetaDataFN: saml-emailreq.xml
 gluuSAMLspMetaDataSourceType: file
 gluuSAMLspMetaDataURL: https://{passport_host}/passport/auth/meta/idp/saml-emailreq
 gluuSpecificRelyingPartyConfig: true
@@ -82,7 +82,7 @@ gluuReleasedAttribute: inum=29DA,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=42E0,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=BCA8,ou=attributes,o=gluu
 gluuSAMLmaxRefreshDelay: PT8H
-gluuSAMLspMetaDataFN: ebbd9591-65f5-476e-8764-b548c7f7de5b-sp-metadata.xml
+gluuSAMLspMetaDataFN: saml-emaillink.xml
 gluuSAMLspMetaDataSourceType: file
 gluuSAMLspMetaDataURL: https://{passport_host}/passport/auth/meta/idp/saml-emaillink
 gluuSpecificRelyingPartyConfig: true
@@ -111,7 +111,7 @@ gluuReleasedAttribute: inum=29DA,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=42E0,ou=attributes,o=gluu
 gluuReleasedAttribute: inum=BCA8,ou=attributes,o=gluu
 gluuSAMLmaxRefreshDelay: PT8H
-gluuSAMLspMetaDataFN: 565a0ba5-e954-48a7-8b68-1f6aea27123c-sp-metadata.xml
+gluuSAMLspMetaDataFN: saml-idpinit.xml
 gluuSAMLspMetaDataSourceType: file
 gluuSAMLspMetaDataURL: https://{passport_host}/passport/auth/meta/idp/saml-idpinit
 gluuSpecificRelyingPartyConfig: true
