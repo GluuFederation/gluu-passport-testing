@@ -29,9 +29,10 @@ test_dir = os.environ.get('TEST_DIR')
 provider_ldifs_dir = '{}/data/ldifs/provider_host'.format(test_dir)
 tr_file = '{}/trust_relationships.ldif'.format(provider_ldifs_dir)
 people_ldif_file = '{}/peoples.ldif'.format(provider_ldifs_dir)
+passport_saml_ldif_file = '{}/passport_saml.ldif'.format(provider_ldifs_dir)
 
 # populate tr ldif
 utils.populate_file(tr_file, { "passport_host": passport_host })
 
 # import tr and users
-utils.import_ldif([tr_file, people_ldif_file])
+utils.import_ldif([tr_file, people_ldif_file, passport_saml_ldif_file])
