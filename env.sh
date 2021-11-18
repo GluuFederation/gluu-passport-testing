@@ -208,7 +208,7 @@ setup_provider_host() {
     echo "download SP metadata and upload it to IDP"
     mkdir sp-metadata
     scp root@$PASSPORT_HOST:/opt/gluu-server/opt/gluu/node/passport/server/idp-metadata/* sp-metadata/
-    scp sp-metadata/* root@$PROVIDER_HOST:/opt/shibboleth-idp/metadata/
+    scp sp-metadata/* root@$PROVIDER_HOST:/opt/gluu-server/opt/shibboleth-idp/metadata/
 
     echo "Provider Host: Inserting data...."
 
