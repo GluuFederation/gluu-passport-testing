@@ -209,6 +209,7 @@ setup_provider_host() {
     mkdir sp-metadata
     scp root@$PASSPORT_HOST:/opt/gluu-server/opt/gluu/node/passport/server/idp-metadata/* sp-metadata/
     scp sp-metadata/* root@$PROVIDER_HOST:/opt/gluu-server/opt/shibboleth-idp/metadata/
+    scp data/ldifs/provider_host/metadata-providers.xml root@$PROVIDER_HOST:/opt/gluu-server/opt/shibboleth-idp/conf
 
     echo "Provider Host: Inserting data...."
 
