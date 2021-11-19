@@ -200,7 +200,7 @@ EOF
     export TEST_DIR=/root/gluu-passport-testing
 
     python3 /root/gluu-passport-testing/data/passport_host_data.py
-
+    gluu-serverd restart
 EOF
 }
 
@@ -226,7 +226,7 @@ setup_provider_host() {
     git clone https://github.com/GluuFederation/gluu-passport-testing.git
 
     python3 /root/gluu-passport-testing/data/provider_host_data.py
-
+    gluu-serverd restart
 EOF
 }
 
@@ -449,9 +449,11 @@ fi
 
 if [ "$setup_gluu" = true ] ; then
     setup_passport_host
-    echo "Waiting 5 minutes for passport host to fetch config and setup providers"
-    sleep 5m
+    echo "Waiting 3 minutes for passport host to fetch config, setup providers and restart"
+    sleep 3m
     setup_provider_host
+    echo "Waiting 3 minutes for provider host to restart"
+    sleep 3m
 fi
 
 if [ "$run_tests" = true ] ; then
