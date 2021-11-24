@@ -228,9 +228,9 @@ setup_provider_host() {
 
     python3 /root/gluu-passport-testing/data/provider_host_data.py
 
-    gluu-serverd login << EOF
+    gluu-serverd login << EOFI
     service oxauth restart
-EOF
+EOFI
 
 EOF
 }
