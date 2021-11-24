@@ -227,7 +227,11 @@ setup_provider_host() {
     git clone https://github.com/GluuFederation/gluu-passport-testing.git
 
     python3 /root/gluu-passport-testing/data/provider_host_data.py
-    gluu-serverd restart
+
+    gluu-serverd login << EOF
+    service oxauth restart
+EOF
+
 EOF
 }
 
