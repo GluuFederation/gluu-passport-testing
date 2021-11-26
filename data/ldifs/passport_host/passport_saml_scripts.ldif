@@ -1,4 +1,4 @@
 dn: inum=D40C-1CA4,ou=scripts,o=gluu
 changetype: modify
-add: oxAlias
-oxConfigurationProperty	{"value1":"authz_req_param_provider","value2":"preselectedExternalProvider","hide":false,"description":""}
+add: oxConfigurationProperty
+oxConfigurationProperty: {"value1":"authz_req_param_provider","value2":"preselectedExternalProvider","hide":false,"description":""}
