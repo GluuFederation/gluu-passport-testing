@@ -26,13 +26,19 @@ for inum in ['2FDB-CF02', 'D40C-1CA4', '2DAF-F9A5']:
 
 # import passport config and providers
 test_dir = os.environ.get('TEST_DIR')
-pasport_ldifs_dir = '{}/data/ldifs/passport_host'.format(test_dir)
-passport_config_file = '{}/gluuPassportConfiguration.json'.format(pasport_ldifs_dir)
-passport_ldif_file = '{}/passport.ldif'.format(pasport_ldifs_dir)
+passport_ldifs_dir = '{}/data/ldifs/passport_host'.format(test_dir)
+passport_config_file = '{}/gluuPassportConfiguration.json'.format(passport_ldifs_dir)
+passport_ldif_file = '{}/passport.ldif'.format(passport_ldifs_dir)
+
+oxauth_dynamic_config_file = '{}/oxauthDynamicConfig.json'.format(passport_ldifs_dir)
+oxauth_ldif_file = '{}/oxauth.ldif'.format(passport_ldifs_dir)
+passport_saml_scripts_ldif_file = '{}/passport_saml_scripts.ldif'.format(passport_ldifs_dir)
+passport_social_scripts_ldif_file = '{}/passport_social_scripts.ldif'.format(passport_ldifs_dir)
 
 # fetch idp cert
 idp_cert = utils.get_idp_signing_cert(provider_host)
 
+## Gluu Passport Config setup
 # populate passport json config
 passport_config_props = {
   "passport_host": passport_host,
@@ -46,9 +52,17 @@ with open(passport_config_file) as f:
   passport_file_text = f.read()
 
 gluu_passport_configuration = passport_file_text.replace('\n', '')
-
-# populate passport ldif
 utils.populate_file(passport_ldif_file, { "gluu_passport_configuration": gluu_passport_configuration })
 
-# import passport config and providers
-utils.import_ldif([passport_ldif_file])
+## oxAuth dynamic config setup
+## add authorizationRequestCustomAllowedParameters: preselectedExternalProvider
+utils.populate_file(oxauth_dynamic_config_file, { "passport_host": passport_host } , is_file_json=True)
+
+# remove extra new lines from json config
+with open(oxauth_dynamic_config_file) as f:
+  oxauth_dynamic_config_file_text = f.read()
+
+oxauth_dynamic_config = oxauth_dynamic_config_file_text.replace('\n', '')
+utils.populate_file(oxauth_ldif_file, { "oxauth_dynamic_config": oxauth_dynamic_config })
+
+utils.import_ldif([passport_ldif_file, oxauth_ldif_file, passport_saml_scripts_ldif_file, passport_social_scripts_ldif_file])
