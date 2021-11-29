@@ -142,13 +142,8 @@ def user_clicks_protected_content_link(context):
 def user_redirected_to_external_login_page(context):
     external_login_page = None
     if context.acr == 'passport-saml':
-
-        # if context.flow != 'preselected provider':
-        #     external_login_page = "https://%s/oxauth/authorize.htm" % context.passport_host
-        # else:
-        external_login_page = "https://%s/oxauth/login" % context.provider_host
+        external_login_page = "https://%s/oxauth/authorize.htm" % context.provider_host
         time.sleep(4)
-        #import ipdb; ipdb.set_trace()
     else:
         external_login_page = "https://%s/oxauth/login" % context.passport_host
     time.sleep(4)
