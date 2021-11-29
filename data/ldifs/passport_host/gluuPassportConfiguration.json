@@ -107,7 +107,7 @@
         "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
         "cert": "{{idp_cert}}",
         "entryPoint": "https://provider_hostprovider_host)/idp/profile/SAML2/POST/SSO",
-        "issuer": "dev.techno24x7.com"
+        "issuer": "{{client_host}}"
       }
     }
   ]

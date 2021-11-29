@@ -10,6 +10,7 @@ ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_AD
 ldap_binddn = 'cn=directory manager'
 passport_host = os.environ.get('PASSPORT_HOST')
 provider_host = os.environ.get('PROVIDER_HOST')
+client_host = os.environ.get('CLIENT_HOST')
 
 # Init utils
 utils = Utils(ldap_hostname, ldaps_port, ldap_pass, ldap_binddn)
@@ -43,7 +44,8 @@ idp_cert = utils.get_idp_signing_cert(provider_host)
 passport_config_props = {
   "passport_host": passport_host,
   "provider_host": provider_host,
-  "idp_cert": idp_cert
+  "idp_cert": idp_cert,
+  "client_host": client_host
 }
 utils.populate_file(passport_config_file, passport_config_props , is_file_json=True)
 
