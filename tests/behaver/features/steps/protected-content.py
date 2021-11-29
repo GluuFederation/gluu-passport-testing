@@ -49,19 +49,18 @@ def user_authenticates(context):
     time.sleep(3)
 
     if context.acr == "passport-saml":
-
         # for all samls..
         time.sleep(2)
         context.web.save_screenshot(
             str(datetime.now())+"3_before_username_typing.png")
-        context.web.find_element(By.ID, "username").click()
+        context.web.find_element(By.ID, "loginForm:username").click()
         context.web.find_element(
             By.ID, "username").send_keys(context.user_name)
-        context.web.find_element(By.ID, "password").send_keys(
+        context.web.find_element(By.ID, "loginForm:password").send_keys(
             context.user_password)
         context.web.save_screenshot(
             str(datetime.now())+"4_before_login_button.png")
-        context.web.find_element(By.ID, "loginButton").click()
+        context.web.find_element(By.ID, "loginForm:loginButton").click()
 
         time.sleep(3)
         context.web.save_screenshot(
@@ -101,13 +100,9 @@ def user_authenticates(context):
                 pass
                 # "Couldn't find consent form, presuming user already consented...")
 
-        time.sleep(2)
-
-        time.sleep(2)
-        # print(context.web.current_url)
+        time.sleep(4)
 
     if context.acr == "oidc":
-
         time.sleep(1)
         context.web.set_window_size(625, 638)
         context.web.find_element(By.ID, "username").click()
