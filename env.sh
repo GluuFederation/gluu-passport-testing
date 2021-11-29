@@ -180,6 +180,7 @@ setup_passport_host() {
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
     export PROVIDER_HOST=$PROVIDER_HOST
     export TEST_DIR=/root/gluu-passport-testing
+    export CLIENT_HOST=$CLIENT_HOST
 
     rm -rf /root/gluu-passport-testing
     git clone https://github.com/GluuFederation/gluu-passport-testing.git
@@ -198,6 +199,7 @@ EOF
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
     export PROVIDER_HOST=$PROVIDER_HOST
     export TEST_DIR=/root/gluu-passport-testing
+    export CLIENT_HOST=$CLIENT_HOST
 
     python3 /root/gluu-passport-testing/data/passport_host_data.py
     gluu-serverd restart
@@ -221,7 +223,7 @@ setup_provider_host() {
     export PASSPORT_HOST_GLUU_ADMIN_PASSWORD=$ADMIN_PASS
     export PROVIDER_HOST=$PROVIDER_HOST
     export TEST_DIR=/root/gluu-passport-testing
-
+    export CLIENT_HOST=$CLIENT_HOST
 
     rm -rf /root/gluu-passport-testing
     git clone https://github.com/GluuFederation/gluu-passport-testing.git
