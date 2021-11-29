@@ -397,8 +397,6 @@ run_all_tests(){
 
     setup_test_client
     run_blackbox_test
-    delete_test_user
-
 
     #---------------------------------------------------
     # TEST 4: PASSPORT-SAML-IDP-INITIATED
@@ -433,7 +431,6 @@ run_all_tests(){
 
     setup_test_client
     run_blackbox_test
-    delete_test_user
 
     echo "ALL TEST FINISHED."
 
