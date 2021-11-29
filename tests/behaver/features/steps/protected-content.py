@@ -55,7 +55,7 @@ def user_authenticates(context):
             str(datetime.now())+"3_before_username_typing.png")
         context.web.find_element(By.ID, "loginForm:username").click()
         context.web.find_element(
-            By.ID, "username").send_keys(context.user_name)
+            By.ID, "loginForm:username").send_keys(context.user_name)
         context.web.find_element(By.ID, "loginForm:password").send_keys(
             context.user_password)
         context.web.save_screenshot(
