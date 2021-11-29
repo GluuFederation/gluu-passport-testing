@@ -395,7 +395,6 @@ run_all_tests(){
     export USER_NAME="kaka"
     export USER_PASSWORD="kaka@123"
 
-    create_test_user
     setup_test_client
     run_blackbox_test
     delete_test_user
@@ -432,7 +431,6 @@ run_all_tests(){
     export USER_NAME="nana"
     export USER_PASSWORD="nana@123"
 
-    create_test_user
     setup_test_client
     run_blackbox_test
     delete_test_user
