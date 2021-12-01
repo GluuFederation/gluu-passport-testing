@@ -50,20 +50,16 @@ passport_config_props = {
 utils.populate_file(passport_config_file, passport_config_props , is_file_json=True)
 
 # remove extra new lines from json config
-with open(passport_config_file) as f:
-  passport_file_text = f.read()
-
-gluu_passport_configuration = passport_file_text.replace('\n', '')
+passport_file_text = utils.get_file_data(passport_config_file).replace('\n', '')
+gluu_passport_configuration = passport_file_text
 utils.populate_file(passport_ldif_file, { "gluu_passport_configuration": gluu_passport_configuration })
 
 ## oxAuth dynamic config setup
-## add authorizationRequestCustomAllowedParameters: preselectedExternalProvider
+# add authorizationRequestCustomAllowedParameters: preselectedExternalProvider
 utils.populate_file(oxauth_dynamic_config_file, { "passport_host": passport_host } , is_file_json=True)
 
 # remove extra new lines from json config
-with open(oxauth_dynamic_config_file) as f:
-  oxauth_dynamic_config_file_text = f.read()
-
+oxauth_dynamic_config_file_text = utils.get_file_data(oxauth_dynamic_config_file).replace('\n', '')
 oxauth_dynamic_config = oxauth_dynamic_config_file_text.replace('\n', '')
 utils.populate_file(oxauth_ldif_file, { "oxauth_dynamic_config": oxauth_dynamic_config })
 
