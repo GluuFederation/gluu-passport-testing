@@ -91,7 +91,7 @@ Provider host need snapshot with Gluu CE IDP 4.3.0. During test case run, It ins
 ./env.sh -c
 ```
 
-### Setup PASSPORT HOST
+### Setup PASSPORT and PROVIDER HOST
 
 `-s` option is use to setup PASSPORT and PROVIDER Host. In this stage, It insert test data into directly ldap db on passport host and provider host.
 
@@ -99,7 +99,7 @@ Provider host need snapshot with Gluu CE IDP 4.3.0. During test case run, It ins
 ./env.sh -s
 ```
 
-There are two main steps:
+Its perform tasks:
 
 - Install latest Gluu on PASSPORT Host
     
@@ -107,8 +107,8 @@ There are two main steps:
 
     In install.sh, we are using `setup.properties` which helps to pass preconfigured setup values.
     
-- Manage Data on PASSPORT Host
+- Manage Data on PASSPORT and Provider Host
 
-    In this stage, env.sh helps to insert, remove and update data in ldap directly using passport_host_data.py. It uses `python-ldap3` module to connect db and perform CRUD operation.
+    In this stage, env.sh helps to insert, remove and update data in ldap using `python-ldap3` module to connect db and perform CRUD operation.
     
-
+    Checkout passport_host_data.py, passport_host_data.py, and ldifs in data folder for examples and implementation.
