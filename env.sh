@@ -283,10 +283,6 @@ run_blackbox_test() {
     echo ----------------------------------------------------------------------------
     echo
     behave ./tests/behaver/features --include protected-content
-    # if [[ $FLOW == 'default emaillink' ]]
-    # then
-    #     behave ./tests/behaver/features --include email-linking
-    # fi
     echo
     echo ----------------------------------------------------------------------------
     echo
