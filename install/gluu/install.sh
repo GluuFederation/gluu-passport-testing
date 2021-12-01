@@ -47,6 +47,8 @@ cd /install/community-edition-setup/
 ./setup.py -n -c
 EOF
 
+### TODO: Setup gluu-passport as per PR
+
 ### Wait for services to start
 wait_until_port_start () {
 	port=$1
