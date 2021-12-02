@@ -112,3 +112,19 @@ Its perform tasks:
     In this stage, env.sh helps to insert, remove and update data in ldap using `python-ldap3` module to connect db and perform CRUD operation.
     
     Checkout passport_host_data.py, passport_host_data.py, and ldifs in data folder for examples and implementation.
+
+
+## Test logs / artifacts
+Test Server will collect logs through ssh (ensure you have authorized test server to connect`PROVIDER_HOST` and `PASSPORT_HOST` through `ssh`)
+
+Logs (such as `idp-process.log`, `passport.log`, `oxauth_script.log`, etc)  will be stored ar `server_artifacts/provider` and `server_artifacts/passport` so they can be analyzed when needed. (i.e. to dig in a failing test case). 
+
+Your CI may handle to fetch and/or publish artifacts from this folder.
+
+## TO BE
+
+### In the near future
+
+This is a nice milestone...
+
+![TO BE](./docs/resources/passport_integration_tests-TO-BE.png)

@@ -1,3 +1,5 @@
+# Main source from https://github.com/GluuFederation/community-edition-setup
+
 import os
 import datetime
 from collections import OrderedDict

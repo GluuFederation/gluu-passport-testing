@@ -1,3 +1,5 @@
+# Main source from https://github.com/GluuFederation/community-edition-setup
+
 import os
 import copy
 import json
