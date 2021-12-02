@@ -4,7 +4,7 @@ import os
 from utils.utils import Utils
 
 # Values
-ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost' 
+ldap_hostname = os.environ.get('LDAP_HOSTNAME') or 'localhost'
 ldaps_port = os.environ.get('LDAP_PORT') or '1636'
 ldap_pass = os.environ.get('LDAP_PASS') or os.environ.get('PASSPORT_HOST_GLUU_ADMIN_PASSWORD')
 ldap_binddn = 'cn=directory manager'

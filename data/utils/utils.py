@@ -1,6 +1,4 @@
 import ldap3
-import os
-import argparse
 from utils import ldif_utils
 from xml.dom import minidom
 from urllib import request
@@ -8,6 +6,7 @@ from urllib import request
 class Utils:
 
   def __init__(self, ldap_hostname, ldaps_port, ldap_pass, ldap_binddn):
+    """ldap and other utilities"""
     self.ldap_hostname = ldap_hostname
     self.ldaps_port = ldaps_port
     self.ldap_pass = ldap_pass
@@ -42,7 +41,7 @@ class Utils:
 
   def import_ldif(self, ldif_files, bucket=None, force=None):
     print("Importing ldif file(s): {} ".format(', '.join(ldif_files)))
-    
+
     for ldif_fn in ldif_files:
       print("Importing entries from " + ldif_fn)
       parser = ldif_utils.myLdifParser(ldif_fn)
@@ -70,7 +69,7 @@ class Utils:
       print("Deleting entries from " + ldif_fn)
       parser = ldif_utils.myLdifParser(ldif_fn)
       parser.parse()
-      for dn, entry in parser.entries:
+      for dn, _ in parser.entries:
         self.ldap_conn.delete(dn)
 
   def get_file_data(self, filename):
@@ -84,7 +83,7 @@ class Utils:
   def populate_file(self, filename, values, is_file_json = False):
     print("Populating file", filename)
     if is_file_json:
-      # due to format function filename problem 
+      # due to format function filename problem
       # https://stackoverflow.com/questions/5466451/how-can-i-print-literal-curly-brace-characters-in-a-string-and-also-use-format
       filetext = self.get_file_data(filename)
       self.write_data_in_file(filename, self.preformat(filetext))
@@ -95,6 +94,7 @@ class Utils:
 
   def preformat(self, msg):
     """ allow {{key}} to be used for formatting in text
+
     that already uses curly braces.  First switch this into
     something else, replace curlies with double curlies, and then
     switch back to regular braces
@@ -105,7 +105,8 @@ class Utils:
     return msg
   
   def get_idp_signing_cert(self, provider_host):
-    url = request.urlopen('https://{}/idp/shibboleth'.format(provider_host))
+    makeRequest = request.Request('https://{}/idp/shibboleth'.format(provider_host))
+    url = request.urlopen(makeRequest)
     xmldoc = minidom.parse(url)
     itemlist = xmldoc.getElementsByTagName('ds:X509Certificate')
     x509CertificateText = ''
