@@ -1,0 +1,6 @@
+dn: inum=D40C-1CA4,ou=scripts,o=gluu
+changetype: modify
+add: oxAlias
+oxAlias: urn:oasis:names:tc:SAML:2.0:ac:classes:InternetProtocol
+oxAlias: urn:oasis:names:tc:SAML:2.0:ac:classes:Password
+oxAlias: urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport

@@ -1,0 +1,4 @@
+dn: ou=oxpassport,ou=configuration,o=gluu
+changetype: modify
+replace: gluuPassportConfiguration
+gluuPassportConfiguration: {gluu_passport_configuration}

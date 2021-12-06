@@ -1,0 +1,5 @@
+version: 1
+dn: ou=oxauth,ou=configuration,o=gluu
+changetype: modify
+replace: oxAuthConfDynamic
+oxAuthConfDynamic: {oxauth_dynamic_config}

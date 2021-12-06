@@ -1,0 +1,114 @@
+{
+  "conf": {
+    "serverURI": "https://{{passport_host}}",
+    "serverWebPort": 8090,
+    "postProfileEndpoint": "https://{{passport_host}}/oxauth/postlogin.htm",
+    "spTLSCert": "/etc/certs/passport-sp.crt",
+    "spTLSKey": "/etc/certs/passport-sp.key",
+    "logging": {
+      "level": "debug",
+      "consoleLogOnly": false,
+      "activeMQConf": {
+        "enabled": false,
+        "host": "",
+        "username": "",
+        "password": "",
+        "port": 0
+      }
+    }
+  },
+  "idpInitiated": {
+    "openidclient": {
+      "authorizationEndpoint": "https://{{passport_host}}/oxauth/restv1/authorize",
+      "clientId": "1503.b7b8708b-1f63-4649-a466-2674a55ddb05",
+      "acrValues": "passport_saml"
+    },
+    "authorizationParams": [
+      {
+        "provider": "saml-idpinit",
+        "extraParams": {},
+        "redirect_uri": "https://{{passport_host}}/oxauth/auth/passport/sample-redirector.htm",
+        "response_type": "code",
+        "scope": "openid"
+      }
+    ]
+  },
+  "providers": [
+    {
+      "id": "saml-default",
+      "displayName": "saml-default",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-default/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "{{idp_cert}}",
+        "entryPoint": "https://{{provider_host}}/idp/profile/SAML2/POST/SSO",
+        "issuer": "urn:test:default"
+      }
+    },
+    {
+      "id": "saml-emailreq",
+      "displayName": "saml-emailreq",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-emailreq/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "{{idp_cert}}",
+        "entryPoint": "https://{{provider_host}}/idp/profile/SAML2/POST/SSO",
+        "issuer": "urn:test:mailreq"
+      }
+    },
+    {
+      "id": "saml-emaillink",
+      "displayName": "saml-emaillink",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-emaillink/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "{{idp_cert}}",
+        "entryPoint": "https://{{provider_host}}/idp/profile/SAML2/POST/SSO",
+        "issuer": "urn:test:link"
+      }
+    },
+    {
+      "id": "saml-idpinit",
+      "displayName": "saml-idpinit",
+      "type": "saml",
+      "mapping": "saml_ldap_profile",
+      "passportStrategyId": "passport-saml",
+      "enabled": true,
+      "callbackUrl": "https://{{passport_host}}/passport/auth/saml/saml-idpinit/callback",
+      "requestForEmail": false,
+      "emailLinkingSafe": false,
+      "options": {
+        "skipRequestCompression": "true",
+        "authnRequestBinding": "HTTP-POST",
+        "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+        "cert": "{{idp_cert}}",
+        "entryPoint": "https://provider_hostprovider_host)/idp/profile/SAML2/POST/SSO",
+        "issuer": "{{client_host}}"
+      }
+    }
+  ]
+}

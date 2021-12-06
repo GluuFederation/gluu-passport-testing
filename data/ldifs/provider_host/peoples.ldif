@@ -1,0 +1,104 @@
+dn: ou=people,o=gluu
+objectClass: organizationalunit
+objectClass: top
+ou: people
+
+dn: inum=5d820a55-afc3-466b-bfee-4b84f80c2b16,ou=people,o=gluu
+objectClass: gluuCustomPerson
+objectClass: gluuPerson
+objectClass: top
+objectClass: eduPerson
+cn: nana nana
+displayName: nana
+givenName: nana
+gluuStatus: active
+inum: 5d820a55-afc3-466b-bfee-4b84f80c2b16
+mail: nana@test.com
+oxCreationTimestamp: 20211006094927.751Z
+oxTrustEmail:: ewogICJ2YWx1ZSIgOiAibmFuYUB0ZXN0LmNvbSIsCiAgImRpc3BsYXkiIDogb
+ nVsbCwKICAidHlwZSIgOiBudWxsLAogICJwcmltYXJ5IiA6IGZhbHNlCn0=
+sn: nana
+uid: nana
+userPassword:: e1NTSEE1MTJ9VldFRk1WZTY1TnkzZXo2M3dWVkM1am53RGtSUjR4cVRFRUtVR
+ 0xESnd6aXF1NElwVTl6bnVkQjM5Ylp4akZSVFNYMmkvR2FXWjVqT2xZMTc2VzAxN0JJK2NVZWVK
+ Vkow
+
+dn: inum=1eba4eb6-71ea-4122-935f-835bdb02a5a1,ou=people,o=gluu
+objectClass: gluuCustomPerson
+objectClass: gluuPerson
+objectClass: top
+objectClass: eduPerson
+cn: kaka kaka
+displayName: kaka
+givenName: kaka
+gluuStatus: active
+inum: 1eba4eb6-71ea-4122-935f-835bdb02a5a1
+mail: kaka@test.com
+oxCreationTimestamp: 20211006094955.967Z
+oxTrustEmail:: ewogICJ2YWx1ZSIgOiAia2FrYUB0ZXN0LmNvbSIsCiAgImRpc3BsYXkiIDogb
+ nVsbCwKICAidHlwZSIgOiBudWxsLAogICJwcmltYXJ5IiA6IGZhbHNlCn0=
+sn: kaka
+uid: kaka
+userPassword:: e1NTSEE1MTJ9cUtyN0U1U044ZVo5SGNldmZGb1lrSzBnUlc2cjVJRDkvRnZNN
+ TNLV21xdTdEcVhrTHpkand4SVdCWnFNQW9oSWdPMWpTV1hiZkpHZTJXa0t2VGY0aSs3TGtqTDJN
+ OG5S
+
+dn: inum=bacec7fa-281a-40c4-a404-eb9e3358efc1,ou=people,o=gluu
+objectClass: gluuCustomPerson
+objectClass: gluuPerson
+objectClass: top
+objectClass: eduPerson
+cn: dada dada
+displayName: dada
+givenName: dada
+gluuStatus: active
+inum: bacec7fa-281a-40c4-a404-eb9e3358efc1
+mail: dada@test.com
+oxCreationTimestamp: 20211006095021.026Z
+oxTrustEmail:: ewogICJ2YWx1ZSIgOiAiZGFkYUB0ZXN0LmNvbSIsCiAgImRpc3BsYXkiIDogb
+ nVsbCwKICAidHlwZSIgOiBudWxsLAogICJwcmltYXJ5IiA6IGZhbHNlCn0=
+sn: dada
+uid: dada
+userPassword:: e1NTSEE1MTJ9QU5ESUMxTFEzZ1RWdVRqV0NPUXhvQm5JU1FGOXVxeFZoSzBUO
+ EkyQitwSkhDamgzSGVWRnlQTnhpY01xZGNIVkllRjZNNVNPU3psbGtDSVNxdm9jYmh6d3NheVU3
+ WXp6
+
+dn: inum=d314b27e-144d-4459-b67a-3653f3ef868d,ou=people,o=gluu
+objectClass: gluuCustomPerson
+objectClass: gluuPerson
+objectClass: top
+objectClass: eduPerson
+cn: mama mama
+displayName: mama
+givenName: mama
+gluuStatus: active
+inum: d314b27e-144d-4459-b67a-3653f3ef868d
+mail: mama@test.com
+oxCreationTimestamp: 20211006095130.608Z
+oxTrustEmail:: ewogICJ2YWx1ZSIgOiAibWFtYUB0ZXN0LmNvbSIsCiAgImRpc3BsYXkiIDogb
+ nVsbCwKICAidHlwZSIgOiBudWxsLAogICJwcmltYXJ5IiA6IGZhbHNlCn0=
+sn: mama
+uid: mama
+userPassword:: e1NTSEE1MTJ9bXFYQndMNjBGSGxpeHI0SVZCUWE0MkM1bDFBM2tOZXRJM1NZU
+ jJYTytFUVo3STBrKzNyUEVSNWpkck1aUDhoQVZScnR3djJqRWtvblMxOUJMTkxMa1ZpSWFvZVJp
+ R0tJ
+
+dn: inum=4627bf36-06ae-43c5-828d-141b6d7628ed,ou=people,o=gluu
+objectClass: gluuCustomPerson
+objectClass: gluuPerson
+objectClass: top
+objectClass: eduPerson
+cn: lala lala
+displayName: lala
+givenName: lala
+gluuStatus: active
+inum: 4627bf36-06ae-43c5-828d-141b6d7628ed
+mail: lala@test.com
+oxCreationTimestamp: 20211006095400.684Z
+oxTrustEmail:: ewogICJ2YWx1ZSIgOiAibGFsYUB0ZXN0LmNvbSIsCiAgImRpc3BsYXkiIDogb
+ nVsbCwKICAidHlwZSIgOiBudWxsLAogICJwcmltYXJ5IiA6IGZhbHNlCn0=
+sn: lala
+uid: lala
+userPassword:: e1NTSEE1MTJ9bVorR25MZGpwaDVGTVB2UlE5dGRtWVRyeGtUc0FjSFd2dUZwa
+ ms3MlVsZjZJbHBJWEhzWlhFcCt1eU5qTS9YMVA4N010QWo3NHJoQzl4ZTZKUzhZOGVYTXhOamlV
+ QUJw

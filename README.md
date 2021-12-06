@@ -10,113 +10,102 @@ Creating a **stage** environment like:
 
 ![How we do it](./docs/resources/passport_integration_tests.png)
 
-## Starting
+## Snapshot setup
 
-Clone this reppo to your test server / CI server
+### 1. Passport Host Setup
 
-## Setup
+Passport Host not need any extra setup. It is just need fresh UB 20 snapshot. During test case run, It install Gluu CE in it, install Data and perform test.
 
-### Setting up provider (idp/op) droplet
-`@TODO`
+### 2. Provider Host Setup
 
-### Setting up passport droplet
+Provider host need snapshot with Gluu CE IDP 4.3.0. During test case run, It install data, add TR and setup SP metadata.
 
-- Setup your SP static IP (you need a static ip reserved, preffered a `floating_ip`) and host name
-    - In the project root:
-        ```
-        vim setup/setup.properties
-        ```
-    - Locate the line with `ip=`
-    - Update with the static IP address
-    - Locate the line with `hostname=`
-    - Update with your passport hostname
-- Edit `setup/templates/passport-central-config.json` to configure your passport SPs
-- In case you want certificates (recommended):
-    - run:
-        ```
-        certbot --apache --agree-tos --force-renewal -m your@realemail.org -n -d <passporthost>
-        ```
-        (replace passporthost for your passport host, i.e. `test.gluu.org`)
-    - compress `etc/letsecrypt`
-        ```
-        tar -czvf etcletsencrypt.tar /etc/letsencrypt
-        ```
-        (so you will have `etcletsencrypt.tar` in your `setup` folder)
+## ENV.sh Steps
 
+[env.sh](env.sh) is the use to handle whole test flow. It used to configure, setup server and run test cases. 
 
-- On a fresh droplet, create folder `test-install-data`:
-``` sh
-ssh <yourhost> mkdir /test-install-data
+### Setup and Configuration
+
+- Setup 
+  - Install Xvfb `sudo apt install xvfb`
+  - Install `poetry` if you don't have: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+  - Install dependencies: `poetry install`
+  - If you don't have, install Firefox: `apt install firefox`
+  - Install Python LDAP3 for DB Operations: `pip install ldap3`
+
+- Configuration
+  - Use `test.conf` for configuration. You can pass any file by using option `-c <file>`.
+  - Configuration details are as given below:
+  
+  | Env | Description |
+  |-----|-------------|
+  |**PASSPORT_HOST**|Use to set Host for Passport Droplet|
+  |**PASSPORT_IP**|Use to set floating IP for Passport Droplet|
+  |**LATEST_DEV_SNAPSHOT_ID**|It is `Dev Passport Snapshot Id` from which you want to create droplet for Passport|
+  |**LATEST_STABLE_SNAPSHOT_ID**|It is `Stable Passport Snapshot Id` from which you want to create droplet for Passport|
+  |**PROVIDER_HOST**|Use to set Host for SAML IDP Provider Droplet|
+  |**PROVIDER_IP**|Use to set floating IP for SAML IDP Provider Droplet|
+  |**PROVIDER_SNAPSHOT_ID**|It is `SAML IDP Provider Snapshot Id` from which you want to create droplet for SAML IDP Provider|
+  |**CLIENT_HOST**|It is use to set Host for Request Party Client i.e. [auth-tdd-client](https://github.com/christian-hawk/auth-tdd-client)|
+  |**GLUU_VERSION**|Two values allow here `LATEST-STABLE` or `LATEST-DEV`. As per version, Gluu CE version installed on PASSPORT Host.|
+
+  - Example of test.conf:
+  ```
+  PASSPORT_HOST=test.yourpassport.com
+  PASSPORT_IP="100.xx.xx.xx"
+  LATEST_DEV_SNAPSHOT_ID=xxxxxx
+  LATEST_STABLE_SNAPSHOT_ID=xxxxxx
+  PROVIDER_HOST=test.youridphost.com
+  PROVIDER_IP="101.xx.x.x"
+  PROVIDER_SNAPSHOT_ID=xxxxx
+  CLIENT_HOST=xxx.xxx.com
+  TEST_SERVER_HOST=xxx.xxx.com
+  GLUU_VERSION=LATEST-STABLE
+  ```
+
+- Options
+
+  - Options available in `env.sh` to handle different task.
+  - Example: `./env.sh -[option]`
+
+  | Option | Description |
+  |--------|-------------|
+  | -c | Use to create the droplets |
+  | -t | Use to run test cases |
+  | -s | Use to install and setup Gluu on Passport Host and add data on Passport and IDP Host |
+  | -l | Use to fetch artifacts logs files |
+  | -d | Use to delete the droplets |
+
+### Create Droplet
+
+`-c` option is use to create droplet.
+
+```
+./env.sh -c
 ```
 
-- Copy files from setup folder to `test-install-data` that you just created on your fresh droplet:
+### Setup PASSPORT and PROVIDER HOST
 
-```sh
-scp -r ./setup/* <your-host>:/test-install-data/.
+`-s` option is use to setup PASSPORT and PROVIDER Host. In this stage, It insert test data into directly ldap db on passport host and provider host.
+
+```
+./env.sh -s
 ```
 
-- Login to your droplet and run the `prepare.sh` file:
-```sh
-cd /
-chmod -R 755 test-install-data
-cd /test-install/data
-./prepare.sh
-```
+Its perform tasks:
 
-- Check if flag file `freshsnap` was created:
+- Install latest Gluu on PASSPORT Host
 
-```sh
-ls /root
-```
+  In this stage, env.sh helps to connect PASSPORT Host and install Gluu CE using install.sh.
 
+  In install.sh, we are using `setup.properties` which helps to pass preconfigured setup values.
 
-## Starting test server
+- Manage Data on PASSPORT and Provider Host
 
-Just restart (`shutdown -r`) and gluu-server will be installed w/ testing-data. Follow it on `/test-data/gluu.log`
+  In this stage, env.sh helps to insert, remove and update data in ldap using `python-ldap3` module to connect db and perform CRUD operation.
 
+  Checkout passport_host_data.py, passport_host_data.py, and ldifs in data folder for examples and implementation.
 
-### Configuration
-
-Use `test.conf` for configuration. You can pass any file by using option `-c <file>`.
-
-Configuration details are as given below:
-
-| Env | Description |
-|-----|-------------|
-|**PASSPORT_HOST**|Use to set Host for Passport Droplet|
-|**PASSPORT_IP**|Use to set floating IP for Passport Droplet|
-|**LATEST_DEV_SNAPSHOT_ID**|It is `Dev Passport Snapshot Id` from which you want to create droplet for Passport|
-|**LATEST_STABLE_SNAPSHOT_ID**|It is `Stable Passport Snapshot Id` from which you want to create droplet for Passport|
-|**PROVIDER_HOST**|Use to set Host for SAML IDP Provider Droplet|
-|**PROVIDER_IP**|Use to set floating IP for SAML IDP Provider Droplet|
-|**PROVIDER_SNAPSHOT_ID**|It is `SAML IDP Provider Snapshot Id` from which you want to create droplet for SAML IDP Provider|
-|**CLIENT_HOST**|It is use to set Host for Request Party Client i.e. [auth-tdd-client](https://github.com/christian-hawk/auth-tdd-client)|
-|**API_CLIENT_ID**|Providers' gluu-server [Admin REST API](https://gluu.org/docs/gluu-server/4.1/api-guide/oxtrust-api/) client_id *(used for automated user creation/deletion)*|
-|**API_CLIENT_SECRET**|Providers' gluu-server [Admin REST API](https://gluu.org/docs/gluu-server/4.1/api-guide/oxtrust-api/) client_secret *(used for automated user creation/deletion)*|
-
-### Setting up test suite
-
-Install Xvfb
-`sudo apt install xvfb`
-
-Install poetry if you don't have:
-`curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
-
-Install dependencies:
-`poetry install`
-
-If you don't have, install Firefox:
-`apt install firefox`
-
-Setup ENV on `env.sh` file
-
-run `poetry run env.sh`
-
-### Options
-You can run `env.sh` with skip options:
-- `-s`: skip droplet creation
-- `-t`: skip tests
-- `-c <file>`: Pass configuration file
 
 ## Test logs / artifacts
 Test Server will collect logs through ssh (ensure you have authorized test server to connect`PROVIDER_HOST` and `PASSPORT_HOST` through `ssh`)

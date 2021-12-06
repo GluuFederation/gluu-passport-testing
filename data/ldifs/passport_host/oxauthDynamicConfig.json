@@ -1,0 +1,427 @@
+{
+  "issuer": "https://{{passport_host}}",
+  "baseEndpoint": "https://{{passport_host}}/oxauth/restv1",
+  "authorizationEndpoint": "https://{{passport_host}}/oxauth/restv1/authorize",
+  "tokenEndpoint": "https://{{passport_host}}/oxauth/restv1/token",
+  "tokenRevocationEndpoint": "https://{{passport_host}}/oxauth/restv1/revoke",
+  "userInfoEndpoint": "https://{{passport_host}}/oxauth/restv1/userinfo",
+  "clientInfoEndpoint": "https://{{passport_host}}/oxauth/restv1/clientinfo",
+  "checkSessionIFrame": "https://{{passport_host}}/oxauth/opiframe.htm",
+  "endSessionEndpoint": "https://{{passport_host}}/oxauth/restv1/end_session",
+  "jwksUri": "https://{{passport_host}}/oxauth/restv1/jwks",
+  "registrationEndpoint": "https://{{passport_host}}/oxauth/restv1/register",
+  "openIdDiscoveryEndpoint": "https://{{passport_host}}/.well-known/webfinger",
+  "openIdConfigurationEndpoint": "https://{{passport_host}}/.well-known/openid-configuration",
+  "idGenerationEndpoint": "https://{{passport_host}}/oxauth/restv1/id",
+  "introspectionEndpoint": "https://{{passport_host}}/oxauth/restv1/introspection",
+  "deviceAuthzEndpoint": "https://{{passport_host}}/oxauth/restv1/device_authorization",
+  "discoveryCacheLifetimeInMinutes": 60,
+  "sectorIdentifierCacheLifetimeInMinutes": 1440,
+  "sessionAsJwt": false,
+  "umaConfigurationEndpoint": "https://{{passport_host}}/oxauth/restv1/uma2-configuration",
+  "umaRptAsJwt": false,
+  "umaRptLifetime": 3600,
+  "umaTicketLifetime": 3600,
+  "umaPctLifetime": 2592000,
+  "umaResourceLifetime": 2592000,
+  "umaAddScopesAutomatically": true,
+  "umaValidateClaimToken": false,
+  "umaGrantAccessIfNoPolicies": false,
+  "umaRestrictResourceToAssociatedClient": false,
+  "statEnabled": true,
+  "statAuthorizationScope": "jans_stat",
+  "statTimerIntervalInSeconds": 0,
+  "statWebServiceIntervalLimitInSeconds": 60,
+  "spontaneousScopeLifetime": 86400,
+  "openidSubAttribute": "inum",
+  "responseTypesSupported": [
+    [
+      "token",
+      "id_token"
+    ],
+    [
+      "token",
+      "code"
+    ],
+    [
+      "token"
+    ],
+    [
+      "id_token",
+      "code"
+    ],
+    [
+      "id_token"
+    ],
+    [
+      "token",
+      "id_token",
+      "code"
+    ],
+    [
+      "code"
+    ]
+  ],
+  "responseModesSupported": [
+    "fragment",
+    "query",
+    "form_post"
+  ],
+  "grantTypesSupported": [
+    "implicit",
+    "authorization_code",
+    "refresh_token",
+    "urn:ietf:params:oauth:grant-type:device_code",
+    "urn:ietf:params:oauth:grant-type:uma-ticket",
+    "client_credentials",
+    "password"
+  ],
+  "subjectTypesSupported": [
+    "public",
+    "pairwise"
+  ],
+  "defaultSubjectType": "pairwise",
+  "userInfoSigningAlgValuesSupported": [
+    "HS256",
+    "HS384",
+    "HS512",
+    "RS256",
+    "RS384",
+    "RS512",
+    "ES256",
+    "ES384",
+    "ES512"
+  ],
+  "userInfoEncryptionAlgValuesSupported": [
+    "RSA1_5",
+    "RSA-OAEP",
+    "A128KW",
+    "A256KW"
+  ],
+  "userInfoEncryptionEncValuesSupported": [
+    "A128CBC+HS256",
+    "A256CBC+HS512",
+    "A128GCM",
+    "A256GCM"
+  ],
+  "idTokenSigningAlgValuesSupported": [
+    "none",
+    "HS256",
+    "HS384",
+    "HS512",
+    "RS256",
+    "RS384",
+    "RS512",
+    "ES256",
+    "ES384",
+    "ES512"
+  ],
+  "idTokenEncryptionAlgValuesSupported": [
+    "RSA1_5",
+    "RSA-OAEP",
+    "A128KW",
+    "A256KW"
+  ],
+  "idTokenEncryptionEncValuesSupported": [
+    "A128CBC+HS256",
+    "A256CBC+HS512",
+    "A128GCM",
+    "A256GCM"
+  ],
+  "requestObjectSigningAlgValuesSupported": [
+    "none",
+    "HS256",
+    "HS384",
+    "HS512",
+    "RS256",
+    "RS384",
+    "RS512",
+    "ES256",
+    "ES384",
+    "ES512"
+  ],
+  "requestObjectEncryptionAlgValuesSupported": [
+    "RSA1_5",
+    "RSA-OAEP",
+    "A128KW",
+    "A256KW"
+  ],
+  "requestObjectEncryptionEncValuesSupported": [
+    "A128CBC+HS256",
+    "A256CBC+HS512",
+    "A128GCM",
+    "A256GCM"
+  ],
+  "tokenEndpointAuthMethodsSupported": [
+    "client_secret_basic",
+    "client_secret_post",
+    "client_secret_jwt",
+    "private_key_jwt"
+  ],
+  "tokenEndpointAuthSigningAlgValuesSupported": [
+    "HS256",
+    "HS384",
+    "HS512",
+    "RS256",
+    "RS384",
+    "RS512",
+    "ES256",
+    "ES384",
+    "ES512"
+  ],
+  "dynamicRegistrationCustomAttributes": [
+    "oxAuthTrustedClient"
+  ],
+  "displayValuesSupported": [
+    "page",
+    "popup"
+  ],
+  "claimTypesSupported": [
+    "normal"
+  ],
+  "jwksAlgorithmsSupported": [
+    "RS256",
+    "RS384",
+    "RS512",
+    "ES256",
+    "ES384",
+    "ES512",
+    "PS256",
+    "PS384",
+    "PS512",
+    "RSA1_5",
+    "RSA-OAEP"
+  ],
+  "serviceDocumentation": "http://gluu.org/docs",
+  "claimsLocalesSupported": [
+    "en"
+  ],
+  "idTokenTokenBindingCnfValuesSupported": [
+    "tbh"
+  ],
+  "uiLocalesSupported": [
+    "en",
+    "bg",
+    "de",
+    "es",
+    "fr",
+    "it",
+    "ru",
+    "tr"
+  ],
+  "claimsParameterSupported": false,
+  "requestParameterSupported": true,
+  "requestUriParameterSupported": true,
+  "requestUriHashVerificationEnabled": false,
+  "requireRequestUriRegistration": false,
+  "opPolicyUri": "http://ox.gluu.org/doku.php?id=oxauth:policy",
+  "opTosUri": "http://ox.gluu.org/doku.php?id=oxauth:tos",
+  "authorizationCodeLifetime": 60,
+  "refreshTokenLifetime": 14400,
+  "idTokenLifetime": 3600,
+  "accessTokenLifetime": 300,
+  "cleanServiceInterval": 60,
+  "cleanServiceBatchChunkSize": 10000,
+  "keyRegenerationEnabled": true,
+  "keyRegenerationInterval": 48,
+  "defaultSignatureAlgorithm": "RS256",
+  "oxOpenIdConnectVersion": "openidconnect-1.0",
+  "oxId": "https://{{passport_host}}/oxid/service/gluu/inum",
+  "dynamicRegistrationEnabled": true,
+  "dynamicRegistrationExpirationTime": -1,
+  "dynamicRegistrationPersistClientAuthorizations": true,
+  "trustedClientEnabled": true,
+  "skipAuthorizationForOpenIdScopeAndPairwiseId": false,
+  "dynamicRegistrationScopesParamEnabled": true,
+  "dynamicRegistrationPasswordGrantTypeEnabled": false,
+  "dynamicRegistrationAllowedPasswordGrantScopes": [],
+  "dynamicRegistrationCustomObjectClass": "",
+  "personCustomObjectClassList": [
+    "gluuCustomPerson",
+    "gluuPerson"
+  ],
+  "persistIdTokenInLdap": false,
+  "persistRefreshTokenInLdap": true,
+  "allowPostLogoutRedirectWithoutValidation": false,
+  "invalidateSessionCookiesAfterAuthorizationFlow": false,
+  "returnClientSecretOnRead": true,
+  "rejectJwtWithNoneAlg": true,
+  "expirationNotificatorEnabled": false,
+  "useNestedJwtDuringEncryption": true,
+  "expirationNotificatorMapSizeLimit": 100000,
+  "expirationNotificatorIntervalInSeconds": 600,
+  "useCacheForAllImplicitFlowObjects": false,
+  "authenticationFiltersEnabled": false,
+  "clientAuthenticationFiltersEnabled": false,
+  "clientRegDefaultToCodeFlowWithRefresh": true,
+  "authenticationFilters": [
+    {
+      "filter": "(&(mail=*{0}*)(inum={1}))",
+      "bind": false,
+      "bindPasswordAttribute": "",
+      "baseDn": "ou=people,o=gluu"
+    },
+    {
+      "filter": "uid={0}",
+      "bind": true,
+      "bindPasswordAttribute": "pwd",
+      "baseDn": "ou=people,o=gluu"
+    }
+  ],
+  "clientAuthenticationFilters": [
+    {
+      "filter": "myCustomAttr1={0}",
+      "bind": null,
+      "bindPasswordAttribute": "",
+      "baseDn": "ou=clients,o=gluu"
+    }
+  ],
+  "corsConfigurationFilters": [
+    {
+      "filterName": "CorsFilter",
+      "corsEnabled": true,
+      "corsAllowedOrigins": "*",
+      "corsAllowedMethods": "GET,POST,HEAD,OPTIONS",
+      "corsAllowedHeaders": "Origin,Authorization,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers",
+      "corsExposedHeaders": "",
+      "corsSupportCredentials": true,
+      "corsLoggingEnabled": false,
+      "corsPreflightMaxAge": 1800,
+      "corsRequestDecorate": true
+    }
+  ],
+  "sessionIdUnusedLifetime": 86400,
+  "sessionIdUnauthenticatedUnusedLifetime": 120,
+  "sessionIdEnabled": true,
+  "sessionIdPersistOnPromptNone": true,
+  "sessionIdRequestParameterEnabled": false,
+  "changeSessionIdOnAuthentication": true,
+  "sessionIdPersistInCache": false,
+  "sessionIdLifetime": 86400,
+  "serverSessionIdLifetime": 86400,
+  "configurationUpdateInterval": 3600,
+  "enableClientGrantTypeUpdate": true,
+  "dynamicGrantTypeDefault": [
+    "implicit",
+    "authorization_code",
+    "refresh_token",
+    "urn:ietf:params:oauth:grant-type:device_code",
+    "urn:ietf:params:oauth:grant-type:uma-ticket",
+    "client_credentials"
+  ],
+  "cssLocation": "",
+  "jsLocation": "",
+  "imgLocation": "",
+  "metricReporterInterval": 300,
+  "metricReporterKeepDataDays": 15,
+  "metricReporterEnabled": true,
+  "pairwiseIdType": "algorithmic",
+  "pairwiseCalculationKey": "u4tq2OHf9iv2PfPXuLzwzDZrNOu",
+  "pairwiseCalculationSalt": "fR1gJzG1NJEZ3oWduw88p6DP",
+  "shareSubjectIdBetweenClientsWithSameSectorId": true,
+  "subjectIdentifierBasedOnWholeUriBackwardCompatibility": false,
+  "webKeysStorage": "keystore",
+  "dnName": "CN=oxAuth CA Certificates",
+  "keyStoreFile": "/etc/certs/oxauth-keys.jks",
+  "keyStoreSecret": "8fNypVr9XLm5",
+  "keySelectionStrategy": "OLDER",
+  "keyAlgsAllowedForGeneration": [],
+  "oxElevenTestModeToken": "",
+  "oxElevenGenerateKeyEndpoint": "https://{{passport_host}}/oxeleven/rest/oxeleven/generateKey",
+  "oxElevenSignEndpoint": "https://{{passport_host}}/oxeleven/rest/oxeleven/sign",
+  "oxElevenVerifySignatureEndpoint": "https://{{passport_host}}/oxeleven/rest/oxeleven/verifySignature",
+  "oxElevenDeleteKeyEndpoint": "https://{{passport_host}}/oxeleven/rest/oxeleven/deleteKey",
+  "introspectionAccessTokenMustHaveUmaProtectionScope": false,
+  "introspectionSkipAuthorization": false,
+  "endSessionWithAccessToken": false,
+  "cookieDomain": null,
+  "enabledOAuthAuditLogging": false,
+  "jmsBrokerURISet": [],
+  "jmsUserName": "",
+  "jmsPassword": "",
+  "clientWhiteList": [
+    "*"
+  ],
+  "clientBlackList": [
+    "*.attacker.com/*"
+  ],
+  "legacyIdTokenClaims": false,
+  "customHeadersWithAuthorizationResponse": true,
+  "frontChannelLogoutSessionSupported": true,
+  "loggingLevel": "INFO",
+  "loggingLayout": "text",
+  "updateUserLastLogonTime": false,
+  "updateClientAccessTime": false,
+  "logClientIdOnClientAuthentication": true,
+  "logClientNameOnClientAuthentication": false,
+  "disableJdkLogger": true,
+  "authorizationRequestCustomAllowedParameters": [
+    "customParam2",
+    "customParam3",
+    "customParam1",
+    "preselectedExternalProvider"
+  ],
+  "legacyDynamicRegistrationScopeParam": false,
+  "openidScopeBackwardCompatibility": false,
+  "disableU2fEndpoint": false,
+  "useLocalCache": true,
+  "fapiCompatibility": false,
+  "forceIdTokenHintPrecense": false,
+  "forceOfflineAccessScopeToEnableRefreshToken": true,
+  "errorReasonEnabled": false,
+  "removeRefreshTokensForClientOnLogout": true,
+  "skipRefreshTokenDuringRefreshing": false,
+  "refreshTokenExtendLifetimeOnRotation": false,
+  "consentGatheringScriptBackwardCompatibility": false,
+  "introspectionScriptBackwardCompatibility": false,
+  "introspectionResponseScopesBackwardCompatibility": false,
+  "clientAuthorizationBackwardCompatibility": false,
+  "softwareStatementValidationType": "script",
+  "softwareStatementValidationClaimName": "",
+  "authenticationProtectionConfiguration": {
+    "attemptExpiration": 15,
+    "maximumAllowedAttemptsWithoutDelay": 4,
+    "delayTime": 2,
+    "bruteForceProtectionEnabled": false
+  },
+  "errorHandlingMethod": "internal",
+  "keepAuthenticatorAttributesOnAcrChange": false,
+  "deviceAuthzRequestExpiresIn": 1800,
+  "deviceAuthzTokenPollInterval": 5,
+  "deviceAuthzResponseTypeToProcessAuthz": "code",
+  "backchannelClientId": "",
+  "backchannelRedirectUri": "",
+  "backchannelAuthenticationEndpoint": "https://{{passport_host}}/oxauth/restv1/bc-authorize",
+  "backchannelDeviceRegistrationEndpoint": "https://{{passport_host}}/oxauth/restv1/bc-deviceRegistration",
+  "backchannelTokenDeliveryModesSupported": [],
+  "backchannelAuthenticationRequestSigningAlgValuesSupported": [],
+  "backchannelUserCodeParameterSupported": false,
+  "backchannelBindingMessagePattern": "^[a-zA-Z0-9]{4,8}$",
+  "backchannelAuthenticationResponseExpiresIn": 3600,
+  "backchannelAuthenticationResponseInterval": 2,
+  "backchannelLoginHintClaims": [
+    "inum",
+    "uid",
+    "mail"
+  ],
+  "cibaEndUserNotificationConfig": {
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "projectId": "",
+    "storageBucket": "",
+    "messagingSenderId": "",
+    "appId": "",
+    "notificationUrl": "",
+    "notificationKey": null,
+    "publicVapidKey": ""
+  },
+  "backchannelRequestsProcessorJobIntervalSec": 0,
+  "backchannelRequestsProcessorJobChunkSize": 100,
+  "cibaGrantLifeExtraTimeSec": 180,
+  "cibaMaxExpirationTimeAllowedSec": 1800,
+  "cibaEnabled": false,
+  "httpLoggingEnabled": false,
+  "httpLoggingExludePaths": [],
+  "externalLoggerConfiguration": ""
+}
