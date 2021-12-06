@@ -2,5 +2,4 @@
 engines:
   duplication:
     exclude_paths:
-      - "data/pylib/*.py"
-      - "data/pylib/ldif4/*.py"
+      - "data/pylib/**"
